@@ -23,9 +23,7 @@ float fastInvertSquare(const float num)
   long i  = * ( long * ) &y;
   i  = 0x5f3759df - ( i >> 1 );               
   y  = * ( float * ) &i;
-  y  *= ( 1.5F - ( num * 0.5F * y * y ) );
-
-  return y;
+  return y *= ( 1.5F - ( num * 0.5F * y * y ) );
 }
 
 #endif //DECLARATIONS_H

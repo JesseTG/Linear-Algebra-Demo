@@ -3,9 +3,11 @@
 
 #include "bgtile.h"
 #include "Plotter.h"
+#include "Vector.h"
+#include "NumMatrix.h"
 
 enum StateName { 
-  ERROR = -2, NADA, INTRO
+  ERROR = -2, NADA = -1, INTRO = 0,
 };
 
 /*

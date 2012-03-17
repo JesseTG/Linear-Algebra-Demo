@@ -4,18 +4,19 @@
 class State
 {
   public:
-    virtual State() = 0;
     virtual ~State() = 0;
     
+    StateName getNextState() const { return nextstate; }
+    virtual void input() = 0;
+    virtual void logic() = 0;
+    virtual void render() = 0;
     
-    void input() = 0;
-    void logic() = 0;
-    void render() = 0;
     
     
   protected:
+    StateName nextstate;
   
   private:
-}
+};
 
 #endif //STATE_H

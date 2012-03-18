@@ -2,14 +2,17 @@
 #define STATEMANAGER_H
 
 #include "State.h"
+#include "Declarations.h"
 
 class StateManager
 {
   public:
-    StateManager() { currentstate }
+  
+    StateManager() { 
+    }
   
     void setState(StateName newstate)
-      { if (newstate == NADA) return; else currentstate = newstate; }
+      { if (newstate != NADA) currentstate = newstate; }
       
     void updateState() {
       setState(currentstate->getNextState());
@@ -18,8 +21,9 @@ class StateManager
       currentstate->render();
     }
     
-  private:
-    State* currentstate;
+    private:
+      State* currentstate;
+  
 };
 
 #endif //STATEMANAGER_H

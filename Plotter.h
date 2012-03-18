@@ -96,8 +96,7 @@ void PlotterClass::show(word color)
 
 void PlotterClass::line(byte x0, byte y0, byte x1, byte y1)
 {
-  byte swap;
-#define SWAP(a, b) (swap = (a), (a) = (b), (b) = swap)
+#define SWAP(a, b) ((a)^=(b), (b)^=(a), (a)^=(b))
 
   byte steep = abs(y1 - y0) > abs(x1 - x0);
   if (steep) {
@@ -111,8 +110,7 @@ void PlotterClass::line(byte x0, byte y0, byte x1, byte y1)
   int deltax = x1 - x0;
   int deltay = abs(y1 - y0);
   int error = deltax / 2;
-  char ystep;
-  ystep = (y0 < y1) ? 1 : -1;  
+  char ystep = (y0 < y1) ? 1 : -1;  
 
   byte x;
   byte y = y0;
@@ -121,7 +119,7 @@ void PlotterClass::line(byte x0, byte y0, byte x1, byte y1)
   if (!plotting) {
     GD.microcode(wireframe_code, sizeof(wireframe_code));
     plotting = 1;
-    GD.wr(COMM+8, (flip ? 1 : 2) << 6);
+    GD.wr(COMM+8, (flip + 1) << 6);
   }
   GD.__wstart(COMM+0);
   SPI.transfer(x0);

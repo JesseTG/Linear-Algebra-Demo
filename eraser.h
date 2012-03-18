@@ -3,6 +3,9 @@
  * http://tinyurl.com/6vrfzr6
  */
 
+#ifndef ERASER_H
+#define ERASER_H
+
 static PROGMEM prog_uchar eraser_code[] = {
 0x81,0x15,
 0x98,0xA8,
@@ -28,3 +31,5 @@ static PROGMEM prog_uchar eraser_code[] = {
 0x95,0x15,
 0x0C,0x70,
 };
+
+#endif //ERASER_H

@@ -2,6 +2,9 @@
  * This code comes from the Wireframe example for the Gameduino.
  * http://tinyurl.com/6vrfzr6
  */
+ 
+#ifndef WIREFRAME_H
+#define WIREFRAME_H
 
 static PROGMEM prog_uchar wireframe_code[] = {
 0xE0,0x15,
@@ -112,3 +115,5 @@ static PROGMEM prog_uchar wireframe_code[] = {
 0xE0,0x15,
 0x0C,0x70,
 };
+
+#endif //WIREFRAME_H

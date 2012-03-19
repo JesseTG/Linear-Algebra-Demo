@@ -6,6 +6,10 @@
 #ifndef PLOTTER_H
 #define PLOTTER_H
 
+#include <SPI.h>
+#include <GD.h>
+#include "State.h"
+#include "Declarations.h"
 #include "wireframe.h"
 #include "eraser.h"
 
@@ -23,7 +27,7 @@ class PlotterClass
 public:
   void begin();
   void line(byte x0, byte y0, byte x1, byte y1);
-  void show(word color);
+  void show(byte r, byte g, byte b);
   inline void show();
 private:
   byte flip;
@@ -72,23 +76,23 @@ void PlotterClass::begin()
 
 inline void PlotterClass::show()
 {
-  show(WHITE);
+  show(255, 255, 255);
 }
 
-void PlotterClass::show(word color)
+void PlotterClass::show(byte r, byte g, byte b)
 {
   waitready();
   if (flip == 1) {
     GD.wr16(PALETTE4A, BLACK);
-    GD.wr16(PALETTE4A + 2, color);
+    GD.wr16(PALETTE4A + 2, RGB(r, g, b));
     GD.wr16(PALETTE4A + 4, BLACK);
-    GD.wr16(PALETTE4A + 6, color);
+    GD.wr16(PALETTE4A + 6, RGB(r, g, b));
   } 
   else {
     GD.wr16(PALETTE4A, BLACK);
     GD.wr16(PALETTE4A + 2, BLACK);
-    GD.wr16(PALETTE4A + 4, color);
-    GD.wr16(PALETTE4A + 6, color);
+    GD.wr16(PALETTE4A + 4, RGB(r, g, b));
+    GD.wr16(PALETTE4A + 6, RGB(r, g, b));
   }
   flip ^= 1;
   erase();

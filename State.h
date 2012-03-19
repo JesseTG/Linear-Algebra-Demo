@@ -2,26 +2,25 @@
 #define STATE_H
 
 #include "Declarations.h"
+#include "StateManager.h"
+
+
 
 class State
 {
-  public:
-    virtual ~State() = 0;
+  protected:
+    StateName nextstate;
     
-    StateName getNextState() const { return nextstate; }
-    void setNextState(const StateName newnextstate)
-    { nextstate = newnextstate; }
+  public:
+    virtual ~State() {};
+    
+    StateName getNextState() const { return this->nextstate; }
+    void setNextState(const StateName newnextstate) { this->nextstate = newnextstate; }
       
     virtual void input() = 0;
     virtual void logic() = 0;
     virtual void render() = 0;
     
-    
-    
-  protected:
-    StateName nextstate;
-  
-  private:
 };
 
 #endif //STATE_H

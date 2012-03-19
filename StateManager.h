@@ -1,29 +1,44 @@
 #ifndef STATEMANAGER_H
 #define STATEMANAGER_H
 
-#include "State.h"
 #include "Declarations.h"
+#include "State.h"
 
 class StateManager
 {
   public:
+    StateManager();
+    void updateState();
   
-    StateManager() { 
-    }
-  
-    void setState(StateName newstate)
-      { if (newstate != NADA) currentstate = newstate; }
-      
-    void updateState() {
-      setState(currentstate->getNextState());
-      currentstate->input();
-      currentstate->logic();
-      currentstate->render();
-    }
-    
-    private:
-      State* currentstate;
-  
+  private:
+    void setState(const State newstate);
+    State* currentstate;
 };
 
+StateManager::StateManager()
+{
+    currentstate = new TitleState;
+}
+
+void StateManager::updateState()
+{
+    setState(currentstate->getNextState());
+    currentstate->input();
+    currentstate->logic();
+    currentstate->render();
+}
+
+void StateManager::setState(const StateName newstate)
+{ 
+    switch (newstate) {
+      case ERROR: while (true);  //Infinite loop.
+      case NADA: return;
+      case TITLE: currentstate = new TitleState();
+      default: while (true);
+    }
+}
+
+
+
 #endif //STATEMANAGER_H
+

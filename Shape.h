@@ -5,20 +5,22 @@
 #include "Declarations.h"
 #include "Plotter.h"
 
-template<byte numofvertices>
+
 class Shape
 {
   private:
     NumMatrix vertices[numofvertices];
     uint16_t color;
     int16_t angle;
+    byte numofvertices;
     
   public:
-    Shape()
+    Shape(const byte newnumofvertices)
     {
       color = RGB(255, 255, 255);
       angle = 0;
-      for (byte i = 0; i < numofvertices; ++i) vertices[i] = Vector<byte>(0, 0);
+      numofvertices = newnumofvertices;
+      for (byte i = 0; i < numofvertices; ++i) vertices[i] = Vector(0, 0);
     }
       
     void draw() const
@@ -30,28 +32,28 @@ class Shape
                      vertices[(i+1)%numofvertices].getTransformedVector().y);
     }
     
-    void setVertice(const byte vertice, const Vector<byte>& coord);
+    void setVertice(const byte vertice, const Vector& newpos)
+    { vertices[vertice](0, 2) = newpos.x; vertices[vertice](1, 2) = newpos.y; }
     
     void setAngle(const int16_t newangle);
     
     void rotateBy(const int16_t theangle);
     
-    void shearBy(const Vector<byte>& offset);
+    void shearBy(const Vector& offset);
     
-    void shearTo(const Vector<byte>& offset);
+    void shearTo(const Vector& offset);
     
-    void scaleBy(const Vector<byte>& offset);
+    void scaleBy(const Vector& offset);
     
-    void setPosition(const Vector<byte>& offset);  //Uses first point.
+    void setPosition(const Vector& offset);  //Uses first point.
     
-    void moveBy(const Vector<byte>& offset);
+    void moveBy(const Vector& offset);
     
-    void moveTo(const Vector<byte>& offset);
+    void moveTo(const Vector& offset);
     
-    void transform(const NumMatrix& offset);
-    
-    void getTransformed(const NumMatrix& offset);
-    
+    //Transforms all points in this Shape by this matrix.
+    void transform(const NumMatrix& offset)
+    { for (byte i = 0; i < numofvertices; ++i) vertices[i] *= offset; }
     
     uint16_t getColor() const
     { return color; }

@@ -1,15 +1,21 @@
 #ifndef DECLARATIONS_H
 #define DECLARATIONS_H
 
+#include <SPI.h>
+#include <GD.h>
 #include "bgtile.h"
 #include "Plotter.h"
 #include "Vector.h"
 #include "NumMatrix.h"
 #include "Shape.h"
+#include "State.h"
+#include "StateManager.h"
+
+#include "TitleState.h"
 
 
-template <class T> class Vector;
-template <byte numofvertices> class Shape;
+class Shape;
+class Vector;
 class State;
 class NumMatrix;
 class StateManager;
@@ -44,12 +50,11 @@ enum StateName {
  */
 float fastInvertSquare(const float num)
 {
-  float y  = num;
-  long i  = * ( long * ) &y;
-  i  = 0x5f3759df - ( i >> 1 );               
-  y  = * ( float * ) &i;
+  float y = num;
+  long i = * ( long * ) &y;
+  i = 0x5f3759df - ( i >> 1 );               
+  y = * ( float * ) &i;
   return y *= ( 1.5F - ( num * 0.5F * y * y ) );
 }
 
 #endif //DECLARATIONS_H
-

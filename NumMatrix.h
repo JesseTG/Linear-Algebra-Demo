@@ -7,33 +7,26 @@
 class NumMatrix 
 {
   public:
-    NumMatrix()  //This generates an identity matrix.
-    { for (byte i = 0; i < 9; ++i) dims[i] = (i%4 == 0); }
-    
-    NumMatrix(int16_t a, int16_t b, int16_t c,
-              int16_t d, int16_t e, int16_t f,
-              int16_t g, int16_t h, int16_t i)
-    { 
-      dims[0] = a; dims[1] = b; dims[2] = c;
-      dims[3] = d; dims[4] = e; dims[5] = f;
-      dims[6] = g; dims[7] = h; dims[8] = i;
-    }
+    NumMatrix()  //This generates a blank matrix.
+    { for (byte i = 0; i < 9; ++i) dims[i] = 0; }
     
     //Gets the transformation that affects X position
-    Vector<int16_t> getXTransform() const
-    { return Vector<int16_t>(this->operator()(0,0), get(0, 1)); }
+    Vector getXTransform() const
+    { return Vector(get(0,0), get(0, 1)); }
     
     //Gets the transformation that affects Y position
-    Vector<int16_t> getYTransform() const
-    { return Vector<int16_t>(get(1, 0), get(1, 1)); }
+    Vector getYTransform() const
+    { return Vector(get(1, 0), get(1, 1)); }
     
     //Gets the translation vector
-    Vector<int16_t> getTranslation() const
-    { return Vector<int16_t>(get(0, 2), get(1, 2)); }
+    Vector getTranslation() const
+    { return Vector(get(0, 2), get(1, 2)); }
     
-    Vector<int16_t> getTransformedVector() const
-    { return Vector<int16_t>(get(0,0) * get(0,2) + get(0,1) * get(1,2),
-                             get(1,0) * get(0,2) + get(1,1) * get(1,2));
+    //Gets the translation vector with both transformation vectors applied
+    Vector getTransformedVector() const
+    {
+      return Vector(get(0,0) * get(0,2) + get(0,1) * get(1,2),
+                    get(1,0) * get(0,2) + get(1,1) * get(1,2));
     }
     
     NumMatrix& operator=(const NumMatrix& other)
@@ -45,25 +38,30 @@ class NumMatrix
     NumMatrix operator*(const NumMatrix& other)
     {
       NumMatrix temp;
-      for (byte r = 0; r < 3; ++r)
-        for (byte c = 0; c < 3; ++c)
-          temp(r, c) = operator()(r, c)*other(r, c) + 0;
+      for (byte i = 0; i < 3; ++i)
+        for (byte j = 0; j < 3; ++j)
+          for (byte k = 0; k < 3; ++k)
+            temp(i, j) += this->operator()(i, k) * other(k, j);
             
       return temp;
     }
     
+    //This will likely be used more often that operator*.
     NumMatrix& operator*=(const NumMatrix& other)
     {
-      for (byte i = 0; i < 2; ++i)
-        for (byte j = 0; j < 2; ++j)
-          get(i, j);
+      for (byte i = 0; i < 3; ++i)
+        for (byte j = 0; j < 3; ++j)
+          for (byte k = 0; k < 3; ++k)
+            this->operator()(i, k) *= other(k, j);
+      
+      return *this;
     }
     
     boolean operator==(const NumMatrix& other)
     {
       for (byte i = 0; i < 9; ++i)
           if (dims[i] != other[i]) return false;
-       return true;
+      return true;
     }
     
     boolean operator!=(const NumMatrix& other)
@@ -82,12 +80,20 @@ class NumMatrix
     int16_t& operator[](const byte i)
     { return dims[i]; }
     
+    //And we have an explicit function, just in case we need one.
     int16_t get(const byte r, const byte c) const
     { return dims[3*r + c]; }
     
     int16_t get(const byte i) const
     { return dims[i]; }
     
+    //Returns an identity matrix.
+    static NumMatrix getIdentity()
+    {
+      NumMatrix temp;
+      for (byte i = 0; i < 9; ++i) temp[i] = (i%4 == 0);
+      return temp;
+    }
     
     
   private:

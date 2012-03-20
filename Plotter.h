@@ -8,8 +8,9 @@
 
 #include <SPI.h>
 #include <GD.h>
-#include "State.h"
+
 #include "Declarations.h"
+#include "State.h"
 #include "wireframe.h"
 #include "eraser.h"
 

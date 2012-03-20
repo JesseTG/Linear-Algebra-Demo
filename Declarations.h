@@ -1,26 +1,29 @@
-#ifndef DECLARATIONS_H
-#define DECLARATIONS_H
-
 #include <SPI.h>
 #include <GD.h>
-#include "bgtile.h"
-#include "Plotter.h"
-#include "Vector.h"
+
+class NumMatrix;
+class Shape;
+class State;
+class StateManager;
+class Vector;
+
+class TitleState;
+
 #include "NumMatrix.h"
 #include "Shape.h"
 #include "State.h"
 #include "StateManager.h"
-
 #include "TitleState.h"
+#include "Vector.h"
+
+#include "bgtile.h"
+#include "Plotter.h"
 
 
-class Shape;
-class Vector;
-class State;
-class NumMatrix;
-class StateManager;
 
-enum StateName { 
+#ifndef ENUM_DEFINED
+#define ENUM_DEFINED
+typedef enum { 
   ERROR = -2,
   NADA = -1,
   TITLE = 0,
@@ -38,23 +41,5 @@ enum StateName {
   SCALING,
   PROJECTION,
   CONCLUSION
-};
-
-/*
- * This very fast algorithm returns inverse square root of a number.
- * Its origin is not known, but it is believed to have been
- * developed by Silicon Graphics in the early 90's.  Well-known
- * for being used in the video game Quake III Arena.
- * 
- * http://tinyurl.com/cv4csc
- */
-float fastInvertSquare(const float num)
-{
-  float y = num;
-  long i = * ( long * ) &y;
-  i = 0x5f3759df - ( i >> 1 );               
-  y = * ( float * ) &i;
-  return y *= ( 1.5F - ( num * 0.5F * y * y ) );
-}
-
-#endif //DECLARATIONS_H
+} StateName;
+#endif

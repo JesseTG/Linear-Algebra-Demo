@@ -2,11 +2,8 @@
 #define TITLESTATE_H
 
 #include "Declarations.h"
-#include "StateManager.h"
 #include "State.h"
 
-
-class State;
 
 class TitleState : public State
 {

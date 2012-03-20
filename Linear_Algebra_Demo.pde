@@ -3,8 +3,6 @@
 #include <font8x8.h>
 
 #include "Declarations.h"
-#include "StateManager.h"
-#include "State.h"
 
 StateManager StateController;
 

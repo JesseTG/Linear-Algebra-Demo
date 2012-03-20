@@ -2,7 +2,8 @@
 #define STATEMANAGER_H
 
 #include "Declarations.h"
-#include "State.h"
+//#include "State.h"
+
 
 class StateManager
 {
@@ -11,7 +12,7 @@ class StateManager
     void updateState();
   
   private:
-    void setState(const State newstate);
+    void setState(const StateName newstate);
     State* currentstate;
 };
 

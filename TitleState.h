@@ -9,11 +9,13 @@ class TitleState : public State
 {
   public:
     TitleState();
-    virtual ~TitleState();
-    
-    virtual void input();
-    virtual void logic();
-    virtual void render();
+    ~TitleState();
+    void* operator new(size_t size) { return malloc(size); }
+    void operator delete(void *obj) { free(obj); }
+
+    void input();
+    void logic();
+    void render();
 };
 
 TitleState::TitleState()

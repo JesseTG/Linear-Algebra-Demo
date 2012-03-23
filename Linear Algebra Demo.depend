@@ -1,0 +1,121 @@
+# depslib dependency file v1.0
+1332300367 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
+	"Declarations.h"
+	"NumMatrix.h"
+	"Vector.h"
+	"Shape.h"
+	"StateManager.h"
+	"State.h"
+	"TitleState.h"
+	"bgtile.h"
+	"Plotter.h"
+	<SPI/SPI.h>
+	<GD.h>
+
+1332375781 /home/jesse/Desktop/Code/Linear_Algebra_Demo/Declarations.h
+	<SPI/SPI.h>
+	<Gameduino/GD.h>
+	<Gameduino/font8x8.h>
+
+1320887939 /home/jesse/.arduino-0023/libraries/SPI/SPI.h
+	<stdio.h>
+	<WProgram.h>
+	<avr/pgmspace.h>
+
+1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/WProgram.h
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<avr/interrupt.h>
+	"wiring.h"
+	"WCharacter.h"
+	"WString.h"
+	"HardwareSerial.h"
+
+1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/wiring.h
+	<avr/io.h>
+	<stdlib.h>
+	"binary.h"
+
+1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/binary.h
+
+1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/WCharacter.h
+	<ctype.h>
+
+1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/WString.h
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/HardwareSerial.h
+	<inttypes.h>
+	"Stream.h"
+	"usb_api.h"
+
+1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/Stream.h
+	<inttypes.h>
+	"Print.h"
+
+1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/Print.h
+	<inttypes.h>
+	<stdio.h>
+	"WString.h"
+
+1315061764 /home/jesse/.arduino-0023/libraries/Gameduino/GD.h
+	"wirish.h"
+	<stdio.h>
+	<stdint.h>
+	<string.h>
+
+1332282899 /home/jesse/.arduino-0023/libraries/Gameduino/font8x8.h
+
+1332468568 /home/jesse/Desktop/Code/Linear_Algebra_Demo/NumMatrix.h
+	"Vector.h"
+
+1332205879 /home/jesse/Desktop/Code/Linear_Algebra_Demo/Vector.h
+
+1332468229 /home/jesse/Desktop/Code/Linear_Algebra_Demo/Shape.h
+	"Declarations.h"
+	"Plotter.h"
+
+1332374493 /home/jesse/Desktop/Code/Linear_Algebra_Demo/Plotter.h
+	<SPI/SPI.h>
+	<Gameduino/GD.h>
+	"Declarations.h"
+	"wireframe.h"
+	"eraser.h"
+
+1332024901 /home/jesse/Desktop/Code/Linear_Algebra_Demo/wireframe.h
+
+1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/eraser.h
+
+1332295747 /home/jesse/Desktop/Code/Linear_Algebra_Demo/StateManager.h
+	"Declarations.h"
+	"State.h"
+	"TitleState.h"
+
+1332295694 /home/jesse/Desktop/Code/Linear_Algebra_Demo/TitleState.h
+	"Declarations.h"
+	"State.h"
+
+1332295753 /home/jesse/Desktop/Code/Linear_Algebra_Demo/State.h
+	"Declarations.h"
+
+1331689922 /home/jesse/Desktop/Code/Linear_Algebra_Demo/bgtile.h
+
+1332375751 source:/home/jesse/.arduino-0023/libraries/Gameduino/GD.cpp
+	"wirish.h"
+	"GD.h"
+	"WProgram.h"
+	<avr/pgmspace.h>
+	<SPI/SPI.h>
+	<GD.h>
+	"font8x8.h"
+
+1320887939 source:/home/jesse/.arduino-0023/libraries/SPI/SPI.cpp
+	"pins_arduino.h"
+	"SPI.h"
+
+1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/pins_arduino.h
+	<avr/pgmspace.h>
+

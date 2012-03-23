@@ -5,21 +5,24 @@
 
 class State
 {
-  
-    
+
+
   public:
     virtual ~State() {};
-    
-    StateName getNextState() const; 
+
+    StateName getNextState() const;
     void setNextState(const StateName newnextstate);
-      
+
+    void* operator new(size_t size) { return malloc(size); }
+    void operator delete(void *obj) { free(obj); }
+
     virtual void input() = 0;
     virtual void logic() = 0;
     virtual void render() = 0;
-    
+
   protected:
     StateName nextstate;
-    
+
 };
 
 StateName State::getNextState() const
@@ -27,6 +30,6 @@ StateName State::getNextState() const
 
 void State::setNextState(const StateName newnextstate)
 { this->nextstate = newnextstate; }
- 
+
 
 #endif //STATE_H

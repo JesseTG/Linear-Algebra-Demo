@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Linear Algebra Demo" />
+		<Option pch_mode="2" />
+		<Option compiler="avrgcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Linear Algebra Demo CB.elf" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="avrgcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="avr-objcopy -O ihex -R .eeprom -R .eesafe $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).hex" />
+					<Add after="avr-objcopy --no-change-warnings -j .eeprom --change-section-lma .eeprom=0 -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).eep.hex" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Linear Algebra Demo CB.elf" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="avrgcc" />
+				<Compiler>
+					<Add option="-Os" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="avr-objcopy -O ihex -R .eeprom -R .eesafe $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).hex" />
+					<Add after="avr-objcopy --no-change-warnings -j .eeprom --change-section-lma .eeprom=0 -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).eep.hex" />
+					<Add after="avrdude -p m168 -c avrispmkII -P usb -U flash:w:$(TARGET_OUTPUT_FILE).hex" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-mmcu=atmega328p" />
+			<Add option="-DF_CPU=16000000UL" />
+			<Add directory="/home/jesse/.arduino-0023/hardware/arduino/cores/arduino" />
+			<Add directory="/home/jesse/.arduino-0023/libraries" />
+			<Add directory="../../../.arduino-0023/libraries/Gameduino" />
+		</Compiler>
+		<Linker>
+			<Add option="-mmcu=atmega328p" />
+			<Add library="./core.a" />
+		</Linker>
+		<Unit filename="../../../.arduino-0023/libraries/Gameduino/GD.cpp" />
+		<Unit filename="../../../.arduino-0023/libraries/SPI/SPI.cpp" />
+		<Unit filename="Declarations.h" />
+		<Unit filename="NumMatrix.h" />
+		<Unit filename="Plotter.h" />
+		<Unit filename="Shape.h" />
+		<Unit filename="State.h" />
+		<Unit filename="StateManager.h" />
+		<Unit filename="TitleState.h" />
+		<Unit filename="Vector.h" />
+		<Unit filename="bgtile.h" />
+		<Unit filename="eraser.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="wireframe.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

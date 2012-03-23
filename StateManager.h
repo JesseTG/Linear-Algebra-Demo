@@ -2,7 +2,8 @@
 #define STATEMANAGER_H
 
 #include "Declarations.h"
-//#include "State.h"
+#include "State.h"
+#include "TitleState.h"
 
 
 class StateManager
@@ -10,7 +11,9 @@ class StateManager
   public:
     StateManager();
     void updateState();
-  
+
+
+
   private:
     void setState(const StateName newstate);
     State* currentstate;
@@ -30,11 +33,11 @@ void StateManager::updateState()
 }
 
 void StateManager::setState(const StateName newstate)
-{ 
+{
     switch (newstate) {
       case ERROR: while (true);  //Infinite loop.
       case NADA: return;
-      case TITLE: currentstate = new TitleState();
+      case TITLE: delete currentstate; currentstate = new TitleState;
       default: while (true);
     }
 }

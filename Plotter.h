@@ -6,11 +6,15 @@
 #ifndef PLOTTER_H
 #define PLOTTER_H
 
-#include <SPI.h>
-#include <GD.h>
 
+
+
+
+
+#include <SPI/SPI.h>
+#include <Gameduino/GD.h>
 #include "Declarations.h"
-#include "State.h"
+
 #include "wireframe.h"
 #include "eraser.h"
 
@@ -49,7 +53,7 @@ void PlotterClass::erase()
   plotting = 0;
   GD.wr(J1_RESET, 1);
   GD.wr(COMM+7, 1);
-  GD.wr(COMM+8, replicate((flip ? 1 : 2) ^ 3));
+  GD.wr(COMM+8, replicate((2 - flip) ^ 3));
   GD.microcode(eraser_code, sizeof(eraser_code));
 }
 
@@ -83,12 +87,12 @@ inline void PlotterClass::show()
 void PlotterClass::show(byte r, byte g, byte b)
 {
   waitready();
-  if (flip == 1) {
+  if (flip) {
     GD.wr16(PALETTE4A, BLACK);
     GD.wr16(PALETTE4A + 2, RGB(r, g, b));
     GD.wr16(PALETTE4A + 4, BLACK);
     GD.wr16(PALETTE4A + 6, RGB(r, g, b));
-  } 
+  }
   else {
     GD.wr16(PALETTE4A, BLACK);
     GD.wr16(PALETTE4A + 2, BLACK);
@@ -114,11 +118,11 @@ void PlotterClass::line(byte x0, byte y0, byte x1, byte y1)
   }
   int deltax = x1 - x0;
   int deltay = abs(y1 - y0);
-  int error = deltax / 2;
-  char ystep = (y0 < y1) ? 1 : -1;  
+  volatile int error = deltax / 2;
+  char ystep = (y0 < y1) ? 1 : -1;
 
-  byte x;
-  byte y = y0;
+  volatile byte x;
+  volatile byte y = y0;
 
   waitready();
   if (!plotting) {

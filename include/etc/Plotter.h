@@ -13,7 +13,7 @@
 
 #include <SPI/SPI.h>
 #include <Gameduino/GD.h>
-#include "Declarations.h"
+#include "../Declarations.h"
 
 #include "wireframe.h"
 #include "eraser.h"

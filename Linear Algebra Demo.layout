@@ -2,28 +2,28 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
 	<File name="../../../.arduino-0023/libraries/Gameduino/GD.cpp" open="0" top="0" tabpos="11">
-		<Cursor position="267" topLine="2" />
+		<Cursor position="4263" topLine="203" />
 	</File>
 	<File name="Declarations.h" open="1" top="0" tabpos="2">
 		<Cursor position="220" topLine="0" />
 	</File>
 	<File name="NumMatrix.h" open="1" top="0" tabpos="10">
-		<Cursor position="2644" topLine="78" />
+		<Cursor position="2169" topLine="66" />
 	</File>
 	<File name="Plotter.h" open="1" top="0" tabpos="4">
 		<Cursor position="142" topLine="6" />
 	</File>
 	<File name="Shape.h" open="1" top="0" tabpos="3">
-		<Cursor position="153" topLine="30" />
+		<Cursor position="828" topLine="42" />
 	</File>
 	<File name="State.h" open="1" top="0" tabpos="7">
 		<Cursor position="313" topLine="9" />
 	</File>
-	<File name="StateManager.h" open="1" top="0" tabpos="5">
-		<Cursor position="194" topLine="0" />
+	<File name="StateManager.h" open="1" top="1" tabpos="5">
+		<Cursor position="192" topLine="0" />
 	</File>
-	<File name="TitleState.h" open="1" top="1" tabpos="6">
-		<Cursor position="338" topLine="0" />
+	<File name="TitleState.h" open="1" top="0" tabpos="6">
+		<Cursor position="231" topLine="0" />
 	</File>
 	<File name="Vector.h" open="1" top="0" tabpos="8">
 		<Cursor position="0" topLine="0" />

@@ -12,8 +12,6 @@ class StateManager
     StateManager();
     void updateState();
 
-
-
   private:
     void setState(const StateName newstate);
     State* currentstate;

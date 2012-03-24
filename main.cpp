@@ -1,15 +1,15 @@
-#include "Declarations.h"
+#include "include/Declarations.h"
 
-#include "NumMatrix.h"
-#include "Vector.h"
-#include "Shape.h"
+#include "include/NumMatrix.h"
+#include "include/Vector.h"
+#include "include/Shape.h"
 
-#include "StateManager.h"
-#include "State.h"
-#include "TitleState.h"
+#include "include/StateManager.h"
+#include "include/State.h"
+#include "include/TitleState.h"
 
-#include "bgtile.h"
-#include "Plotter.h"
+#include "include/etc/bgtile.h"
+#include "include/etc/Plotter.h"
 
 #include <SPI/SPI.h>
 #include <GD.h>

@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Linear Algebra Demo" />
+		<Option title="Linear_Algebra_Demo" />
 		<Option pch_mode="2" />
 		<Option compiler="avrgcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Linear Algebra Demo CB.elf" prefix_auto="1" extension_auto="0" />
+				<Option output="bin/Debug/Linear_Algebra_Demo.elf" prefix_auto="1" extension_auto="0" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="avrgcc" />
@@ -17,10 +17,11 @@
 				<ExtraCommands>
 					<Add after="avr-objcopy -O ihex -R .eeprom -R .eesafe $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).hex" />
 					<Add after="avr-objcopy --no-change-warnings -j .eeprom --change-section-lma .eeprom=0 -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).eep.hex" />
+					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Linear Algebra Demo CB.elf" prefix_auto="1" extension_auto="0" />
+				<Option output="bin/Release/Linear_Algebra_Demo.elf" prefix_auto="1" extension_auto="0" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="avrgcc" />
@@ -31,6 +32,7 @@
 					<Add after="avr-objcopy -O ihex -R .eeprom -R .eesafe $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).hex" />
 					<Add after="avr-objcopy --no-change-warnings -j .eeprom --change-section-lma .eeprom=0 -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).eep.hex" />
 					<Add after="avrdude -p m168 -c avrispmkII -P usb -U flash:w:$(TARGET_OUTPUT_FILE).hex" />
+					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
 		</Build>

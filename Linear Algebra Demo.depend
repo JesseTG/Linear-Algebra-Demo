@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1332614474 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
+1332631601 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
 	"include/Declarations.h"
 	"include/NumMatrix.h"
 	"include/Vector.h"
 	"include/Shape.h"
 	"include/StateManager.h"
 	"include/State.h"
-	"include/TitleState.h"
+	"include/states/TitleState.h"
 	"include/etc/bgtile.h"
 	"include/etc/Plotter.h"
 	<SPI/SPI.h>
@@ -119,21 +119,23 @@
 1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/pins_arduino.h
 	<avr/pgmspace.h>
 
-1332375781 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
+1332632569 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
 	<SPI/SPI.h>
 	<Gameduino/GD.h>
 	<Gameduino/font8x8.h>
+	<IRremote/IRremote.h>
 
-1332468568 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/NumMatrix.h
+1332631972 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/NumMatrix.h
 	"Vector.h"
 
 1332205879 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Vector.h
 
-1332617176 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Shape.h
+1332631251 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Shape.h
 	"Declarations.h"
 	"etc/Plotter.h"
+	<math.h>
 
-1332614495 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/Plotter.h
+1332631992 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/Plotter.h
 	<SPI/SPI.h>
 	<Gameduino/GD.h>
 	"../Declarations.h"
@@ -144,12 +146,12 @@
 
 1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/eraser.h
 
-1332472335 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
+1332631564 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
 	"Declarations.h"
 	"State.h"
-	"TitleState.h"
+	"states/TitleState.h"
 
-1332614893 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
+1332631676 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
 	"Declarations.h"
 	<Gameduino/GD.h>
 
@@ -158,4 +160,18 @@
 	"State.h"
 
 1331689922 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/bgtile.h
+
+1332632078 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TitleState.h
+	"../Declarations.h"
+	"../State.h"
+
+1252209328 /home/jesse/.arduino-0023/libraries/IRremote/IRremote.h
+
+1252255330 source:/home/jesse/.arduino-0023/libraries/IRremote/IRremote.cpp
+	"IRremote.h"
+	"IRremoteInt.h"
+	<avr/interrupt.h>
+
+1252209348 /home/jesse/.arduino-0023/libraries/IRremote/IRremoteInt.h
+	<WProgram.h>
 

@@ -66,10 +66,10 @@ void PlotterClass::begin()
   // This gives a 256 x 256 4-color bitmap.
   for (byte i = 0; i < 256; ++i) {
     GD.sprite(i,
-              72 + 16 * ((i >> 4) & 15),
-              22 + 16 * (i & 15),
-              i & 63, /* image 0-63 */
-              0x8 | ((3 - (i >> 6)) << 1), /* palettes bits in columns 3,2,1,0 */
+              72 + (((i >> 4) & 15) << 4),
+              22 + ((i & 15) << 4),
+              i & 63, //image 0-63
+              0x8 | ((3 - (i >> 6)) << 1), //palettes bits in columns 3,2,1,0
               0);
   }
 
@@ -118,11 +118,11 @@ void PlotterClass::line(byte x0, byte y0, byte x1, byte y1)
   }
   int deltax = x1 - x0;
   int deltay = abs(y1 - y0);
-  volatile int error = deltax / 2;
+  //volatile int error = deltax / 2;
   char ystep = (y0 < y1) ? 1 : -1;
 
-  volatile byte x;
-  volatile byte y = y0;
+  //volatile byte x;
+  //volatile byte y = y0;
 
   waitready();
   if (!plotting) {

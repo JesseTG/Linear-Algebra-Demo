@@ -47,21 +47,23 @@
 		<Linker>
 			<Add option="-mmcu=atmega328p" />
 			<Add library="./core.a" />
+			<Add library="/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr5/libm.a" />
 		</Linker>
 		<Unit filename="../../../.arduino-0023/libraries/Gameduino/GD.cpp" />
+		<Unit filename="../../../.arduino-0023/libraries/IRremote/IRremote.cpp" />
 		<Unit filename="../../../.arduino-0023/libraries/SPI/SPI.cpp" />
-		<Unit filename="Declarations.h" />
-		<Unit filename="NumMatrix.h" />
-		<Unit filename="Plotter.h" />
-		<Unit filename="Shape.h" />
-		<Unit filename="State.h" />
-		<Unit filename="StateManager.h" />
-		<Unit filename="TitleState.h" />
-		<Unit filename="Vector.h" />
-		<Unit filename="bgtile.h" />
-		<Unit filename="eraser.h" />
+		<Unit filename="include/Declarations.h" />
+		<Unit filename="include/NumMatrix.h" />
+		<Unit filename="include/Shape.h" />
+		<Unit filename="include/State.h" />
+		<Unit filename="include/StateManager.h" />
+		<Unit filename="include/Vector.h" />
+		<Unit filename="include/etc/Plotter.h" />
+		<Unit filename="include/etc/bgtile.h" />
+		<Unit filename="include/etc/eraser.h" />
+		<Unit filename="include/etc/wireframe.h" />
+		<Unit filename="include/states/TitleState.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="wireframe.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

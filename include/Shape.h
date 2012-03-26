@@ -4,6 +4,8 @@
 #include "Declarations.h"
 #include "etc/Plotter.h"
 
+#include <math.h>
+
 /*
  * Here we use a lot of simplified matrix multiplication for the sake of
  * saving computation time, thus improving speed.  Essentially, we multiply only
@@ -16,6 +18,7 @@
 class Shape
 {
     public:
+        Shape() {}
         Shape(const byte newnumofvertices);
         ~Shape();
 
@@ -35,6 +38,9 @@ class Shape
         //Scales this shape by this much.
         void scaleBy(const Vector& offset);
 
+        //Sets the amount of vertices that this shape has due to C++ rules
+        void setNumOfVertices(const byte newnumofvertices);
+
         //Sets a specfic vertice's location.  Meant to be for initialization.
         void setVertice(const byte vertice, const Vector& newpos);
 
@@ -52,9 +58,11 @@ class Shape
         //back, but still nice to have.
         void operator delete(void* obj) { free(obj); }
 
-    private:
-        Shape() {}  //Shape is not default-constructible.
+        //Gets a rotation matrix.  Trigonometric functions are only used twice,
+        //which is good since they're computationally expensive!
+        static NumMatrix getRotationMatrix(const int16_t newangle);
 
+    private:
         //A pointer to all the matrices; we don't know until runtime how many
         //vertices a shape will need.
         NumMatrix* vertices;
@@ -62,12 +70,6 @@ class Shape
         //The amount of vertices this shape has, since we can't access an
         //array's size in C++.
         byte numofvertices;
-
-
-
-        //Gets a rotation matrix.  Trigonometric functions are only used twice,
-        //which is good since they're computationally expensive!
-        static NumMatrix getRotationMatrix(const int16_t newangle);
 };
 
 Shape::Shape(const byte newnumofvertices)
@@ -84,11 +86,12 @@ Shape::~Shape()
 void Shape::badRotateBy(int16_t theangle)
 {
     theangle *= (PI/180);
-
+    //I can't simulate novice rotation EXACTLY since I'm storing coordinates
+    //in matrices, not vectors.  But this is close enough.
     for (byte i = 0; i < numofvertices; ++i) {
         vertices[i](0, 0) *= cos(theangle);
-        vertices[i](0, 1) *= -sin(newangle);
-        vertices[i](1, 0) *= sin(newangle);
+        vertices[i](0, 1) *= -sin(theangle);
+        vertices[i](1, 0) *= sin(theangle);
         vertices[i](1, 1) *= cos(theangle);
     }
 }
@@ -105,6 +108,7 @@ void Shape::draw() const
 
 void Shape::moveBy(const Vector& newpos)
 {
+    //This is just adding coordinates to the matrix.
     for (byte i = 0; i < numofvertices; ++i) {
         vertices[i](0, 2) += newpos.x;
         vertices[i](1, 2) += newpos.y;
@@ -122,6 +126,19 @@ void Shape::rotateBy(const int16_t newangle)
     }
 }
 
+void Shape::shearBy(const Vector& offset)
+{
+    for (byte i = 0; i < numofvertices; ++i) {
+        vertices[i](0, 1) += offset.x;
+        vertices[i](1, 0) += offset.y;
+    }
+}
+
+void Shape::setNumOfVertices(const byte newnumofvertices)
+{
+    numofvertices = newnumofvertices;
+}
+
 void Shape::setVertice(const byte vertice, const Vector& newpos)
 {
     vertices[vertice](0, 2) = newpos.x;
@@ -129,6 +146,10 @@ void Shape::setVertice(const byte vertice, const Vector& newpos)
 }
 
 void Shape::scaleBy(const Vector& offset) {
+    /* This is the 2x2 matrix you'd need (x and y are scaling factors).
+     * [x 0]
+     * [0 y]
+     */
     for (byte i = 0; i < numofvertices; ++i) {
         vertices[i](0, 0) *= offset.x;
         vertices[i](1, 1) *= offset.y;

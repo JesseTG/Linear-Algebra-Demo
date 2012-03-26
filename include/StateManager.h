@@ -3,7 +3,7 @@
 
 #include "Declarations.h"
 #include "State.h"
-#include "TitleState.h"
+#include "states/TitleState.h"
 
 
 class StateManager

@@ -67,24 +67,24 @@ class NumMatrix
     boolean operator!=(const NumMatrix& other)
     { return !(operator==(other)); }
 
-    int16_t operator()(const byte r, const byte c) const
+    float operator()(const byte r, const byte c) const
     { return get(r, c); }
 
-    int16_t& operator()(const byte r, const byte c)
+    float& operator()(const byte r, const byte c)
     { return dims[3*r + c]; }
 
     //So we can refer to this NumMatrix by both one index and two.
-    int16_t operator[](const byte i) const
+    float operator[](const byte i) const
     { return get(i); }
 
-    int16_t& operator[](const byte i)
+    float& operator[](const byte i)
     { return dims[i]; }
 
     //And we have an explicit function, just in case we need one.
-    int16_t get(const byte r, const byte c) const
+    float get(const byte r, const byte c) const
     { return dims[3*r + c]; }
 
-    int16_t get(const byte i) const
+    float get(const byte i) const
     { return dims[i]; }
 
     //Returns an identity matrix.
@@ -106,7 +106,7 @@ class NumMatrix
     //[0][1][2]
     //[3][4][5]
     //[6][7][8]
-    int16_t dims[9];
+    float dims[9];
 };
 
 #endif //NUMMATRIX_H

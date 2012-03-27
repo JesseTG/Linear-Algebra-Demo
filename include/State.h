@@ -2,7 +2,6 @@
 #define STATE_H
 
 #include "Declarations.h"
-#include <Gameduino/GD.h>
 
 class State
 {
@@ -16,9 +15,6 @@ class State
 
     uint16_t getColor() const;
     void setColor(const byte r, const byte g, const byte b);
-
-    void* operator new(size_t size) { return malloc(size); }
-    void operator delete(void *obj) { free(obj); }
 
     virtual void input() = 0;
     virtual void logic() = 0;

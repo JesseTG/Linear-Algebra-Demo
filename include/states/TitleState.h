@@ -22,9 +22,6 @@ class TitleState : public State
     void logic();
     void render();
 
-    void* operator new(size_t size) { return malloc(size); }
-    void operator delete(void *obj) { free(obj); }
-
   private:
     //The cross that will be spinning on the title screen
     Cross cross;
@@ -70,7 +67,7 @@ TitleState::~TitleState()
 void TitleState::input()
 {
     //TODO: Work on getting input!  Need to get familiar IRrecv's API again.
-    if (/* user presses a certain button */) setNextState(/* state 2*/);
+    if (/* user presses a certain button */true) setNextState(/* state 2*/NADA);
 }
 
 void TitleState::logic()

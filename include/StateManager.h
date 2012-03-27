@@ -2,9 +2,6 @@
 #define STATEMANAGER_H
 
 #include "Declarations.h"
-#include "State.h"
-#include "states/TitleState.h"
-
 
 class StateManager
 {

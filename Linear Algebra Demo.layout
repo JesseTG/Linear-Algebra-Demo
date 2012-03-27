@@ -1,40 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="../../../.arduino-0023/libraries/Gameduino/GD.cpp" open="0" top="0" tabpos="11">
-		<Cursor position="145" topLine="0" />
-	</File>
-	<File name="../../../.arduino-0023/libraries/IRremote/IRremote.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="407" topLine="0" />
-	</File>
-	<File name="../../../.arduino-0023/libraries/SPI/SPI.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1503" topLine="17" />
-	</File>
-	<File name="include/Declarations.h" open="1" top="0" tabpos="4">
-		<Cursor position="469" topLine="10" />
-	</File>
-	<File name="include/NumMatrix.h" open="0" top="0" tabpos="0">
-		<Cursor position="2964" topLine="0" />
-	</File>
-	<File name="include/Shape.h" open="1" top="0" tabpos="3">
-		<Cursor position="2520" topLine="48" />
-	</File>
-	<File name="include/State.h" open="1" top="0" tabpos="6">
-		<Cursor position="111" topLine="22" />
-	</File>
-	<File name="include/StateManager.h" open="1" top="0" tabpos="1">
-		<Cursor position="487" topLine="0" />
-	</File>
-	<File name="include/etc/Plotter.h" open="0" top="0" tabpos="0">
-		<Cursor position="2410" topLine="108" />
-	</File>
-	<File name="include/etc/bgtile.h" open="0" top="0" tabpos="0">
-		<Cursor position="96" topLine="0" />
-	</File>
-	<File name="include/states/TitleState.h" open="1" top="0" tabpos="2">
-		<Cursor position="1946" topLine="62" />
-	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="5">
-		<Cursor position="502" topLine="9" />
-	</File>
 </CodeBlocks_layout_file>

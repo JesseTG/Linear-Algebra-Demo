@@ -2,67 +2,43 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Linear_Algebra_Demo" />
+		<Option title="Linear Algebra Demo" />
 		<Option pch_mode="2" />
-		<Option compiler="avrgcc" />
+		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Linear_Algebra_Demo.elf" prefix_auto="1" extension_auto="0" />
+				<Option output="bin/Debug/Linear Algebra Demo" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="avrgcc" />
+				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
-				<ExtraCommands>
-					<Add after="avr-objcopy -O ihex -R .eeprom -R .eesafe $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).hex" />
-					<Add after="avr-objcopy --no-change-warnings -j .eeprom --change-section-lma .eeprom=0 -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).eep.hex" />
-					<Mode after="always" />
-				</ExtraCommands>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Linear_Algebra_Demo.elf" prefix_auto="1" extension_auto="0" />
+				<Option output="bin/Release/Linear Algebra Demo" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
-				<Option type="1" />
-				<Option compiler="avrgcc" />
+				<Option type="0" />
+				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-Os" />
+					<Add option="-O2" />
 				</Compiler>
-				<ExtraCommands>
-					<Add after="avr-objcopy -O ihex -R .eeprom -R .eesafe $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).hex" />
-					<Add after="avr-objcopy --no-change-warnings -j .eeprom --change-section-lma .eeprom=0 -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).eep.hex" />
-					<Add after="avrdude -p m168 -c avrispmkII -P usb -U flash:w:$(TARGET_OUTPUT_FILE).hex" />
-					<Mode after="always" />
-				</ExtraCommands>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-mmcu=atmega328p" />
-			<Add option="-DF_CPU=16000000UL" />
-			<Add directory="/home/jesse/.arduino-0023/hardware/arduino/cores/arduino" />
-			<Add directory="/home/jesse/.arduino-0023/libraries" />
-			<Add directory="../../../.arduino-0023/libraries/Gameduino" />
 		</Compiler>
 		<Linker>
-			<Add option="-mmcu=atmega328p" />
-			<Add library="./core.a" />
-			<Add library="/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr5/libm.a" />
+			<Add library="sfml-audio" />
+			<Add library="sfml-graphics" />
+			<Add library="sfml-network" />
+			<Add library="sfml-system" />
+			<Add library="sfml-window" />
 		</Linker>
-		<Unit filename="../../../.arduino-0023/libraries/Gameduino/GD.cpp" />
-		<Unit filename="../../../.arduino-0023/libraries/IRremote/IRremote.cpp" />
-		<Unit filename="../../../.arduino-0023/libraries/SPI/SPI.cpp" />
-		<Unit filename="include/Declarations.h" />
-		<Unit filename="include/NumMatrix.h" />
-		<Unit filename="include/Shape.h" />
-		<Unit filename="include/State.h" />
-		<Unit filename="include/StateManager.h" />
-		<Unit filename="include/Vector.h" />
-		<Unit filename="include/etc/Plotter.h" />
-		<Unit filename="include/etc/bgtile.h" />
-		<Unit filename="include/etc/eraser.h" />
-		<Unit filename="include/etc/wireframe.h" />
-		<Unit filename="include/states/TitleState.h" />
+		<Unit filename="cb.bmp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

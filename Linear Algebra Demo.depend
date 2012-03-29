@@ -1,16 +1,7 @@
 # depslib dependency file v1.0
-1332880579 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
+1332965720 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
 	"include/Declarations.h"
-	"include/NumMatrix.h"
-	"include/Vector.h"
-	"include/Shape.h"
 	"include/StateManager.h"
-	"include/State.h"
-	"include/states/TitleState.h"
-	"include/etc/bgtile.h"
-	"include/etc/Plotter.h"
-	<SPI/SPI.h>
-	<GD.h>
 
 1332375781 /home/jesse/Desktop/Code/Linear_Algebra_Demo/Declarations.h
 	<SPI/SPI.h>
@@ -119,11 +110,12 @@
 1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/pins_arduino.h
 	<avr/pgmspace.h>
 
-1332879663 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
-	<SPI/SPI.h>
-	<Gameduino/GD.h>
-	<Gameduino/font8x8.h>
-	<IRremote/IRremote.h>
+1332985599 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
+	"Logger.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+	<memory>
+	<stdexcept>
 
 1332631972 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/NumMatrix.h
 	"Vector.h"
@@ -146,14 +138,13 @@
 
 1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/eraser.h
 
-1332631564 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
+1332965477 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
 	"Declarations.h"
-	"State.h"
 	"states/TitleState.h"
+	"State.h"
 
-1332631676 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
+1332965203 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
 	"Declarations.h"
-	<Gameduino/GD.h>
 
 1332295694 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/TitleState.h
 	"Declarations.h"
@@ -161,7 +152,7 @@
 
 1332802731 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/bgtile.h
 
-1332724938 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TitleState.h
+1332986701 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TitleState.h
 	"../Declarations.h"
 	"../State.h"
 
@@ -174,4 +165,7 @@
 
 1252209348 /home/jesse/.arduino-0023/libraries/IRremote/IRremoteInt.h
 	<WProgram.h>
+
+1332966831 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Logger.h
+	<string>
 

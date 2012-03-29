@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++0x" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -29,6 +30,9 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-Os" />
+			<Add option="-O3" />
+			<Add option="-std=c++0x" />
 			<Add option="-Wall" />
 		</Compiler>
 		<Linker>
@@ -38,7 +42,11 @@
 			<Add library="sfml-system" />
 			<Add library="sfml-window" />
 		</Linker>
-		<Unit filename="cb.bmp" />
+		<Unit filename="include/Declarations.h" />
+		<Unit filename="include/Logger.h" />
+		<Unit filename="include/State.h" />
+		<Unit filename="include/StateManager.h" />
+		<Unit filename="include/states/TitleState.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

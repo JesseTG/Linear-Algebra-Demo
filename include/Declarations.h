@@ -1,16 +1,25 @@
 #ifndef DECLARATIONS_H
 #define DECLARATIONS_H
 
+#include "Logger.h"
+
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
 
 class StateManager;
 class State;
 class TitleState;
 
-enum class StateName {
-  ERROR = -1,
-  NADA = NULL,  //Remember that NULL = 0
-  TITLE = 1,
+
+typedef sf::Rect<float> RectFloat;
+typedef sf::Vector2<int> VectorInt;
+typedef sf::Vector2<float> VectorFloat;
+
+enum class StateName : char {
+  NADA = 0,
+  TITLE,
   VECTORS,
   VECTORS_VS_SCALARS,
   RASTER_VS_VECTOR,
@@ -25,5 +34,10 @@ enum class StateName {
   PROJECTION,
   CONCLUSION
 };
+
+
+sf::RenderWindow Window(sf::VideoMode(640, 480, 32), "Linear Algebra Demo");
+Logger logger;
+
 
 #endif //DECLARATIONS_H

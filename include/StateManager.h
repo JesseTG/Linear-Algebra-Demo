@@ -2,6 +2,10 @@
 #define STATEMANAGER_H
 
 #include "Declarations.h"
+#include "states/TitleState.h"
+#include "State.h"
+
+enum class StateName : char;
 
 class StateManager
 {
@@ -11,12 +15,12 @@ class StateManager
 
   private:
     void setState(const StateName newstate);
-    State* currentstate;
+    std::shared_ptr<State> currentstate;
 };
 
 StateManager::StateManager()
 {
-    currentstate = new TitleState;
+    currentstate.reset(new TitleState);
 }
 
 void StateManager::updateState()
@@ -30,10 +34,9 @@ void StateManager::updateState()
 void StateManager::setState(const StateName newstate)
 {
     switch (newstate) {
-      case ERROR: while (true);  //Infinite loop.
-      case NADA: return;
-      case TITLE: delete currentstate; currentstate = new TitleState;
-      default: while (true);
+      case StateName::NADA: return;
+      case StateName::TITLE: currentstate.reset(new TitleState);
+      default: throw std::runtime_error("Improper state!  Abort!");
     }
 }
 

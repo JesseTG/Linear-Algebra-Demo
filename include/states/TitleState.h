@@ -5,7 +5,7 @@
 #include "../State.h"
 
 /*
- * This is my project's title screen.  It features only a rotating cross and
+ * This is my project's title screen.  It features only a rotating sprite
  * some information off to the sides.
  */
 
@@ -23,76 +23,61 @@ class TitleState : public State
     sf::Image marioimage;
     sf::Sprite mario;
 
-    sf::Image bgimage;
-    sf::Sprite bg;
 
-    RectFloat mariobox;
+
+    sf::String title;
 };
 
 TitleState::TitleState()
 {
+    logger.log("Entering Title state.");
+
     //NADA means next frame we stay in this state, or we'd never see this one!
     setNextState(StateName::NADA);
 
-    marioimage.LoadFromFile("./gfx/mario.png");
+
+    if (marioimage.LoadFromFile("./gfx/mario.png"))
+        logger.log("Loaded title screen sprite.");
     marioimage.SetSmooth(false);
 
     mario.SetImage(marioimage);
-
     mario.SetScale(6, 6);
     mario.SetPosition(320, 240);
     mario.SetCenter(marioimage.GetWidth()/2.0, marioimage.GetHeight()/2.0);
 
-    bgimage.LoadFromFile("./gfx/bgtile.png");
-    bg.SetImage(bgimage);
+    title.SetFont(font);
+    title.SetSize(24);
+    title.SetText("Linear Algebra Demo\n\n"
+                  "Jesse Talavera-Greenberg\n\n"
+                  "O/P: Previous/Next Screen");
 
     Window.Clear();
-
-    for (int i = 0; i < Window.GetWidth(); i += bgimage.GetWidth()) {
-        for (int j = 0; j < Window.GetHeight(); j += bgimage.GetHeight()) {
-            bg.SetPosition(i, j);
-            Window.Draw(bg);
-        }
-    }
 }
 
 TitleState::~TitleState()
 {
-
+    logger.log("Exiting Title state.");
 }
 
 void TitleState::input()
 {
-    //TODO: Work on getting input!  Need to get familiar IRrecv's API again.
-    if (/* user presses a certain button */true == false)
-    setNextState(/* state 2*/StateName::TITLE);
+    while (Window.GetEvent(event))
+        if (event.Type == sf::Event::KeyPressed &&
+            event.Key.Code == sf::Key::P)
+                setNextState(StateName::VECTORS);
 }
 
 void TitleState::logic()
 {
-    mario.Rotate(1);
-    VectorFloat temp = mario.TransformToGlobal(VectorFloat(0, 0));
-    VectorFloat temp2(mario.TransformToGlobal(VectorFloat(temp.x + marioimage.GetWidth()*mario.GetScale().x,
-                                              temp.y + marioimage.GetHeight()*mario.GetScale().y)));
-    mariobox.Top = temp.y;
-    mariobox.Left = temp.x;
-    mariobox.Bottom = temp2.y;
-    mariobox.Right = temp2.x;
+    mario.Rotate(.5);
 }
 
 void TitleState::render()
 {
-    for (int i = 0; i < Window.GetWidth(); i += bgimage.GetWidth()) {
-        for (int j = 0; j < Window.GetHeight(); j += bgimage.GetHeight()) {
-            bg.SetPosition(i, j);
-            if (mariobox.Contains(bg.GetPosition().x, bg.GetPosition().y))
-                Window.Draw(bg);
-        }
-    }
-
-
-    Window.Draw(mario);
-    Window.Display();
+    Window.Draw(bg);  //Puts the background on the screen.
+    Window.Draw(title);  //Puts the title on the screen.
+    Window.Draw(mario);  //Puts the Mario sprite on the screen.
+    Window.Display();  //Now actually displays the screen.
 }
 
 #endif //TITLESTATE_H

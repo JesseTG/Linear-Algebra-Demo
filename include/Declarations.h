@@ -35,6 +35,11 @@ enum class StateName : char {
   CONCLUSION
 };
 
+sf::Event event;
+sf::Font font;
+sf::Image bgimage;
+sf::Sprite bg;
+
 
 sf::RenderWindow Window(sf::VideoMode(640, 480, 32), "Linear Algebra Demo");
 Logger logger;

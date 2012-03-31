@@ -47,6 +47,7 @@
 		<Unit filename="include/State.h" />
 		<Unit filename="include/StateManager.h" />
 		<Unit filename="include/states/TitleState.h" />
+		<Unit filename="include/states/VectorState.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

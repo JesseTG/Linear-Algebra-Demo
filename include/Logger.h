@@ -17,7 +17,7 @@ class Logger
     #ifdef DEBUG
     private:
         std::ofstream output;
-    #endif DEBUG
+    #endif
 };
 
 Logger::Logger()

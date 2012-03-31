@@ -9,6 +9,8 @@
  * some information off to the sides.
  */
 
+const float ROTATION = .5;  //The angle the sprite spins each frame.
+
 class TitleState : public State
 {
   public:
@@ -69,7 +71,7 @@ void TitleState::input()
 
 void TitleState::logic()
 {
-    mario.Rotate(.5);
+    mario.Rotate(ROTATION);
 }
 
 void TitleState::render()

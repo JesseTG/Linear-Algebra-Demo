@@ -30,16 +30,12 @@ int main()
 
 bool init()
 {
-    if (bgimage.LoadFromFile("./gfx/bg.png"))
-        logger.log("Loaded background image.");
-    else
-        return false;
+    if (bgimage.LoadFromFile("./gfx/bg.png")) logger.log("Loaded background.");
+    else return false;
     bg.SetImage(bgimage);
 
-    if (font.LoadFromFile("./gfx/font.ttf"))
-        logger.log("Loaded font.");
-    else
-        return false;
+    if (font.LoadFromFile("./gfx/font.ttf")) logger.log("Loaded font.");
+    else return false;
 
     return true;
 }

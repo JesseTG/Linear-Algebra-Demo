@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1333063386 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
+1333222011 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
 	"include/Declarations.h"
 	"include/StateManager.h"
 
@@ -110,7 +110,7 @@
 1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/pins_arduino.h
 	<avr/pgmspace.h>
 
-1333060630 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
+1333235984 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
 	"Logger.h"
 	<SFML/Graphics.hpp>
 	<iostream>
@@ -138,13 +138,14 @@
 
 1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/eraser.h
 
-1333060378 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
+1333232884 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
 	"Declarations.h"
 	"State.h"
 	"states/TitleState.h"
 	"states/VectorState.h"
+	"states/ScalarVsVectorState.h"
 
-1332965203 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
+1333223069 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
 	"Declarations.h"
 
 1332295694 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/TitleState.h
@@ -153,7 +154,7 @@
 
 1332802731 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/bgtile.h
 
-1333064133 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TitleState.h
+1333232387 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TitleState.h
 	"../Declarations.h"
 	"../State.h"
 
@@ -167,13 +168,18 @@
 1252209348 /home/jesse/.arduino-0023/libraries/IRremote/IRremoteInt.h
 	<WProgram.h>
 
-1333066060 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Logger.h
-	<iostream>
+1333232908 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Logger.h
 	<string>
+	<iostream>
 	<fstream>
 
-1333063443 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/VectorState.h
+1333234629 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/VectorState.h
 	"../Declarations.h"
 	"../State.h"
-	<iostream>
+	<sstream>
+
+1333240148 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ScalarVsVectorState.h
+	"../Declarations.h"
+	"../State.h"
+	<sstream>
 

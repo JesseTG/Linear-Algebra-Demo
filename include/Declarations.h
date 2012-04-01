@@ -12,16 +12,25 @@ class StateManager;
 class State;
 class TitleState;
 
-
+//Typedefs for less typing (the scope operator :: looks ugly)  /////////////////
+typedef sf::Color Color;
 typedef sf::Rect<float> RectFloat;
+typedef sf::Rect<int> RectInt;
 typedef sf::Vector2<int> VectorInt;
 typedef sf::Vector2<float> VectorFloat;
+typedef sf::Sprite Sprite;
+typedef sf::Shape Shape;
+////////////////////////////////////////////////////////////////////////////////
 
+//It's easy to interchange regular enumerations with integers.
+enum Direction { UP, DOWN, LEFT, RIGHT };
+
+//Enum classes, on the other hand, force you to do so explicitly.
 enum class StateName : char {
   NADA = 0,
   TITLE,
   VECTORS,
-  VECTORS_VS_SCALARS,
+  SCALARS_VS_VECTORS,
   RASTER_VS_VECTOR,
   MATRICES,
   TRANSLATION_DISTANCE_LENGTH,
@@ -35,13 +44,16 @@ enum class StateName : char {
   CONCLUSION
 };
 
-sf::Event event;
-sf::Font font;
+
+
+sf::Event event;  //The object the latest event (external input) is stored in
+sf::Image sprites;  //The entire spritesheet.
 sf::Image bgimage;
-sf::Sprite bg;
+Sprite bg;
 
 
-sf::RenderWindow Window(sf::VideoMode(640, 480, 32), "Linear Algebra Demo");
+sf::RenderWindow Window(sf::VideoMode(640, 480, 32), "Linear Algebra Demo",
+                        sf::Style::Titlebar | sf::Style::Close);
 Logger logger;
 
 

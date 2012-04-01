@@ -13,7 +13,7 @@ class State
 
     virtual void input() = 0;
     virtual void logic() = 0;
-    virtual void render() = 0;
+    virtual void render() const = 0;
 
   protected:
     StateName nextstate;

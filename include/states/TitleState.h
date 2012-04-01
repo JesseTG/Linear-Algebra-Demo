@@ -5,12 +5,21 @@
 #include "../State.h"
 
 /*
- * This is my project's title screen.  It features only a rotating sprite
+ * This is my project's title screen.  It features only a rotating sprite and
  * some information off to the sides.
  */
 
+//These are here so we avoid "magic numbers"; aka numbers that don't appear at
+//first glance to hold any significance.  Very bad in software development,
+//especially if this magic number is reused.
 const float ROTATION = .5;  //The angle the sprite spins each frame.
+const int MARIO_SCALE = 10;  //The factor we scale the sprite by.
+const int FONT_SIZE = 24;  //Size of the font, not the sf::Strings using it.
 
+/*
+ * This is a class, aka a blueprint for a type of data.  It's a sort of black box
+ * that abstracts away certain processes so we can describe solutions in terms of
+ */
 class TitleState : public State
 {
   public:
@@ -19,14 +28,10 @@ class TitleState : public State
 
     void input();
     void logic();
-    void render();
+    void render() const;
 
   private:
-    sf::Image marioimage;
-    sf::Sprite mario;
-
-
-
+    Sprite mario;
     sf::String title;
 };
 
@@ -37,21 +42,23 @@ TitleState::TitleState()
     //NADA means next frame we stay in this state, or we'd never see this one!
     setNextState(StateName::NADA);
 
+    //Sets up Mario's sprite  //////////////////////////////////////////////////
+    mario.SetImage(sprites);
+    mario.SetSubRect(RectInt(0, 0, 16, 16));
+    mario.SetCenter(mario.GetSubRect().GetWidth()/2,
+                    mario.GetSubRect().GetHeight()/2);
+    mario.SetScale(MARIO_SCALE, MARIO_SCALE);
+    mario.SetPosition(Window.GetWidth()/2, Window.GetHeight()/1.5);
 
-    if (marioimage.LoadFromFile("./gfx/mario.png"))
-        logger.log("Loaded title screen sprite.");
-    marioimage.SetSmooth(false);
+    ////////////////////////////////////////////////////////////////////////////
 
-    mario.SetImage(marioimage);
-    mario.SetScale(6, 6);
-    mario.SetPosition(320, 240);
-    mario.SetCenter(marioimage.GetWidth()/2.0, marioimage.GetHeight()/2.0);
-
-    title.SetFont(font);
-    title.SetSize(24);
+    //Sets up the title text  //////////////////////////////////////////////////
+    title.SetPosition(8, 8);
+    title.SetSize(FONT_SIZE);
     title.SetText("Linear Algebra Demo\n\n"
                   "Jesse Talavera-Greenberg\n\n"
                   "O/P: Previous/Next Screen");
+    ////////////////////////////////////////////////////////////////////////////
 
     Window.Clear();
 }
@@ -74,12 +81,18 @@ void TitleState::logic()
     mario.Rotate(ROTATION);
 }
 
-void TitleState::render()
+void TitleState::render() const
 {
     Window.Draw(bg);  //Puts the background on the screen.
     Window.Draw(title);  //Puts the title on the screen.
     Window.Draw(mario);  //Puts the Mario sprite on the screen.
     Window.Display();  //Now actually displays the screen.
 }
+
+/*
+   I really do think you should learn to code, Mr. Ski, as a math teacher
+   there's so much you could do after spending a summer learning how to use
+   Octave or Maxima (both of which are free).
+ */
 
 #endif //TITLESTATE_H

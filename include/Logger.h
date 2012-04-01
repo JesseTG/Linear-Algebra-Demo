@@ -1,18 +1,20 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include <iostream>
 #include <string>
-#include <fstream>
 
-#define DEBUG
+
+#ifdef DEBUG
+#include <iostream>
+#include <fstream>
+#endif
 
 class Logger
 {
     public:
         Logger();
-        virtual ~Logger();
-        void log(const std::string& input);
+        ~Logger();
+        std::string log(const std::string& input);
 
     #ifdef DEBUG
     private:
@@ -34,12 +36,13 @@ Logger::~Logger()
     #endif
 }
 
-void Logger::log(const std::string& input)
+std::string Logger::log(const std::string& input)
 {
     #ifdef DEBUG
     std::cout << input << std::endl;
     output << input << std::endl;
     #endif
+    return input;
 }
 
 #endif // LOGGER_H

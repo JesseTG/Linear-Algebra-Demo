@@ -5,9 +5,7 @@
 #include "State.h"
 #include "states/TitleState.h"
 #include "states/VectorState.h"
-
-
-enum class StateName : char;
+#include "states/ScalarVsVectorState.h"
 
 class StateManager
 {
@@ -39,7 +37,8 @@ void StateManager::setState(const StateName newstate)
       case StateName::NADA: return;
       case StateName::TITLE: currentstate.reset(new TitleState); return;
       case StateName::VECTORS: currentstate.reset(new VectorState); return;
-      default: throw std::runtime_error("Improper state!  Abort!"); return;
+      case StateName::SCALARS_VS_VECTORS: currentstate.reset(new ScalarVsVectorState); return;
+      default: throw std::runtime_error(logger.log("Improper state!  Abort!"));
     }
 }
 

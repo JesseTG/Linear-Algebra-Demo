@@ -1,6 +1,7 @@
 #include "include/Declarations.h"
 #include "include/StateManager.h"
 
+//Returns whether the program started up OK or not.
 bool init();
 
 StateManager StateController;
@@ -15,7 +16,7 @@ int main()
     }
     else {
         logger.log("Resources not properly initialized!  Exiting!");
-        exit(1);
+        return EXIT_FAILURE;
     }
 
 
@@ -25,17 +26,20 @@ int main()
     while (true) StateController.updateState();
 
     logger.log("Program ended normally.");
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 bool init()
 {
     if (bgimage.LoadFromFile("./gfx/bg.png")) logger.log("Loaded background.");
     else return false;
+    bgimage.SetSmooth(false);
     bg.SetImage(bgimage);
 
-    if (font.LoadFromFile("./gfx/font.ttf")) logger.log("Loaded font.");
+    if (sprites.LoadFromFile("./gfx/sprites.png"))
+        logger.log("Loaded spritesheet.");
     else return false;
+    sprites.SetSmooth(false);
 
     return true;
 }

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <memory>
 #include <stdexcept>
+#include <sstream>
 
 class StateManager;
 class State;
@@ -37,19 +38,14 @@ enum class StateName : char {
   DOT_CROSS_PRODUCTS,
   REFLECTION,
   ROTATION,
-  BAD_ROTATION,
-  SHEARING,
   SCALING,
-  PROJECTION,
   CONCLUSION
 };
 
-
-
 sf::Event event;  //The object the latest event (external input) is stored in
-sf::Image sprites;  //The entire spritesheet.
-sf::Image bgimage;
-Sprite bg;
+sf::Image sprites;  //The entire spritesheet.  All graphics taken from here.
+sf::Image bgimage;  //The background image.
+Sprite bg;  //The sprite that represents this background image.
 
 
 sf::RenderWindow Window(sf::VideoMode(640, 480, 32), "Linear Algebra Demo",

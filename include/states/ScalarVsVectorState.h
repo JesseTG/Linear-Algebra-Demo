@@ -4,8 +4,6 @@
 #include "../Declarations.h"
 #include "../State.h"
 
-#include <sstream>
-
 const int HARRIER_SCALE = 3;
 const int HARRIER_MOVE_SPEED = 8;
 
@@ -56,12 +54,14 @@ ScalarVsVectorState::ScalarVsVectorState()
     harrier.SetScale(HARRIER_SCALE, HARRIER_SCALE);
     harrier.SetPosition(center);
 
+    distance = 0;
+
     buffer[UP] = harrier.GetSize().y/2;
     buffer[DOWN] = Window.GetHeight() - buffer[UP];
     buffer[LEFT] = harrier.GetSize().x/2;
     buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
 
-    centerline = Shape::Line(center, center, 10, Color::White);
+    centerline = Shape::Line(harrier.GetPosition(), center, 5, Color::White);
     ////////////////////////////////////////////////////////////////////////////
 }
 
@@ -76,7 +76,7 @@ void ScalarVsVectorState::input()
         if (event.Type == sf::Event::KeyPressed) {
             switch (event.Key.Code) {
                 case sf::Key::O: setNextState(StateName::VECTORS); return;
-                case sf::Key::P: setNextState(StateName::NADA); return;
+                case sf::Key::P: setNextState(StateName::RASTER_VS_VECTOR); return;
             }
         }
     }
@@ -103,6 +103,7 @@ void ScalarVsVectorState::logic()
     currentpos -= harrier.GetPosition();
     distance += sqrt(currentpos.x*currentpos.x + currentpos.y*currentpos.y);
 
+    //Changes the harrier's sprite based on which third of the screen he's in  /
     if (harrier.GetPosition().x < Window.GetWidth()/3) {
         harrier.SetSubRect(RectInt(25, 49, 48, 96));
         harrier.FlipX(true);
@@ -116,18 +117,26 @@ void ScalarVsVectorState::logic()
         harrier.SetSubRect(RectInt(25, 49, 48, 96));
         harrier.FlipX(false);
     }
+    ////////////////////////////////////////////////////////////////////////////
 
 
-
+    //Prepares all statistics for output on-screen  ////////////////////////////
     VectorFloat distancetocenter = harrier.GetPosition() - center;
     stats_to_string.str("");
-    stats_to_string << "Distance Travelled: " << distance
-                    << "\nDistance From Center: "
+    stats_to_string << "Vectors Vs. Scalars\n\nDistance Travelled: " << distance
+                    << "\nDisplacement From Center: "
                     << sqrt(distancetocenter.x*distancetocenter.x +
                             distancetocenter.y*distancetocenter.y);
     harrierstats.SetText(stats_to_string.str());
+    ////////////////////////////////////////////////////////////////////////////
 
-    centerline.SetPointPosition(0, harrier.GetPosition());
+    /*
+     *If the Harrier moved, create a new line that tethers him to the center.
+     *Sholudn't have to create a new object, but due to how sf::Shape works I
+     *don't have many other options.  At least it works.
+     */
+    if (currentpos != VectorFloat(0, 0))
+        centerline = Shape::Line(harrier.GetPosition(), center, 5, Color::White);
 }
 
 void ScalarVsVectorState::render() const

@@ -1,12 +1,18 @@
 #include "include/Declarations.h"
 #include "include/StateManager.h"
 
+/*
+ * Created by Jesse Talavera-Greenberg
+ *
+ * This code was written with an editor that suppoprted syntax highlighting.
+ * Without it, it's nigh impossible to read.  Therefore, you might want to paste
+ * this code into ideone.com with C++ mode and syntax highlighting enabled.
+ */
+
 //Returns whether the program started up OK or not.
 bool init();
 
 StateManager StateController;
-
-
 
 int main()
 {

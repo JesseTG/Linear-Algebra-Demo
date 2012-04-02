@@ -6,6 +6,7 @@
 #include "states/TitleState.h"
 #include "states/VectorState.h"
 #include "states/ScalarVsVectorState.h"
+#include "states/RasterVsVectorState.h"
 
 class StateManager
 {
@@ -29,6 +30,11 @@ void StateManager::updateState()
     currentstate->input();
     currentstate->logic();
     currentstate->render();
+
+    if (Window.GetInput().IsKeyDown(sf::Key::Escape)) {
+        logger.log("Program ended normally.");
+        exit(EXIT_SUCCESS);
+    }
 }
 
 void StateManager::setState(const StateName newstate)
@@ -38,6 +44,7 @@ void StateManager::setState(const StateName newstate)
       case StateName::TITLE: currentstate.reset(new TitleState); return;
       case StateName::VECTORS: currentstate.reset(new VectorState); return;
       case StateName::SCALARS_VS_VECTORS: currentstate.reset(new ScalarVsVectorState); return;
+      case StateName::RASTER_VS_VECTOR: currentstate.reset(new RasterVsVectorState); return;
       default: throw std::runtime_error(logger.log("Improper state!  Abort!"));
     }
 }

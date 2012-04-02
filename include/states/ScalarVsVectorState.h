@@ -9,7 +9,6 @@
 const int HARRIER_SCALE = 3;
 const int HARRIER_MOVE_SPEED = 8;
 
-
 class ScalarVsVectorState : public State
 {
     public:
@@ -25,6 +24,12 @@ class ScalarVsVectorState : public State
         //arcade game.
         Sprite harrier;
 
+        //Displays how far we've travelled and how far we are from the center
+        sf::String harrierstats;
+
+        //A line that will illustrate displacement
+        Shape centerline;
+
         //How much distance the harrier has travelled.
         uint64_t distance;
 
@@ -36,7 +41,6 @@ class ScalarVsVectorState : public State
 
         std::ostringstream stats_to_string;
 
-        sf::String harrierstats;
 };
 
 ScalarVsVectorState::ScalarVsVectorState()
@@ -44,18 +48,20 @@ ScalarVsVectorState::ScalarVsVectorState()
     logger.log("Entering Scalar Vs. Vectors state.");
     setNextState(StateName::NADA);
 
-    //Set up the Harrier's sprite  /////////////////////////////////////////////
+    //Set up the Harrier  //////////////////////////////////////////////////////
     harrier.SetImage(sprites);
     harrier.SetSubRect(RectInt(0, 49, 24, 96));
     harrier.SetCenter(harrier.GetSubRect().GetWidth()/2,
                       harrier.GetSubRect().GetHeight()/2);
     harrier.SetScale(HARRIER_SCALE, HARRIER_SCALE);
-    harrier.SetPosition(Window.GetWidth()/2, Window.GetHeight()/2);
+    harrier.SetPosition(center);
 
     buffer[UP] = harrier.GetSize().y/2;
     buffer[DOWN] = Window.GetHeight() - buffer[UP];
     buffer[LEFT] = harrier.GetSize().x/2;
     buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
+
+    centerline = Shape::Line(center, center, 10, Color::White);
     ////////////////////////////////////////////////////////////////////////////
 }
 
@@ -83,42 +89,51 @@ void ScalarVsVectorState::input()
 
 void ScalarVsVectorState::logic()
 {
+    //Stores where we are for further calculation
     VectorFloat currentpos = harrier.GetPosition();
+
     //In C++, false corresponds to 0, true corresponds to 1.  Very useful for
     //shrinking down code (multiplication is more concise than conditionals).
     harrier.Move(0, -HARRIER_MOVE_SPEED * ismoving[UP] * (harrier.GetPosition().y > buffer[UP]));
-    harrier.Move(0, distance += HARRIER_MOVE_SPEED * ismoving[DOWN] * (harrier.GetPosition().y < buffer[DOWN]));
-    harrier.Move(distance += -HARRIER_MOVE_SPEED * ismoving[LEFT] * (harrier.GetPosition().x > buffer[LEFT]), 0);
-    harrier.Move(distance += HARRIER_MOVE_SPEED * ismoving[RIGHT] * (harrier.GetPosition().x < buffer[RIGHT]), 0);
-    distance += abs(harier.pos)
-    //TODO: Implement the distance travelled
+    harrier.Move(0, HARRIER_MOVE_SPEED * ismoving[DOWN] * (harrier.GetPosition().y < buffer[DOWN]));
+    harrier.Move(-HARRIER_MOVE_SPEED * ismoving[LEFT] * (harrier.GetPosition().x > buffer[LEFT]), 0);
+    harrier.Move(HARRIER_MOVE_SPEED * ismoving[RIGHT] * (harrier.GetPosition().x < buffer[RIGHT]), 0);
 
-    if (harrier.GetPosition().x <= Window.GetWidth()/3) {
+    //Adds the distance we just moved to the running total
+    currentpos -= harrier.GetPosition();
+    distance += sqrt(currentpos.x*currentpos.x + currentpos.y*currentpos.y);
+
+    if (harrier.GetPosition().x < Window.GetWidth()/3) {
         harrier.SetSubRect(RectInt(25, 49, 48, 96));
         harrier.FlipX(true);
     }
-    else if (harrier.GetPosition().x > Window.GetHeight()/3 &&
-             harrier.GetPosition().x < 2*Window.GetHeight()/3) {
-                 harrier.SetSubRect(RectInt(0, 49, 24, 96));
-                 harrier.FlipX(false);
+    else if (harrier.GetPosition().x >= Window.GetWidth()/3 &&
+             harrier.GetPosition().x <= 2*Window.GetWidth()/3) {
+        harrier.SetSubRect(RectInt(0, 49, 24, 96));
+        harrier.FlipX(false);  //The Harrier faces the center
     }
-    else if (harrier.GetPosition().x >= 2*Window.GetWidth()/3) {
+    else if (harrier.GetPosition().x > 2*Window.GetWidth()/3) {
         harrier.SetSubRect(RectInt(25, 49, 48, 96));
         harrier.FlipX(false);
     }
 
-    VectorFloat distancetocenter = VectorFloat(harrier.GetPosition()) - VectorFloat(Window.GetWidth(), Window.GetHeight());
+
+
+    VectorFloat distancetocenter = harrier.GetPosition() - center;
     stats_to_string.str("");
     stats_to_string << "Distance Travelled: " << distance
                     << "\nDistance From Center: "
                     << sqrt(distancetocenter.x*distancetocenter.x +
                             distancetocenter.y*distancetocenter.y);
     harrierstats.SetText(stats_to_string.str());
+
+    centerline.SetPointPosition(0, harrier.GetPosition());
 }
 
 void ScalarVsVectorState::render() const
 {
     Window.Draw(bg);
+    Window.Draw(centerline);
     Window.Draw(harrier);
     Window.Draw(harrierstats);
     Window.Display();

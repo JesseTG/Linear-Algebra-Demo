@@ -53,7 +53,7 @@ VectorState::VectorState()
     vectortitle.SetText("Vectors");
     vectortitle.SetPosition(8, 8);
 
-    tetradstats.SetPosition(Window.GetWidth()/2, 5*Window.GetHeight()/6);
+    tetradstats.SetPosition(center.x, 5*Window.GetHeight()/6);
 }
 
 VectorState::~VectorState()

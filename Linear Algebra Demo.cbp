@@ -46,6 +46,8 @@
 		<Unit filename="include/Logger.h" />
 		<Unit filename="include/State.h" />
 		<Unit filename="include/StateManager.h" />
+		<Unit filename="include/states/RasterVsVectorState.h" />
+		<Unit filename="include/states/ScalarVsVectorState.h" />
 		<Unit filename="include/states/TitleState.h" />
 		<Unit filename="include/states/VectorState.h" />
 		<Unit filename="main.cpp" />

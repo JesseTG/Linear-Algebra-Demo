@@ -54,6 +54,7 @@ Sprite bg;
 
 sf::RenderWindow Window(sf::VideoMode(640, 480, 32), "Linear Algebra Demo",
                         sf::Style::Titlebar | sf::Style::Close);
+const VectorFloat center = VectorFloat(Window.GetWidth()/2, Window.GetHeight()/2);
 Logger logger;
 
 

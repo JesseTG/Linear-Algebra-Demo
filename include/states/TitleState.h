@@ -48,7 +48,7 @@ TitleState::TitleState()
     mario.SetCenter(mario.GetSubRect().GetWidth()/2,
                     mario.GetSubRect().GetHeight()/2);
     mario.SetScale(MARIO_SCALE, MARIO_SCALE);
-    mario.SetPosition(Window.GetWidth()/2, Window.GetHeight()/1.5);
+    mario.SetPosition(center.x, Window.GetHeight()/1.5);
 
     ////////////////////////////////////////////////////////////////////////////
 

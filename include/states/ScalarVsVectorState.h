@@ -126,7 +126,8 @@ void ScalarVsVectorState::logic()
     stats_to_string << "Vectors Vs. Scalars\n\nDistance Travelled: " << distance
                     << "\nDisplacement From Center: "
                     << sqrt(distancetocenter.x*distancetocenter.x +
-                            distancetocenter.y*distancetocenter.y);
+                            distancetocenter.y*distancetocenter.y)
+                    << "\n\nArrow Keys: Move";
     harrierstats.SetText(stats_to_string.str());
     ////////////////////////////////////////////////////////////////////////////
 

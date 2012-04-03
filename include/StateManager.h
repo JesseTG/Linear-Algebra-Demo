@@ -7,6 +7,7 @@
 #include "states/VectorState.h"
 #include "states/ScalarVsVectorState.h"
 #include "states/RasterVsVectorState.h"
+#include "states/MatricesState.h"
 
 class StateManager
 {
@@ -45,6 +46,7 @@ void StateManager::setState(const StateName newstate)
       case StateName::VECTORS: currentstate.reset(new VectorState); return;
       case StateName::SCALARS_VS_VECTORS: currentstate.reset(new ScalarVsVectorState); return;
       case StateName::RASTER_VS_VECTOR: currentstate.reset(new RasterVsVectorState); return;
+      case StateName::MATRICES: currentstate.reset(new MatricesState); return;
       default: throw std::runtime_error(logger.log("Improper state!  Abort!"));
     }
 }

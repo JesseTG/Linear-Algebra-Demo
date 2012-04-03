@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1333401100 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
+1333408274 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
 	"include/Declarations.h"
 	"include/StateManager.h"
 
@@ -139,13 +139,14 @@
 
 1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/eraser.h
 
-1333401294 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
+1333410193 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
 	"Declarations.h"
 	"State.h"
 	"states/TitleState.h"
 	"states/VectorState.h"
 	"states/ScalarVsVectorState.h"
 	"states/RasterVsVectorState.h"
+	"states/MatricesState.h"
 
 1333223069 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
 	"Declarations.h"
@@ -180,11 +181,15 @@
 	"../State.h"
 	<sstream>
 
-1333404016 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ScalarVsVectorState.h
+1333410441 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ScalarVsVectorState.h
 	"../Declarations.h"
 	"../State.h"
 
-1333404008 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/RasterVsVectorState.h
+1333410230 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/RasterVsVectorState.h
+	"../Declarations.h"
+	"../State.h"
+
+1333411188 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/MatricesState.h
 	"../Declarations.h"
 	"../State.h"
 

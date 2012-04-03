@@ -4,6 +4,8 @@
 /*
  * Created by Jesse Talavera-Greenberg
  *
+ * These are comments.  Comments are NOT read by the compiler.
+ *
  * This code was written with an editor that suppoprted syntax highlighting.
  * Without it, it's nigh impossible to read.  Therefore, you might want to paste
  * this code into ideone.com with C++ mode and syntax highlighting enabled.

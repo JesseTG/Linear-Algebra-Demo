@@ -35,7 +35,7 @@ RasterVsVectorState::RasterVsVectorState()
     rastercircle.SetPosition(Window.GetWidth()/4, center.y);
     ////////////////////////////////////////////////////////////////////////////
 
-    vectorcircle = Shape::Circle(3*Window.GetWidth()/4, center.y, 16, Color::Blue);
+    vectorcircle = Shape::Circle(Window.GetWidth()*.75, center.y, 16, Color::Blue);
 
 
     scalevector = VectorFloat(1.01, 1.01);
@@ -45,7 +45,7 @@ RasterVsVectorState::RasterVsVectorState()
 
 RasterVsVectorState::~RasterVsVectorState()
 {
-
+    logger.log("Exiting Raster Vs. Vector state.");
 }
 
 void RasterVsVectorState::input()
@@ -54,7 +54,7 @@ void RasterVsVectorState::input()
         if (event.Type == sf::Event::KeyPressed) {
             switch (event.Key.Code) {
                 case sf::Key::O: setNextState(StateName::SCALARS_VS_VECTORS); return;
-                case sf::Key::P: setNextState(StateName::NADA); return;
+                case sf::Key::P: setNextState(StateName::MATRICES); return;
             }
         }
     }
@@ -64,13 +64,20 @@ void RasterVsVectorState::input()
 
 void RasterVsVectorState::logic()
 {
+    //We're scaling both circles.  First we decide how big the scaling vector  /
+    //will be so we can properly handle the pulsing.  //////////////////////////
     if (rastercircle.GetScale().x > 6)
         scalevector = VectorFloat(2, 2) - scalevector;
     else if (rastercircle.GetScale().x < .5)
         scalevector = VectorFloat(2, 2) - scalevector;
+    ////////////////////////////////////////////////////////////////////////////
 
+    //Then we actually scale the circles.  Unfortunately I have to create  /////
+    //another circle each frame, even though it's not very efficient.  /////////
     rastercircle.Scale(scalevector);
-    vectorcircle = Shape::Circle(2*Window.GetWidth()/3, center.y, 16*rastercircle.GetScale().x, Color::Blue);
+    vectorcircle = Shape::Circle(2*Window.GetWidth()/3, center.y,
+                                 16*rastercircle.GetScale().x, Color::Blue);
+    ////////////////////////////////////////////////////////////////////////////
 
 }
 

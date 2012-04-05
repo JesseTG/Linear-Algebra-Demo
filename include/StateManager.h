@@ -8,6 +8,7 @@
 #include "states/ScalarVsVectorState.h"
 #include "states/RasterVsVectorState.h"
 #include "states/MatricesState.h"
+#include "states/TranslationDistanceLengthState.h"
 
 class StateManager
 {
@@ -18,11 +19,13 @@ class StateManager
   private:
     void setState(const StateName newstate);
     std::shared_ptr<State> currentstate;
+    bool isfullscreen;
 };
 
 StateManager::StateManager()
 {
     currentstate.reset(new TitleState);
+    isfullscreen = false;
 }
 
 void StateManager::updateState()
@@ -36,6 +39,11 @@ void StateManager::updateState()
         logger.log("Program ended normally.");
         exit(EXIT_SUCCESS);
     }
+    else if (Window.GetInput().IsKeyDown(sf::Key::F4)) {
+        Window.Create(sf::VideoMode(640, 480, 32), "Linear Algebra Demo",
+                      sf::Style::Titlebar | sf::Style::Close |
+                      (sf::Style::Fullscreen * (isfullscreen = !isfullscreen)));
+    }
 }
 
 void StateManager::setState(const StateName newstate)
@@ -47,8 +55,10 @@ void StateManager::setState(const StateName newstate)
       case StateName::SCALARS_VS_VECTORS: currentstate.reset(new ScalarVsVectorState); return;
       case StateName::RASTER_VS_VECTOR: currentstate.reset(new RasterVsVectorState); return;
       case StateName::MATRICES: currentstate.reset(new MatricesState); return;
+      case StateName::TRANSLATION_DISTANCE_LENGTH: currentstate.reset(new TranslationDistanceLengthState); return;
       default: throw std::runtime_error(logger.log("Improper state!  Abort!"));
     }
+
 }
 
 

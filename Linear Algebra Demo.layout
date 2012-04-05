@@ -10,8 +10,8 @@
 	<File name="include/State.h" open="0" top="0" tabpos="4">
 		<Cursor position="15" topLine="3" />
 	</File>
-	<File name="include/StateManager.h" open="1" top="0" tabpos="5">
-		<Cursor position="234" topLine="29" />
+	<File name="include/StateManager.h" open="1" top="1" tabpos="5">
+		<Cursor position="1771" topLine="38" />
 	</File>
 	<File name="include/states/RasterVsVectorState.h" open="1" top="0" tabpos="4">
 		<Cursor position="2315" topLine="0" />
@@ -25,7 +25,7 @@
 	<File name="include/states/VectorState.h" open="0" top="0" tabpos="5">
 		<Cursor position="1655" topLine="30" />
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="176" topLine="0" />
+	<File name="main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="769" topLine="18" />
 	</File>
 </CodeBlocks_layout_file>

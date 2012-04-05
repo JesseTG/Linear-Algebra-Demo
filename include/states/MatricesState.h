@@ -59,7 +59,7 @@ void MatricesState::input()
         if (event.Type == sf::Event::KeyPressed) {
             switch (event.Key.Code) {
                 case sf::Key::O: setNextState(StateName::RASTER_VS_VECTOR); return;
-                case sf::Key::P: setNextState(StateName::NADA); return;
+                case sf::Key::P: setNextState(StateName::TRANSLATION_DISTANCE_LENGTH); return;
             }
         }
     }

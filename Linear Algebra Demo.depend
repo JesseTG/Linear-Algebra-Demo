@@ -139,7 +139,7 @@
 
 1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/eraser.h
 
-1333410193 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
+1333574201 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
 	"Declarations.h"
 	"State.h"
 	"states/TitleState.h"
@@ -147,6 +147,7 @@
 	"states/ScalarVsVectorState.h"
 	"states/RasterVsVectorState.h"
 	"states/MatricesState.h"
+	"states/TranslationDistanceLengthState.h"
 
 1333223069 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
 	"Declarations.h"
@@ -189,7 +190,13 @@
 	"../Declarations.h"
 	"../State.h"
 
-1333411188 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/MatricesState.h
+1333578334 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/MatricesState.h
+	"../Declarations.h"
+	"../State.h"
+
+1333582458 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TranslationDistanceLengthState.h
+	<unordered_map>
+	<utility>
 	"../Declarations.h"
 	"../State.h"
 

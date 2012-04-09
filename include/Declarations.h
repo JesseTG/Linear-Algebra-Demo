@@ -1,26 +1,32 @@
 #ifndef DECLARATIONS_H
 #define DECLARATIONS_H
 
-#include "Logger.h"
-
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include <stdexcept>
 #include <sstream>
+#include "Logger.h"
 
-class StateManager;
 class State;
 class TitleState;
+class StateManager;
+
 
 //Typedefs for less typing (the scope operator :: looks ugly)  /////////////////
+typedef sf::Clock Clock;
 typedef sf::Color Color;
+typedef sf::Event Event;
+typedef sf::Font Font;
+typedef sf::Image Image;
 typedef sf::Rect<float> RectFloat;
 typedef sf::Rect<int> RectInt;
+typedef sf::RenderWindow RenderWindow;
 typedef sf::Vector2<int> VectorInt;
 typedef sf::Vector2<float> VectorFloat;
-typedef sf::Sprite Sprite;
 typedef sf::Shape Shape;
+typedef sf::Sprite Sprite;
+typedef sf::String StringGraphic;
 ////////////////////////////////////////////////////////////////////////////////
 
 //It's easy to interchange regular enumerations with integers.
@@ -42,16 +48,14 @@ enum class StateName : char {
   CONCLUSION
 };
 
-sf::Event event;  //The object the latest event (external input) is stored in
-sf::Image sprites;  //The entire spritesheet.  All graphics taken from here.
-sf::Image bgimage;  //The background image.
-Sprite bg;  //The sprite that represents this background image.
-
-
-sf::RenderWindow Window(sf::VideoMode(640, 480, 32), "Linear Algebra Demo",
-                        sf::Style::Titlebar | sf::Style::Close);
-const VectorFloat center = VectorFloat(Window.GetWidth()/2, Window.GetHeight()/2);
-Logger logger;
+extern Event event;  //The object the latest event (external input) is stored in
+extern Image sprites;  //The entire spritesheet.  All graphics taken from here.
+extern Image bgimage;  //The background image.
+extern Sprite bg;  //The sprite that represents this background image.
+extern RenderWindow Window;
+extern const VectorFloat center;
+extern Logger logger;
+extern StateManager StateController;
 
 
 #endif //DECLARATIONS_H

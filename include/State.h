@@ -17,13 +17,5 @@ class State
 
   protected:
     StateName nextstate;
-
 };
-
-StateName State::getNextState() const
-{ return this->nextstate; }
-
-void State::setNextState(const StateName newnextstate)
-{ this->nextstate = newnextstate; }
-
 #endif //STATE_H

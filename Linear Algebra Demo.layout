@@ -10,8 +10,8 @@
 	<File name="include/State.h" open="0" top="0" tabpos="4">
 		<Cursor position="60" topLine="0" />
 	</File>
-	<File name="include/StateManager.h" open="0" top="0" tabpos="8">
-		<Cursor position="1257" topLine="38" />
+	<File name="include/StateManager.h" open="1" top="0" tabpos="4">
+		<Cursor position="920" topLine="29" />
 	</File>
 	<File name="include/states/MatricesState.h" open="0" top="0" tabpos="10">
 		<Cursor position="78" topLine="0" />
@@ -26,13 +26,13 @@
 		<Cursor position="214" topLine="0" />
 	</File>
 	<File name="include/states/TranslationDistanceLengthState.h" open="1" top="0" tabpos="1">
-		<Cursor position="1160" topLine="0" />
+		<Cursor position="1160" topLine="6" />
 	</File>
 	<File name="include/states/VectorState.h" open="0" top="0" tabpos="5">
 		<Cursor position="460" topLine="0" />
 	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="982" topLine="9" />
+	<File name="main.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="1395" topLine="19" />
 	</File>
 	<File name="src/Logger.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="30" topLine="0" />
@@ -53,6 +53,6 @@
 		<Cursor position="1754" topLine="6" />
 	</File>
 	<File name="src/TranslationDistanceLengthState.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="3713" topLine="54" />
+		<Cursor position="3697" topLine="64" />
 	</File>
 </CodeBlocks_layout_file>

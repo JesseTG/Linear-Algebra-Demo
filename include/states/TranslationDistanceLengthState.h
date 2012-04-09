@@ -1,15 +1,12 @@
 #ifndef TRANSLATIONDISTANCELENGTHSTATE_H
 #define TRANSLATIONDISTANCELENGTHSTATE_H
 
+#include <ctime>
 #include <unordered_map>
 #include <utility>
 
 #include "../Declarations.h"
 #include "../State.h"
-
-const int HERO_SCALE = 6;
-const int HERO_MOVE_SPEED = 6;
-const int GHOST_SCALE = 3;
 
 //"LEFT/RIGHT" refer to whichever foot is higher
 enum class HeroFrame : char {
@@ -48,6 +45,9 @@ class TranslationDistanceLengthState : public State
         //The sprite that represents the hero.
         Sprite hero;
 
+        //Used to time the Hero's animation
+        Clock animationtimer;
+
         //Whether the Hero is moving in the four cardinal directions.
         bool ismoving[4];
 
@@ -60,8 +60,12 @@ class TranslationDistanceLengthState : public State
         //The Ghost that follows the mouse.  (That's really the monster's name)
         Sprite ghost;
 
-        //Used to time
-        sf::Clock animationtimer;
+        //The
+        StringGraphic stats;
+
+        //Lets us put the stats inside the StringGraphic
+        std::ostringstream stats_to_text;
+
 };
 
 #endif // TRANSLATIONDISTANCELENGTHSTATE_H

@@ -3,7 +3,6 @@
 MatricesState::MatricesState()
 {
     logger.log("Entered Matrices state.");
-    setNextState(StateName::NADA);
 
     matrixfont.LoadFromFile("./gfx/emulogic.ttf");
     text.SetFont(matrixfont);
@@ -35,12 +34,5 @@ MatricesState::~MatricesState()
 
 void MatricesState::input()
 {
-    while (Window.GetEvent(event)) {
-        if (event.Type == sf::Event::KeyPressed) {
-            switch (event.Key.Code) {
-                case sf::Key::O: setNextState(StateName::RASTER_VS_VECTOR); return;
-                case sf::Key::P: setNextState(StateName::TRANSLATION_DISTANCE_LENGTH); return;
-            }
-        }
-    }
+    checkForNextState(StateName::RASTER_VS_VECTOR, StateName::TRANSLATION_DISTANCE_LENGTH);
 }

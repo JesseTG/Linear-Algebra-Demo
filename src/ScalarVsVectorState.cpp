@@ -3,7 +3,6 @@
 ScalarVsVectorState::ScalarVsVectorState()
 {
     logger.log("Entering Scalar Vs. Vectors state.");
-    setNextState(StateName::NADA);
 
     //Set up the Harrier  //////////////////////////////////////////////////////
     harrier.SetImage(sprites);
@@ -31,14 +30,7 @@ ScalarVsVectorState::~ScalarVsVectorState()
 
 void ScalarVsVectorState::input()
 {
-    while (Window.GetEvent(event)) {
-        if (event.Type == sf::Event::KeyPressed) {
-            switch (event.Key.Code) {
-                case sf::Key::O: setNextState(StateName::VECTORS); return;
-                case sf::Key::P: setNextState(StateName::RASTER_VS_VECTOR); return;
-            }
-        }
-    }
+    checkForNextState(StateName::VECTORS, StateName::RASTER_VS_VECTOR);
 
     ismoving[UP] = Window.GetInput().IsKeyDown(sf::Key::Up);
     ismoving[DOWN] = Window.GetInput().IsKeyDown(sf::Key::Down);
@@ -60,7 +52,7 @@ void ScalarVsVectorState::logic()
 
     //Adds the distance we just moved to the running total
     currentpos -= harrier.GetPosition();
-    distance += sqrt(currentpos.x*currentpos.x + currentpos.y*currentpos.y);
+    distance += hypot(currentpos.x, currentpos.y);
 
     //Changes the harrier's sprite based on which third of the screen he's in  /
     if (harrier.GetPosition().x < Window.GetWidth()/3) {

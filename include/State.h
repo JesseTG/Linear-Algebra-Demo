@@ -6,6 +6,7 @@
 class State
 {
   public:
+    State();
     virtual ~State() {};
 
     StateName getNextState() const;
@@ -16,6 +17,7 @@ class State
     virtual void render() const = 0;
 
   protected:
+    void checkForNextState(const StateName prev, const StateName next);
     StateName nextstate;
 };
 #endif //STATE_H

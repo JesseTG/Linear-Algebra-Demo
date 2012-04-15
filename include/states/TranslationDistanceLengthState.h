@@ -1,7 +1,6 @@
 #ifndef TRANSLATIONDISTANCELENGTHSTATE_H
 #define TRANSLATIONDISTANCELENGTHSTATE_H
 
-#include <ctime>
 #include <unordered_map>
 #include <utility>
 

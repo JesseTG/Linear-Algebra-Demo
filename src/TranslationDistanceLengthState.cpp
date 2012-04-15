@@ -1,13 +1,12 @@
 #include "../include/states/TranslationDistanceLengthState.h"
 
 const int HERO_SCALE = 6;
-const int HERO_MOVE_SPEED = 3;
+const int HERO_MOVE_SPEED = 2;
 const int GHOST_SCALE = 3;
 
 TranslationDistanceLengthState::TranslationDistanceLengthState()
 {
     logger.log("Entering Translation, Distance, Length state");
-    setNextState(StateName::NADA);
 
     //Preps the unordered map for easy sprite access  //////////////////////////
     heroframes.insert(HeroPair(HeroFrame::NORTH_LEFT, RectInt(102, 0, 118, 16)));
@@ -53,18 +52,14 @@ TranslationDistanceLengthState::~TranslationDistanceLengthState()
 
 void TranslationDistanceLengthState::input()
 {
-    while (Window.GetEvent(event)) {
-        if (event.Type == sf::Event::KeyPressed)
-            switch (event.Key.Code) {
-                case sf::Key::O: setNextState(StateName::MATRICES); return;
-                case sf::Key::P: setNextState(StateName::NADA); return;
-            }
-    }
+    checkForNextState(StateName::MATRICES, StateName::DOT_PRODUCTS);
 
-    ismoving[UP] = Window.GetInput().IsKeyDown(sf::Key::Up) * !ismoving[LEFT] * !ismoving[RIGHT];
-    ismoving[DOWN] = Window.GetInput().IsKeyDown(sf::Key::Down) * !ismoving[LEFT] * !ismoving[RIGHT];
-    ismoving[LEFT] = Window.GetInput().IsKeyDown(sf::Key::Left) * !ismoving[UP] * !ismoving[DOWN];
-    ismoving[RIGHT] = Window.GetInput().IsKeyDown(sf::Key::Right) * !ismoving[UP] * !ismoving[DOWN];
+    bool movinghorizontal = !ismoving[LEFT] * !ismoving[RIGHT];
+    ismoving[UP] = Window.GetInput().IsKeyDown(sf::Key::Up) * movinghorizontal;
+    ismoving[DOWN] = Window.GetInput().IsKeyDown(sf::Key::Down) * movinghorizontal;
+    bool movingvertical = !ismoving[UP] * !ismoving[DOWN];
+    ismoving[LEFT] = Window.GetInput().IsKeyDown(sf::Key::Left) * movingvertical;
+    ismoving[RIGHT] = Window.GetInput().IsKeyDown(sf::Key::Right) * movingvertical;
 }
 
 void TranslationDistanceLengthState::logic()
@@ -72,7 +67,7 @@ void TranslationDistanceLengthState::logic()
     //Prevents the Hero from moving diagonally, as in Dragon Quest, but stops  /
     //him if the Ghost is too close.  //////////////////////////////////////////
     VectorFloat distancevector = hero.GetPosition() - ghost.GetPosition();
-    float distance = sqrt(distancevector.x*distancevector.x + distancevector.y*distancevector.y);
+    float distance = hypot(distancevector.x, distancevector.y);
     if (distance > 100) {
         if (hero.GetColor() != Color::White) hero.SetColor(Color::White);
         hero.Move(0, -HERO_MOVE_SPEED * ismoving[UP] * (hero.GetPosition().y > buffer[UP]));

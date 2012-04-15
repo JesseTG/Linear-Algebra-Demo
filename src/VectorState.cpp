@@ -4,8 +4,6 @@ VectorState::VectorState()
 {
     logger.log("Entering Vectors state.");
 
-    setNextState(StateName::NADA);
-
     //Setting up the tetrad sprite  ////////////////////////////////////////////
     tetrad.SetImage(sprites);
     tetrad.SetSubRect(RectInt(16, 0, 39, 15));
@@ -35,13 +33,7 @@ VectorState::~VectorState()
 
 void VectorState::input()
 {
-    while (Window.GetEvent(event)) {
-        if (event.Type == sf::Event::KeyPressed)
-            switch (event.Key.Code) {
-                case sf::Key::O: setNextState(StateName::TITLE); return;
-                case sf::Key::P: setNextState(StateName::SCALARS_VS_VECTORS); return;
-            }
-    }
+    checkForNextState(StateName::TITLE, StateName::SCALARS_VS_VECTORS);
 }
 
 

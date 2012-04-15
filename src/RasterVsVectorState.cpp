@@ -3,7 +3,6 @@
 RasterVsVectorState::RasterVsVectorState()
 {
     logger.log("Entered Raster Vs. Vector state.");
-    setNextState(StateName::NADA);
 
     //Sets up the raster circle (aka the circle with pixels).  /////////////////
     rastercircle.SetImage(sprites);
@@ -28,16 +27,7 @@ RasterVsVectorState::~RasterVsVectorState()
 
 void RasterVsVectorState::input()
 {
-    while (Window.GetEvent(event)) {
-        if (event.Type == sf::Event::KeyPressed) {
-            switch (event.Key.Code) {
-                case sf::Key::O: setNextState(StateName::SCALARS_VS_VECTORS); return;
-                case sf::Key::P: setNextState(StateName::MATRICES); return;
-            }
-        }
-    }
-
-
+    checkForNextState(StateName::SCALARS_VS_VECTORS, StateName::MATRICES);
 }
 
 void RasterVsVectorState::logic()

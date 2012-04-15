@@ -10,9 +10,6 @@ TitleState::TitleState()
 {
     logger.log("Entering Title state.");
 
-    //NADA means next frame we stay in this state, or we'd never see this one!
-    setNextState(StateName::NADA);
-
     //Sets up Mario's sprite  //////////////////////////////////////////////////
     mario.SetImage(sprites);
     mario.SetSubRect(RectInt(0, 0, 16, 16));
@@ -39,9 +36,7 @@ TitleState::~TitleState()
 
 void TitleState::input()
 {
-    while (Window.GetEvent(event))
-        if (event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::P)
-            setNextState(StateName::VECTORS);
+    checkForNextState(StateName::NADA, StateName::VECTORS);
 }
 
 void TitleState::logic()

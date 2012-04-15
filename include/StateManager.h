@@ -9,6 +9,7 @@
 #include "states/RasterVsVectorState.h"
 #include "states/MatricesState.h"
 #include "states/TranslationDistanceLengthState.h"
+#include "states/DotProductState.h"
 
 class StateManager
 {
@@ -56,6 +57,7 @@ void StateManager::setState(const StateName newstate)
       case StateName::RASTER_VS_VECTOR: currentstate.reset(new RasterVsVectorState); return;
       case StateName::MATRICES: currentstate.reset(new MatricesState); return;
       case StateName::TRANSLATION_DISTANCE_LENGTH: currentstate.reset(new TranslationDistanceLengthState); return;
+      case StateName::DOT_PRODUCTS: currentstate.reset(new DotProductState); return;
       default: throw std::runtime_error(logger.log("Improper state!  Abort!"));
     }
 

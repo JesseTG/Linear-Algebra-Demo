@@ -229,7 +229,7 @@
 	<cmath>
 	"../include/states/DotProductState.h"
 
-1334019962 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/DotProductState.h
+1334606591 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/DotProductState.h
 	<array>
 	<utility>
 	"../Declarations.h"

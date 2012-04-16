@@ -17,9 +17,11 @@ float map(float x, float in_min, float in_max, float out_min, float out_max)
 DotProductState::DotProductState()
 {
     logger.log("Entering Dot Product state.");
+
+    //The Blue Falcon spritesheet is big enough to justify a new image file  ///
     bfsprites.LoadFromFile("./gfx/bluefalcon.png");
     bfsprites.SetSmooth(false);
-
+    ////////////////////////////////////////////////////////////////////////////
 
     //Puts all the frames into this array  /////////////////////////////////////
     //Order's weird due to the ordering of the sprites  ////////////////////////
@@ -57,6 +59,7 @@ DotProductState::DotProductState()
     frames[18] = RectInt(0, 88, 50, 129);
     ////////////////////////////////////////////////////////////////////////////
 
+    //Prepares the actual sprite for on-screen display  ////////////////////////
     bluefalcon.SetImage(bfsprites);
     bluefalcon.SetSubRect(frames[0]);
     bluefalcon.SetScale(BLUE_FALCON_SCALE, BLUE_FALCON_SCALE);
@@ -64,7 +67,11 @@ DotProductState::DotProductState()
                          bluefalcon.GetSubRect().GetHeight()/2);
     bluefalcon.SetPosition(center);
 
-    //TODO: Put all of the Falcon's frames into the unordered map
+    buffer[UP] = bluefalcon.GetSize().y/2;
+    buffer[DOWN] = Window.GetHeight() - buffer[UP];
+    buffer[LEFT] = bluefalcon.GetSize().x/2;
+    buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
+    ////////////////////////////////////////////////////////////////////////////
 }
 
 DotProductState::~DotProductState()
@@ -84,10 +91,10 @@ void DotProductState::input()
 
 void DotProductState::logic()
 {
-    bluefalcon.Move(0, -BLUE_FALCON_SPEED * ismoving[UP] /* (bluefalcon.GetPosition().y > buffer[UP])*/);
-    bluefalcon.Move(0, BLUE_FALCON_SPEED * ismoving[DOWN] /* (bluefalcon.GetPosition().y < buffer[DOWN])*/);
-    bluefalcon.Move(-BLUE_FALCON_SPEED * ismoving[LEFT] /* (bluefalcon.GetPosition().x > buffer[LEFT])*/, 0);
-    bluefalcon.Move(BLUE_FALCON_SPEED * ismoving[RIGHT] /* (bluefalcon.GetPosition().x < buffer[RIGHT])*/, 0);
+    bluefalcon.Move(0, -BLUE_FALCON_SPEED * ismoving[UP] * (bluefalcon.GetPosition().y > buffer[UP]));
+    bluefalcon.Move(0, BLUE_FALCON_SPEED * ismoving[DOWN] * (bluefalcon.GetPosition().y < buffer[DOWN]));
+    bluefalcon.Move(-BLUE_FALCON_SPEED * ismoving[LEFT] * (bluefalcon.GetPosition().x > buffer[LEFT]), 0);
+    bluefalcon.Move(BLUE_FALCON_SPEED * ismoving[RIGHT] * (bluefalcon.GetPosition().x < buffer[RIGHT]), 0);
 
     VectorFloat temp = bluefalcon.GetPosition() -
                        VectorFloat(Window.GetInput().GetMouseX(),
@@ -96,12 +103,20 @@ void DotProductState::logic()
     float angletomouse = atan2(temp.x, temp.y) * (180/PI);
     angletomouse = map(angletomouse, -180, 180, 0, 360);
 
-    bluefalcon.SetSubRect(frames[map(angletomouse, 360, 0, 0, frames.size())]);
+    bluefalcon.SetSubRect(frames[round(map(angletomouse, 360, 0, 0, frames.size()-1))]);
     bluefalcon.SetCenter(bluefalcon.GetSubRect().GetWidth()/2,
                          bluefalcon.GetSubRect().GetHeight()/2);
 
+    buffer[UP] = bluefalcon.GetSize().y/2;
+    buffer[DOWN] = Window.GetHeight() - buffer[UP];
+    buffer[LEFT] = bluefalcon.GetSize().x/2;
+    buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
+
     stats_to_string.str("");
-    stats_to_string << angletomouse;
+    stats_to_string << "Dot Products" <<
+                       "\n\nAngle: " << angletomouse << " degrees" <<
+                       "\n\nArrow Keys: Movement" <<
+                       "\nMouse: Rotate Vehicle";
     stats.SetText(stats_to_string.str());
 
 }

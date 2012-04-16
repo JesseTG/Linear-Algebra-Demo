@@ -24,6 +24,7 @@ class DotProductState : public State
         float angletomouse;
         Sprite bluefalcon;
         bool ismoving[4];
+        float buffer[4];
         StringGraphic stats;
         std::ostringstream stats_to_string;
 };

@@ -225,7 +225,7 @@
 1334099179 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/TranslationDistanceLengthState.cpp
 	"../include/states/TranslationDistanceLengthState.h"
 
-1334460625 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/DotProductState.cpp
+1334544110 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/DotProductState.cpp
 	<cmath>
 	"../include/states/DotProductState.h"
 

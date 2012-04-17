@@ -1,4 +1,4 @@
-#include "../include/states/TranslationDistanceLengthState.h"
+#include "../../include/states/TranslationDistanceLengthState.h"
 
 const int HERO_SCALE = 6;
 const int HERO_MOVE_SPEED = 2;
@@ -28,10 +28,7 @@ TranslationDistanceLengthState::TranslationDistanceLengthState()
     hero.SetPosition(center);
     frame = char(HeroFrame::SOUTH_LEFT);
 
-    buffer[UP] = hero.GetSize().y/2;
-    buffer[DOWN] = Window.GetHeight() - buffer[UP];
-    buffer[LEFT] = hero.GetSize().x/2;
-    buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
+    setSpriteBuffer(hero, buffer);
     ////////////////////////////////////////////////////////////////////////////
 
     //Preps the Ghost sprite  //////////////////////////////////////////////////
@@ -40,8 +37,8 @@ TranslationDistanceLengthState::TranslationDistanceLengthState()
     ghost.SetCenter(ghost.GetSubRect().GetWidth()/2,
                     ghost.GetSubRect().GetHeight()/2);
     ghost.SetScale(GHOST_SCALE, GHOST_SCALE);
-    ghost.SetPosition(Window.GetInput().GetMouseX(),
-                      Window.GetInput().GetMouseY());
+    ghost.SetPosition(INPUT.GetMouseX(),
+                      INPUT.GetMouseY());
     ////////////////////////////////////////////////////////////////////////////
 }
 
@@ -55,11 +52,11 @@ void TranslationDistanceLengthState::input()
     checkForNextState(StateName::MATRICES, StateName::DOT_PRODUCTS);
 
     bool movinghorizontal = !ismoving[LEFT] * !ismoving[RIGHT];
-    ismoving[UP] = Window.GetInput().IsKeyDown(sf::Key::Up) * movinghorizontal;
-    ismoving[DOWN] = Window.GetInput().IsKeyDown(sf::Key::Down) * movinghorizontal;
+    ismoving[UP] = INPUT.IsKeyDown(sf::Key::Up) * movinghorizontal;
+    ismoving[DOWN] = INPUT.IsKeyDown(sf::Key::Down) * movinghorizontal;
     bool movingvertical = !ismoving[UP] * !ismoving[DOWN];
-    ismoving[LEFT] = Window.GetInput().IsKeyDown(sf::Key::Left) * movingvertical;
-    ismoving[RIGHT] = Window.GetInput().IsKeyDown(sf::Key::Right) * movingvertical;
+    ismoving[LEFT] = INPUT.IsKeyDown(sf::Key::Left) * movingvertical;
+    ismoving[RIGHT] = INPUT.IsKeyDown(sf::Key::Right) * movingvertical;
 }
 
 void TranslationDistanceLengthState::logic()
@@ -70,10 +67,7 @@ void TranslationDistanceLengthState::logic()
     float distance = hypot(distancevector.x, distancevector.y);
     if (distance > 100) {
         if (hero.GetColor() != Color::White) hero.SetColor(Color::White);
-        hero.Move(0, -HERO_MOVE_SPEED * ismoving[UP] * (hero.GetPosition().y > buffer[UP]));
-        hero.Move(0, HERO_MOVE_SPEED * ismoving[DOWN] * (hero.GetPosition().y < buffer[DOWN]));
-        hero.Move(-HERO_MOVE_SPEED * ismoving[LEFT] * (hero.GetPosition().x > buffer[LEFT]), 0);
-        hero.Move(HERO_MOVE_SPEED * ismoving[RIGHT] * (hero.GetPosition().x < buffer[RIGHT]), 0);
+        inputmove(HERO_MOVE_SPEED, ismoving, hero, buffer);
     }
     else {
         hero.SetColor(Color::Blue);  //Blue == terrified!
@@ -101,7 +95,7 @@ void TranslationDistanceLengthState::logic()
     ////////////////////////////////////////////////////////////////////////////
 
     //The Ghost follows the mouse
-    ghost.SetPosition(Window.GetInput().GetMouseX(), Window.GetInput().GetMouseY());
+    ghost.SetPosition(INPUT.GetMouseX(), INPUT.GetMouseY());
 
     stats_to_text.str("");
     stats_to_text << "Translation, Distance, and Length\n\n"

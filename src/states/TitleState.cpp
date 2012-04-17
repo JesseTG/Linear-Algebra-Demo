@@ -1,4 +1,4 @@
-#include "../include/states/TitleState.h"
+#include "../../include/states/TitleState.h"
 
 //These are here so we avoid "magic numbers"; aka numbers that don't appear at
 //first glance to hold any significance.  Very bad in software development,
@@ -20,7 +20,6 @@ TitleState::TitleState()
     ////////////////////////////////////////////////////////////////////////////
 
     //Sets up the title text  //////////////////////////////////////////////////
-    title.SetPosition(8, 8);
     title.SetText("Linear Algebra Demo\n\n"
                   "Jesse Talavera-Greenberg\n\n"
                   "O/P: Previous/Next Screen");

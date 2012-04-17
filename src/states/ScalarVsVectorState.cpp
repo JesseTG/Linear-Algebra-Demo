@@ -1,4 +1,4 @@
-#include "../include/states/ScalarVsVectorState.h"
+#include "../../include/states/ScalarVsVectorState.h"
 
 ScalarVsVectorState::ScalarVsVectorState()
 {
@@ -14,10 +14,7 @@ ScalarVsVectorState::ScalarVsVectorState()
 
     distance = 0;
 
-    buffer[UP] = harrier.GetSize().y/2;
-    buffer[DOWN] = Window.GetHeight() - buffer[UP];
-    buffer[LEFT] = harrier.GetSize().x/2;
-    buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
+    setSpriteBuffer(harrier, buffer);
 
     centerline = Shape::Line(harrier.GetPosition(), center, 5, Color::White);
     ////////////////////////////////////////////////////////////////////////////
@@ -32,10 +29,10 @@ void ScalarVsVectorState::input()
 {
     checkForNextState(StateName::VECTORS, StateName::RASTER_VS_VECTOR);
 
-    ismoving[UP] = Window.GetInput().IsKeyDown(sf::Key::Up);
-    ismoving[DOWN] = Window.GetInput().IsKeyDown(sf::Key::Down);
-    ismoving[LEFT] = Window.GetInput().IsKeyDown(sf::Key::Left);
-    ismoving[RIGHT] = Window.GetInput().IsKeyDown(sf::Key::Right);
+    ismoving[UP] = INPUT.IsKeyDown(sf::Key::Up);
+    ismoving[DOWN] = INPUT.IsKeyDown(sf::Key::Down);
+    ismoving[LEFT] = INPUT.IsKeyDown(sf::Key::Left);
+    ismoving[RIGHT] = INPUT.IsKeyDown(sf::Key::Right);
 }
 
 void ScalarVsVectorState::logic()
@@ -43,12 +40,7 @@ void ScalarVsVectorState::logic()
     //Stores where we are for further calculation
     VectorFloat currentpos = harrier.GetPosition();
 
-    //In C++, false corresponds to 0, true corresponds to 1.  Very useful for
-    //shrinking down code (multiplication is more concise than conditionals).
-    harrier.Move(0, -HARRIER_MOVE_SPEED * ismoving[UP] * (harrier.GetPosition().y > buffer[UP]));
-    harrier.Move(0, HARRIER_MOVE_SPEED * ismoving[DOWN] * (harrier.GetPosition().y < buffer[DOWN]));
-    harrier.Move(-HARRIER_MOVE_SPEED * ismoving[LEFT] * (harrier.GetPosition().x > buffer[LEFT]), 0);
-    harrier.Move(HARRIER_MOVE_SPEED * ismoving[RIGHT] * (harrier.GetPosition().x < buffer[RIGHT]), 0);
+    inputmove(HARRIER_MOVE_SPEED, ismoving, harrier, buffer);
 
     //Adds the distance we just moved to the running total
     currentpos -= harrier.GetPosition();
@@ -76,8 +68,7 @@ void ScalarVsVectorState::logic()
     stats_to_string.str("");
     stats_to_string << "Vectors Vs. Scalars\n\nDistance Travelled: " << distance
                     << "\nDisplacement From Center: "
-                    << sqrt(distancetocenter.x*distancetocenter.x +
-                            distancetocenter.y*distancetocenter.y)
+                    << hypot(distancetocenter.x, distancetocenter.y)
                     << "\n\nArrow Keys: Move";
     harrierstats.SetText(stats_to_string.str());
     ////////////////////////////////////////////////////////////////////////////

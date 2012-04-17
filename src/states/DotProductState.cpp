@@ -1,6 +1,6 @@
 #include <cmath>
 
-#include "../include/states/DotProductState.h"
+#include "../../include/states/DotProductState.h"
 
 #define _USE_MATH_DEFINES
 #define PI M_PI
@@ -67,10 +67,7 @@ DotProductState::DotProductState()
                          bluefalcon.GetSubRect().GetHeight()/2);
     bluefalcon.SetPosition(center);
 
-    buffer[UP] = bluefalcon.GetSize().y/2;
-    buffer[DOWN] = Window.GetHeight() - buffer[UP];
-    buffer[LEFT] = bluefalcon.GetSize().x/2;
-    buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
+    setSpriteBuffer(bluefalcon, buffer);
     ////////////////////////////////////////////////////////////////////////////
 }
 
@@ -83,22 +80,19 @@ void DotProductState::input()
 {
     checkForNextState(StateName::TRANSLATION_DISTANCE_LENGTH, StateName::NADA);
 
-    ismoving[UP] = Window.GetInput().IsKeyDown(sf::Key::Up);
-    ismoving[DOWN] = Window.GetInput().IsKeyDown(sf::Key::Down);
-    ismoving[LEFT] = Window.GetInput().IsKeyDown(sf::Key::Left);
-    ismoving[RIGHT] = Window.GetInput().IsKeyDown(sf::Key::Right);
+    ismoving[UP] = INPUT.IsKeyDown(sf::Key::Up);
+    ismoving[DOWN] = INPUT.IsKeyDown(sf::Key::Down);
+    ismoving[LEFT] = INPUT.IsKeyDown(sf::Key::Left);
+    ismoving[RIGHT] = INPUT.IsKeyDown(sf::Key::Right);
 }
 
 void DotProductState::logic()
 {
-    bluefalcon.Move(0, -BLUE_FALCON_SPEED * ismoving[UP] * (bluefalcon.GetPosition().y > buffer[UP]));
-    bluefalcon.Move(0, BLUE_FALCON_SPEED * ismoving[DOWN] * (bluefalcon.GetPosition().y < buffer[DOWN]));
-    bluefalcon.Move(-BLUE_FALCON_SPEED * ismoving[LEFT] * (bluefalcon.GetPosition().x > buffer[LEFT]), 0);
-    bluefalcon.Move(BLUE_FALCON_SPEED * ismoving[RIGHT] * (bluefalcon.GetPosition().x < buffer[RIGHT]), 0);
+    inputmove(BLUE_FALCON_SPEED, ismoving, bluefalcon, buffer);
 
     VectorFloat temp = bluefalcon.GetPosition() -
-                       VectorFloat(Window.GetInput().GetMouseX(),
-                                   Window.GetInput().GetMouseY());
+                       VectorFloat(INPUT.GetMouseX(),
+                                   INPUT.GetMouseY());
 
     float angletomouse = atan2(temp.x, temp.y) * (180/PI);
     angletomouse = map(angletomouse, -180, 180, 0, 360);
@@ -107,10 +101,7 @@ void DotProductState::logic()
     bluefalcon.SetCenter(bluefalcon.GetSubRect().GetWidth()/2,
                          bluefalcon.GetSubRect().GetHeight()/2);
 
-    buffer[UP] = bluefalcon.GetSize().y/2;
-    buffer[DOWN] = Window.GetHeight() - buffer[UP];
-    buffer[LEFT] = bluefalcon.GetSize().x/2;
-    buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
+    setSpriteBuffer(bluefalcon, buffer);
 
     stats_to_string.str("");
     stats_to_string << "Dot Products" <<

@@ -11,12 +11,9 @@ TitleState::TitleState()
     logger.log("Entering Title state.");
 
     //Sets up Mario's sprite  //////////////////////////////////////////////////
-    mario.SetImage(sprites);
-    mario.SetSubRect(RectInt(0, 0, 16, 16));
-    mario.SetCenter(mario.GetSubRect().GetWidth()/2,
-                    mario.GetSubRect().GetHeight()/2);
-    mario.SetScale(MARIO_SCALE, MARIO_SCALE);
-    mario.SetPosition(center.x, Window.GetHeight()/1.5);
+    initSprite(mario, sprites, RectInt(0, 0, 16, 16),
+               VectorFloat(MARIO_SCALE, MARIO_SCALE),
+               VectorFloat(center.x, Window.GetHeight()/1.5));
     ////////////////////////////////////////////////////////////////////////////
 
     //Sets up the title text  //////////////////////////////////////////////////

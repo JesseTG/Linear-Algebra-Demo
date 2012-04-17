@@ -20,25 +20,18 @@ TranslationDistanceLengthState::TranslationDistanceLengthState()
     ////////////////////////////////////////////////////////////////////////////
 
     //Preps the Hero sprite itself  ////////////////////////////////////////////
-    hero.SetImage(sprites);
-    hero.SetSubRect(heroframes[HeroFrame::SOUTH_LEFT]);
-    hero.SetCenter(hero.GetSubRect().GetWidth()/2,
-                   hero.GetSubRect().GetHeight()/2);
-    hero.SetScale(HERO_SCALE, HERO_SCALE);
-    hero.SetPosition(center);
+    initSprite(hero, sprites, heroframes[HeroFrame::SOUTH_LEFT],
+               VectorFloat(HERO_SCALE, HERO_SCALE));
+    setSpriteBuffer(hero, buffer);
     frame = char(HeroFrame::SOUTH_LEFT);
 
-    setSpriteBuffer(hero, buffer);
+
     ////////////////////////////////////////////////////////////////////////////
 
     //Preps the Ghost sprite  //////////////////////////////////////////////////
-    ghost.SetImage(sprites);
-    ghost.SetSubRect(RectInt(34, 18, 58, 48));
-    ghost.SetCenter(ghost.GetSubRect().GetWidth()/2,
-                    ghost.GetSubRect().GetHeight()/2);
-    ghost.SetScale(GHOST_SCALE, GHOST_SCALE);
-    ghost.SetPosition(INPUT.GetMouseX(),
-                      INPUT.GetMouseY());
+    initSprite(ghost, sprites, RectInt(34, 18, 58, 48),
+               VectorFloat(GHOST_SCALE, GHOST_SCALE),
+               VectorFloat(INPUT.GetMouseX(), INPUT.GetMouseY()));
     ////////////////////////////////////////////////////////////////////////////
 }
 

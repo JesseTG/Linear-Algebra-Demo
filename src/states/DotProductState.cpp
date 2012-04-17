@@ -60,13 +60,8 @@ DotProductState::DotProductState()
     ////////////////////////////////////////////////////////////////////////////
 
     //Prepares the actual sprite for on-screen display  ////////////////////////
-    bluefalcon.SetImage(bfsprites);
-    bluefalcon.SetSubRect(frames[0]);
-    bluefalcon.SetScale(BLUE_FALCON_SCALE, BLUE_FALCON_SCALE);
-    bluefalcon.SetCenter(bluefalcon.GetSubRect().GetWidth()/2,
-                         bluefalcon.GetSubRect().GetHeight()/2);
-    bluefalcon.SetPosition(center);
-
+    initSprite(bluefalcon, bfsprites, frames[0],
+               VectorFloat(BLUE_FALCON_SCALE, BLUE_FALCON_SCALE));
     setSpriteBuffer(bluefalcon, buffer);
     ////////////////////////////////////////////////////////////////////////////
 }

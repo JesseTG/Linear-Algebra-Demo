@@ -5,12 +5,10 @@ VectorState::VectorState()
     logger.log("Entering Vectors state.");
 
     //Setting up the tetrad sprite  ////////////////////////////////////////////
-    tetrad.SetImage(sprites);
-    tetrad.SetSubRect(RectInt(16, 0, 39, 15));
-    tetrad.SetCenter(tetrad.GetSubRect().GetWidth()/2,
-                     tetrad.GetSubRect().GetHeight()/2);
-    tetrad.SetScale(TETRAD_SCALE, TETRAD_SCALE);
-    tetrad.SetPosition(Window.GetWidth()/4, Window.GetHeight()*.8333);
+    initSprite(tetrad, sprites, RectInt(16, 0, 39, 15),
+               VectorFloat(TETRAD_SCALE, TETRAD_SCALE),
+               VectorFloat(Window.GetWidth()/4, Window.GetHeight()*.8333)),
+
     tetradmovement = VectorFloat(TETRAD_SPEED, -TETRAD_SPEED);
     ////////////////////////////////////////////////////////////////////////////
 

@@ -110,7 +110,7 @@
 1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/pins_arduino.h
 	<avr/pgmspace.h>
 
-1334613124 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
+1334622287 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	<memory>
@@ -242,14 +242,14 @@
 1334610095 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/ReflectionState.cpp
 	"../include/states/ReflectionState.h"
 
-1334621078 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/DotProductState.cpp
+1334627150 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/DotProductState.cpp
 	<cmath>
 	"../../include/states/DotProductState.h"
 
 1334621084 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/MatricesState.cpp
 	"../../include/states/MatricesState.h"
 
-1334621064 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/RasterVsVectorState.cpp
+1334625210 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/RasterVsVectorState.cpp
 	"../../include/states/RasterVsVectorState.h"
 
 1334621088 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/ReflectionState.cpp
@@ -258,9 +258,12 @@
 1334621093 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/ScalarVsVectorState.cpp
 	"../../include/states/ScalarVsVectorState.h"
 
-1334621120 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TitleState.cpp
+1334622138 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TitleState.cpp
 	"../../include/states/TitleState.h"
 
-1334621125 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TranslationDistanceLengthState.cpp
+1334623763 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TranslationDistanceLengthState.cpp
 	"../../include/states/TranslationDistanceLengthState.h"
+
+1334622359 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/VectorState.cpp
+	"../../include/states/VectorState.h"
 

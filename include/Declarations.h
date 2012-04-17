@@ -69,11 +69,19 @@ auto inputmove = [](const int speed, const bool ismoving[4],
 };
 
 //Ensures that a sprite stops at the edge of the screen
-auto setSpriteBuffer = [&Window](const Sprite& sprite, float buffer[4]){
+auto setSpriteBuffer = [&Window](const Sprite& sprite, float buffer[4]) {
     buffer[UP] = sprite.GetSize().y/2;
     buffer[DOWN] = Window.GetHeight() - buffer[UP];
     buffer[LEFT] = sprite.GetSize().x/2;
     buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
 };
 
+auto initSprite = [](Sprite& sprite, const Image& image, const RectInt& subrect,
+                     const VectorFloat& scale, const VectorFloat& position = center) {
+    sprite.SetImage(image);
+    sprite.SetSubRect(subrect);
+    sprite.SetScale(scale);
+    sprite.SetCenter(subrect.GetWidth()/2, subrect.GetHeight()/2);
+    sprite.SetPosition(position);
+};
 #endif //DECLARATIONS_H

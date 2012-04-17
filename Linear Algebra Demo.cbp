@@ -50,20 +50,22 @@
 		<Unit filename="include/states/DotProductState.h" />
 		<Unit filename="include/states/MatricesState.h" />
 		<Unit filename="include/states/RasterVsVectorState.h" />
+		<Unit filename="include/states/ReflectionState.h" />
 		<Unit filename="include/states/ScalarVsVectorState.h" />
 		<Unit filename="include/states/TitleState.h" />
 		<Unit filename="include/states/TranslationDistanceLengthState.h" />
 		<Unit filename="include/states/VectorState.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/DotProductState.cpp" />
 		<Unit filename="src/Logger.cpp" />
-		<Unit filename="src/MatricesState.cpp" />
-		<Unit filename="src/RasterVsVectorState.cpp" />
-		<Unit filename="src/ScalarVsVectorState.cpp" />
 		<Unit filename="src/State.cpp" />
-		<Unit filename="src/TitleState.cpp" />
-		<Unit filename="src/TranslationDistanceLengthState.cpp" />
-		<Unit filename="src/VectorState.cpp" />
+		<Unit filename="src/states/DotProductState.cpp" />
+		<Unit filename="src/states/MatricesState.cpp" />
+		<Unit filename="src/states/RasterVsVectorState.cpp" />
+		<Unit filename="src/states/ReflectionState.cpp" />
+		<Unit filename="src/states/ScalarVsVectorState.cpp" />
+		<Unit filename="src/states/TitleState.cpp" />
+		<Unit filename="src/states/TranslationDistanceLengthState.cpp" />
+		<Unit filename="src/states/VectorState.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -4,7 +4,7 @@ RasterVsVectorState::RasterVsVectorState()
 {
 
     //Sets up the raster circle (aka the circle with pixels).  /////////////////
-    initSprite(rastercircle, sprites, RectInt(0, 16, 32, 48), VectorFloat(1, 1),
+    initSprite(rastercircle, sprites, RectInt(0, 16, 32, 48), 1,
                VectorFloat(Window.GetWidth()/4, center.y));
     ////////////////////////////////////////////////////////////////////////////
 

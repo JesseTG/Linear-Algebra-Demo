@@ -58,15 +58,14 @@ DotProductState::DotProductState()
     ////////////////////////////////////////////////////////////////////////////
 
     //Prepares the actual sprite for on-screen display  ////////////////////////
-    initSprite(bluefalcon, bfsprites, frames[0],
-               VectorFloat(BLUE_FALCON_SCALE, BLUE_FALCON_SCALE));
+    initSprite(bluefalcon, bfsprites, frames[0], BLUE_FALCON_SCALE);
     setSpriteBuffer(bluefalcon, buffer);
     ////////////////////////////////////////////////////////////////////////////
 }
 
 void DotProductState::input()
 {
-    checkForNextState(StateName::TRANSLATION_DISTANCE_LENGTH, StateName::NADA);
+    checkForNextState(StateName::TRANSLATION_DISTANCE_LENGTH, StateName::REFLECTION);
 
     ismoving[UP] = INPUT.IsKeyDown(sf::Key::Up);
     ismoving[DOWN] = INPUT.IsKeyDown(sf::Key::Down);

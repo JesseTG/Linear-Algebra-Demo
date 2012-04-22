@@ -1,4 +1,4 @@
-#include "../../include/states/TranslationDistanceLengthState.h"
+#include "../../../include/states/TranslationDistanceLengthState/TranslationDistanceLengthState.h"
 
 const int HERO_SCALE = 6;
 const int HERO_MOVE_SPEED = 2;
@@ -18,8 +18,7 @@ TranslationDistanceLengthState::TranslationDistanceLengthState()
     ////////////////////////////////////////////////////////////////////////////
 
     //Preps the Hero sprite itself  ////////////////////////////////////////////
-    initSprite(hero, sprites, heroframes[HeroFrame::SOUTH_LEFT],
-               VectorFloat(HERO_SCALE, HERO_SCALE));
+    initSprite(hero, sprites, heroframes[HeroFrame::SOUTH_LEFT], HERO_SCALE);
     setSpriteBuffer(hero, buffer);
     frame = char(HeroFrame::SOUTH_LEFT);
 
@@ -27,8 +26,7 @@ TranslationDistanceLengthState::TranslationDistanceLengthState()
     ////////////////////////////////////////////////////////////////////////////
 
     //Preps the Ghost sprite  //////////////////////////////////////////////////
-    initSprite(ghost, sprites, RectInt(34, 18, 58, 48),
-               VectorFloat(GHOST_SCALE, GHOST_SCALE),
+    initSprite(ghost, sprites, RectInt(34, 18, 58, 48), GHOST_SCALE,
                VectorFloat(INPUT.GetMouseX(), INPUT.GetMouseY()));
     ////////////////////////////////////////////////////////////////////////////
 }

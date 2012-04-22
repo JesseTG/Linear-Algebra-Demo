@@ -3,8 +3,7 @@
 VectorState::VectorState()
 {
     //Setting up the tetrad sprite  ////////////////////////////////////////////
-    initSprite(tetrad, sprites, RectInt(16, 0, 39, 15),
-               VectorFloat(TETRAD_SCALE, TETRAD_SCALE),
+    initSprite(tetrad, sprites, RectInt(16, 0, 39, 15), TETRAD_SCALE,
                VectorFloat(Window.GetWidth()/4, Window.GetHeight()*.8333)),
 
     tetradmovement = VectorFloat(TETRAD_SPEED, -TETRAD_SPEED);

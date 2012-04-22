@@ -75,10 +75,10 @@ auto setSpriteBuffer = [&Window](const Sprite& sprite, float buffer[4]) {
 };
 
 auto initSprite = [](Sprite& sprite, const Image& image, const RectInt& subrect,
-                     const VectorFloat& scale, const VectorFloat& position = center) {
+                     const float scale, const VectorFloat& position = center) {
     sprite.SetImage(image);
     sprite.SetSubRect(subrect);
-    sprite.SetScale(scale);
+    sprite.SetScale(VectorFloat(scale, scale));
     sprite.SetCenter(subrect.GetWidth()/2, subrect.GetHeight()/2);
     sprite.SetPosition(position);
 };

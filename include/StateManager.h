@@ -10,9 +10,9 @@
 #include "states/ScalarVsVectorState.h"
 #include "states/RasterVsVectorState.h"
 #include "states/MatricesState.h"
-#include "states/TranslationDistanceLengthState.h"
+#include "states/TranslationDistanceLengthState/TranslationDistanceLengthState.h"
 #include "states/DotProductState.h"
-#include "states/ReflectionState.h"
+#include "states/ReflectionState/ReflectionState.h"
 
 class StateManager
 {

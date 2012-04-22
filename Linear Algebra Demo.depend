@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1334610379 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
+1335121037 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
 	"include/Declarations.h"
 	"include/StateManager.h"
 
@@ -110,13 +110,12 @@
 1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/pins_arduino.h
 	<avr/pgmspace.h>
 
-1334622287 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
+1335120920 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	<memory>
 	<stdexcept>
 	<sstream>
-	"Logger.h"
 
 1332631972 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/NumMatrix.h
 	"Vector.h"
@@ -139,7 +138,7 @@
 
 1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/eraser.h
 
-1334610874 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
+1335120964 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
 	"Declarations.h"
 	"State.h"
 	"states/TitleState.h"
@@ -160,7 +159,7 @@
 
 1332802731 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/bgtile.h
 
-1333907881 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TitleState.h
+1335121308 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TitleState.h
 	"../Declarations.h"
 	"../State.h"
 
@@ -179,24 +178,24 @@
 	<iostream>
 	<fstream>
 
-1333906435 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/VectorState.h
+1335121289 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/VectorState.h
 	"../Declarations.h"
 	"../State.h"
 	<sstream>
 
-1333932808 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ScalarVsVectorState.h
+1335121308 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ScalarVsVectorState.h
 	"../Declarations.h"
 	"../State.h"
 
-1333932631 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/RasterVsVectorState.h
+1335120904 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/RasterVsVectorState.h
 	"../Declarations.h"
 	"../State.h"
 
-1333932914 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/MatricesState.h
+1335120849 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/MatricesState.h
 	"../Declarations.h"
 	"../State.h"
 
-1334013053 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TranslationDistanceLengthState.h
+1335121289 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TranslationDistanceLengthState.h
 	<unordered_map>
 	<utility>
 	"../Declarations.h"
@@ -230,40 +229,41 @@
 	<cmath>
 	"../include/states/DotProductState.h"
 
-1334606591 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/DotProductState.h
+1335120852 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/DotProductState.h
 	<array>
 	<utility>
 	"../Declarations.h"
 	"../State.h"
 
-1334610095 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ReflectionState.h
+1335121401 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ReflectionState.h
+	<memory>
 	"../State.h"
 
 1334610095 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/ReflectionState.cpp
 	"../include/states/ReflectionState.h"
 
-1334627150 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/DotProductState.cpp
+1335120826 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/DotProductState.cpp
 	<cmath>
 	"../../include/states/DotProductState.h"
 
-1334621084 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/MatricesState.cpp
+1335120861 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/MatricesState.cpp
 	"../../include/states/MatricesState.h"
 
-1334625210 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/RasterVsVectorState.cpp
+1335121197 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/RasterVsVectorState.cpp
 	"../../include/states/RasterVsVectorState.h"
 
 1334621088 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/ReflectionState.cpp
 	"../../include/states/ReflectionState.h"
 
-1334621093 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/ScalarVsVectorState.cpp
+1335121210 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/ScalarVsVectorState.cpp
 	"../../include/states/ScalarVsVectorState.h"
 
-1334622138 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TitleState.cpp
+1335121223 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TitleState.cpp
 	"../../include/states/TitleState.h"
 
-1334623763 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TranslationDistanceLengthState.cpp
+1335121239 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TranslationDistanceLengthState.cpp
 	"../../include/states/TranslationDistanceLengthState.h"
 
-1334622359 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/VectorState.cpp
+1335121251 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/VectorState.cpp
 	"../../include/states/VectorState.h"
 

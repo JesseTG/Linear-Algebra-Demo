@@ -2,7 +2,6 @@
 
 RasterVsVectorState::RasterVsVectorState()
 {
-    logger.log("Entered Raster Vs. Vector state.");
 
     //Sets up the raster circle (aka the circle with pixels).  /////////////////
     initSprite(rastercircle, sprites, RectInt(0, 16, 32, 48), VectorFloat(1, 1),
@@ -15,11 +14,6 @@ RasterVsVectorState::RasterVsVectorState()
     scalevector = VectorFloat(1.01, 1.01);
 
     rastertitle.SetText("Raster Vs. Vector Graphics");
-}
-
-RasterVsVectorState::~RasterVsVectorState()
-{
-    logger.log("Exiting Raster Vs. Vector state.");
 }
 
 void RasterVsVectorState::input()

@@ -9,7 +9,7 @@ class RasterVsVectorState : public State
 {
     public:
         RasterVsVectorState();
-        ~RasterVsVectorState();
+        ~RasterVsVectorState() {}
         void input();
         void logic();
         void render() const;

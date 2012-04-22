@@ -16,8 +16,6 @@ float map(float x, float in_min, float in_max, float out_min, float out_max)
 
 DotProductState::DotProductState()
 {
-    logger.log("Entering Dot Product state.");
-
     //The Blue Falcon spritesheet is big enough to justify a new image file  ///
     bfsprites.LoadFromFile("./gfx/bluefalcon.png");
     bfsprites.SetSmooth(false);
@@ -64,11 +62,6 @@ DotProductState::DotProductState()
                VectorFloat(BLUE_FALCON_SCALE, BLUE_FALCON_SCALE));
     setSpriteBuffer(bluefalcon, buffer);
     ////////////////////////////////////////////////////////////////////////////
-}
-
-DotProductState::~DotProductState()
-{
-    logger.log("Exiting Dot Product state.");
 }
 
 void DotProductState::input()

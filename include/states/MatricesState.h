@@ -8,7 +8,7 @@ class MatricesState : public State
 {
     public:
         MatricesState();
-        ~MatricesState();
+        ~MatricesState() {}
 
         void input();
         void logic() {}  //No logic here, so we can leave this blank.

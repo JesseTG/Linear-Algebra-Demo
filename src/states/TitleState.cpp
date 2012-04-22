@@ -8,8 +8,6 @@ const int MARIO_SCALE = 10;  //The factor we scale the sprite by.
 
 TitleState::TitleState()
 {
-    logger.log("Entering Title state.");
-
     //Sets up Mario's sprite  //////////////////////////////////////////////////
     initSprite(mario, sprites, RectInt(0, 0, 16, 16),
                VectorFloat(MARIO_SCALE, MARIO_SCALE),
@@ -23,11 +21,6 @@ TitleState::TitleState()
     ////////////////////////////////////////////////////////////////////////////
 
     Window.Clear();
-}
-
-TitleState::~TitleState()
-{
-    logger.log("Exiting Title state.");
 }
 
 void TitleState::input()

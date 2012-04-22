@@ -8,7 +8,6 @@
 #include <memory>
 #include <stdexcept>
 #include <sstream>
-#include "Logger.h"
 
 class State;
 class TitleState;
@@ -56,7 +55,6 @@ extern Image bgimage;  //The background image.
 extern Sprite bg;  //The sprite that represents this background image.
 extern RenderWindow Window;
 extern const VectorFloat center;
-extern Logger logger;
 extern StateManager StateController;
 
 //Moves the sprite in question.

@@ -40,7 +40,6 @@ void StateManager::updateState()
     currentstate->render();
 
     if (INPUT.IsKeyDown(sf::Key::Escape)) {
-        logger.log("Program ended normally.");
         exit(EXIT_SUCCESS);
     }
     else if (INPUT.IsKeyDown(sf::Key::F4)) {
@@ -62,7 +61,7 @@ void StateManager::setState(const StateName newstate)
       case StateName::TRANSLATION_DISTANCE_LENGTH: RESET(new TranslationDistanceLengthState); return;
       case StateName::DOT_PRODUCTS: RESET(new DotProductState); return;
       case StateName::REFLECTION: RESET(new ReflectionState); return;
-      default: throw std::runtime_error(logger.log("Improper state!  Abort!"));
+      default: throw std::runtime_error("Improper state!  Abort!");
     }
 
 }

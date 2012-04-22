@@ -21,18 +21,11 @@ Sprite bg;  //The sprite that represents this background image.
 RenderWindow Window(sf::VideoMode(640, 480, 32), "Linear Algebra Demo",
                     sf::Style::Titlebar | sf::Style::Close);
 const VectorFloat center(Window.GetWidth()/2, Window.GetHeight()/2);
-Logger logger;
 StateManager StateController;
 
 int main()
 {
-    logger.log("Program start.");
-    if (init()) {
-        logger.log("Global resources initialized successfully.");
-    } else {
-        logger.log("Resources not properly initialized!  Exiting!");
-        return EXIT_FAILURE;
-    }
+    if (!init()) return EXIT_FAILURE;
 
 
     Window.Clear();
@@ -40,23 +33,19 @@ int main()
 
     while (true) StateController.updateState();
 
-    logger.log("Program ended normally.");
     return EXIT_SUCCESS;
 }
 
 bool init()
 {
     //Prepare the background  //////////////////////////////////////////////////
-    if (bgimage.LoadFromFile("./gfx/bg.png")) logger.log("Loaded background.");
-    else return false;
+    if (!bgimage.LoadFromFile("./gfx/bg.png")) return false;
     bgimage.SetSmooth(false);
     bg.SetImage(bgimage);
     ////////////////////////////////////////////////////////////////////////////
 
     //Prepare the spritesheet  /////////////////////////////////////////////////
-    if (sprites.LoadFromFile("./gfx/sprites.png"))
-        logger.log("Loaded spritesheet.");
-    else return false;
+    if (!sprites.LoadFromFile("./gfx/sprites.png")) return false;
     sprites.SetSmooth(false);
     ////////////////////////////////////////////////////////////////////////////
 

@@ -2,8 +2,6 @@
 
 MatricesState::MatricesState()
 {
-    logger.log("Entered Matrices state.");
-
     matrixfont.LoadFromFile("./gfx/emulogic.ttf");
     text.SetFont(matrixfont);
     text.SetSize(24);
@@ -25,11 +23,6 @@ MatricesState::MatricesState()
     Window.Draw(bg);
     Window.Draw(text);
     Window.Display();
-}
-
-MatricesState::~MatricesState()
-{
-    logger.log("Exited Matrices state.");
 }
 
 void MatricesState::input()

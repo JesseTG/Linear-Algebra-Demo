@@ -13,7 +13,7 @@ class VectorState : public State
 {
     public:
         VectorState();
-        ~VectorState();
+        ~VectorState() {}
 
         void input();
         void logic();

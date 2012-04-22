@@ -11,7 +11,7 @@ class ScalarVsVectorState : public State
 {
     public:
         ScalarVsVectorState();
-        ~ScalarVsVectorState();
+        ~ScalarVsVectorState() {}
 
         void input();
         void logic();

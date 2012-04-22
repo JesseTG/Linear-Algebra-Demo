@@ -2,8 +2,6 @@
 
 ScalarVsVectorState::ScalarVsVectorState()
 {
-    logger.log("Entering Scalar Vs. Vectors state.");
-
     //Set up the Harrier  //////////////////////////////////////////////////////
     harrier.SetImage(sprites);
     harrier.SetSubRect(RectInt(0, 49, 24, 96));
@@ -18,11 +16,6 @@ ScalarVsVectorState::ScalarVsVectorState()
 
     centerline = Shape::Line(harrier.GetPosition(), center, 5, Color::White);
     ////////////////////////////////////////////////////////////////////////////
-}
-
-ScalarVsVectorState::~ScalarVsVectorState()
-{
-    logger.log("Exiting Scalar Vs. Vectors state.");
 }
 
 void ScalarVsVectorState::input()

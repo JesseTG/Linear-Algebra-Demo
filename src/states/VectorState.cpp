@@ -2,8 +2,6 @@
 
 VectorState::VectorState()
 {
-    logger.log("Entering Vectors state.");
-
     //Setting up the tetrad sprite  ////////////////////////////////////////////
     initSprite(tetrad, sprites, RectInt(16, 0, 39, 15),
                VectorFloat(TETRAD_SCALE, TETRAD_SCALE),
@@ -22,11 +20,6 @@ VectorState::VectorState()
     vectortitle.SetPosition(8, 8);
 
     tetradstats.SetPosition(center.x, 5*Window.GetHeight()/6);
-}
-
-VectorState::~VectorState()
-{
-    logger.log("Exiting Vectors state.");
 }
 
 void VectorState::input()

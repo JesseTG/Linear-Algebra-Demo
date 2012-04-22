@@ -18,7 +18,7 @@ class TitleState : public State
 {
   public:
     TitleState();
-    ~TitleState();
+    ~TitleState() {}
 
     void input();
     void logic();

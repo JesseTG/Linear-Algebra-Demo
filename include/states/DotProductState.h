@@ -12,7 +12,7 @@ class DotProductState : public State
 {
     public:
         DotProductState();
-        ~DotProductState();
+        ~DotProductState() {}
 
         void input();
         void logic();

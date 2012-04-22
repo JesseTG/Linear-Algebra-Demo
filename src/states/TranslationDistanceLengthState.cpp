@@ -6,8 +6,6 @@ const int GHOST_SCALE = 3;
 
 TranslationDistanceLengthState::TranslationDistanceLengthState()
 {
-    logger.log("Entering Translation, Distance, Length state");
-
     //Preps the unordered map for easy sprite access  //////////////////////////
     heroframes.insert(HeroPair(HeroFrame::NORTH_LEFT, RectInt(102, 0, 118, 16)));
     heroframes.insert(HeroPair(HeroFrame::NORTH_RIGHT, RectInt(120, 0, 136, 16)));
@@ -33,11 +31,6 @@ TranslationDistanceLengthState::TranslationDistanceLengthState()
                VectorFloat(GHOST_SCALE, GHOST_SCALE),
                VectorFloat(INPUT.GetMouseX(), INPUT.GetMouseY()));
     ////////////////////////////////////////////////////////////////////////////
-}
-
-TranslationDistanceLengthState::~TranslationDistanceLengthState()
-{
-    logger.log("Exiting Translation, Distance, Length state.");
 }
 
 void TranslationDistanceLengthState::input()

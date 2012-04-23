@@ -18,6 +18,7 @@ void ReflectionState::input()
 void ReflectionState::logic()
 {
     opaopa->move();
+    opaopa->animate();
 }
 
 void ReflectionState::render() const

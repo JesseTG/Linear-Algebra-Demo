@@ -3,6 +3,9 @@
 
 #define INPUT Window.GetInput()
 
+#define EVEN(a) (((a) % 2) == 0)
+#define ODD(a) !EVEN(a)
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
@@ -14,7 +17,7 @@ class TitleState;
 class StateManager;
 
 //Typedefs for less typing (the scope operator :: looks ugly)  /////////////////
-typedef sf::Clock Clock;
+typedef sf::Clock Timer;
 typedef sf::Color Color;
 typedef sf::Event Event;
 typedef sf::Font Font;

@@ -70,7 +70,7 @@ void TranslationDistanceLengthState::logic()
     ////////////////////////////////////////////////////////////////////////////
 
     //Keeps the animation at JUST the right speed  /////////////////////////////
-    if (int(animationtimer.GetElapsedTime()) == 1) {
+    if (animationtimer.GetElapsedTime() >= 1) {
         for (bool& i : ismoving) if (i) break;  //Don't change the frame if moving
         if (frame % 2 == 0) frame += 1; else frame -= 1;
         animationtimer.Reset();

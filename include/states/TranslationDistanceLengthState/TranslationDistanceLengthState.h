@@ -45,7 +45,7 @@ class TranslationDistanceLengthState : public State
         Sprite hero;
 
         //Used to time the Hero's animation
-        Clock animationtimer;
+        Timer animationtimer;
 
         //Whether the Hero is moving in the four cardinal directions.
         bool ismoving[4];

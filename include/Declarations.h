@@ -31,6 +31,7 @@ typedef sf::Vector2<float> VectorFloat;
 typedef sf::Shape Shape;
 typedef sf::Sprite Sprite;
 typedef sf::String StringGraphic;
+typedef sf::VideoMode VideoMode;
 ////////////////////////////////////////////////////////////////////////////////
 
 //It's easy to interchange regular enumerations with integers.

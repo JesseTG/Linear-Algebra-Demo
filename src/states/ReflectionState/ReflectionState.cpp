@@ -12,7 +12,7 @@ ReflectionState::~ReflectionState()
 
 void ReflectionState::input()
 {
-    checkForNextState(StateName::DOT_PRODUCTS, StateName::NADA);
+    checkForNextState(StateName::DOT_PRODUCTS, StateName::ROTATION);
 }
 
 void ReflectionState::logic()

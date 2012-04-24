@@ -27,7 +27,6 @@ int main()
 {
     if (!init()) return EXIT_FAILURE;
 
-
     Window.Clear();
     Window.Display();
 

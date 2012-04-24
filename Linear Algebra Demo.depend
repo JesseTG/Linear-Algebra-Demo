@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1335121037 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
+1335218785 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/main.cpp
 	"include/Declarations.h"
 	"include/StateManager.h"
 
@@ -110,7 +110,7 @@
 1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/pins_arduino.h
 	<avr/pgmspace.h>
 
-1335212493 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
+1335232977 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	<memory>
@@ -138,7 +138,7 @@
 
 1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/eraser.h
 
-1335123005 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
+1335233114 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
 	"Declarations.h"
 	"State.h"
 	"states/TitleState.h"
@@ -149,8 +149,9 @@
 	"states/TranslationDistanceLengthState/TranslationDistanceLengthState.h"
 	"states/DotProductState.h"
 	"states/ReflectionState/ReflectionState.h"
+	"states/RotationState/RotationState.h"
 
-1334099110 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
+1335233320 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/State.h
 	"Declarations.h"
 
 1332295694 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/TitleState.h
@@ -159,7 +160,7 @@
 
 1332802731 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/bgtile.h
 
-1335121308 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TitleState.h
+1335231526 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TitleState.h
 	"../Declarations.h"
 	"../State.h"
 
@@ -267,7 +268,7 @@
 1335123151 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/VectorState.cpp
 	"../../include/states/VectorState.h"
 
-1335210751 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/ReflectionState/ReflectionState.cpp
+1335216654 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/ReflectionState/ReflectionState.cpp
 	"../../../include/states/ReflectionState/ReflectionState.h"
 
 1335124352 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ReflectionState/ReflectionState.h
@@ -284,16 +285,24 @@
 	"../../Declarations.h"
 	"../../State.h"
 
-1335122496 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/Entity.cpp
+1335215250 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/Entity.cpp
 	"../include/Entity.h"
 
-1335122556 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Entity.h
+1335215380 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Entity.h
 	"Declarations.h"
 
-1335212691 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/ReflectionState/OpaOpa.cpp
+1335215548 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/ReflectionState/OpaOpa.cpp
 	"../../../include/states/ReflectionState/OpaOpa.h"
 
-1335210404 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ReflectionState/OpaOpa.h
+1335215548 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/ReflectionState/OpaOpa.h
 	<array>
 	"../../Declarations.h"
+
+1335235778 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/RotationState/RotationState.cpp
+	"../../../include/states/RotationState/RotationState.h"
+
+1335233505 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/RotationState/RotationState.h
+	<array>
+	"../../Declarations.h"
+	"../../State.h"
 

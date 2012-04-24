@@ -6,9 +6,6 @@
 
 #include <sstream>
 
-const int TETRAD_SCALE = 8;
-const int TETRAD_SPEED = 2;
-
 class VectorState : public State
 {
     public:
@@ -20,12 +17,23 @@ class VectorState : public State
         void render() const;
 
     private:
+        //The line that shows the path the tetrad follows.
         Shape pathline;
+
+        //The tetrad itself
         Sprite tetrad;
-        StringGraphic vectortitle;
-        StringGraphic  tetradstats;
+
+        //The stringstream that puts the statistics to text
         std::ostringstream stats_to_string;
+
+        //Constantly added to tetrad's position
         VectorFloat tetradmovement;
+
+        //Displays tetrad's position and velocity
+        StringGraphic tetradstats;
+
+        //The title for this screen
+        StringGraphic vectortitle;
 };
 
 

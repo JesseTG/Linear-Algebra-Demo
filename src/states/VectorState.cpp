@@ -1,5 +1,8 @@
 #include  "../../include/states/VectorState.h"
 
+const int TETRAD_SCALE = 8;
+const int TETRAD_SPEED = 2;
+
 VectorState::VectorState()
 {
     //Setting up the tetrad sprite  ////////////////////////////////////////////

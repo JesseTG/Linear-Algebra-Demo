@@ -44,27 +44,31 @@
 			<Add library="sfml-window" />
 		</Linker>
 		<Unit filename="include/Declarations.h" />
-		<Unit filename="include/Logger.h" />
+		<Unit filename="include/Entity.h" />
 		<Unit filename="include/State.h" />
 		<Unit filename="include/StateManager.h" />
 		<Unit filename="include/states/DotProductState.h" />
 		<Unit filename="include/states/MatricesState.h" />
 		<Unit filename="include/states/RasterVsVectorState.h" />
-		<Unit filename="include/states/ReflectionState.h" />
+		<Unit filename="include/states/ReflectionState/OpaOpa.h" />
+		<Unit filename="include/states/ReflectionState/ReflectionState.h" />
+		<Unit filename="include/states/RotationState/RotationState.h" />
 		<Unit filename="include/states/ScalarVsVectorState.h" />
 		<Unit filename="include/states/TitleState.h" />
-		<Unit filename="include/states/TranslationDistanceLengthState.h" />
+		<Unit filename="include/states/TranslationDistanceLengthState/TranslationDistanceLengthState.h" />
 		<Unit filename="include/states/VectorState.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/Logger.cpp" />
+		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/State.cpp" />
 		<Unit filename="src/states/DotProductState.cpp" />
 		<Unit filename="src/states/MatricesState.cpp" />
 		<Unit filename="src/states/RasterVsVectorState.cpp" />
-		<Unit filename="src/states/ReflectionState.cpp" />
+		<Unit filename="src/states/ReflectionState/OpaOpa.cpp" />
+		<Unit filename="src/states/ReflectionState/ReflectionState.cpp" />
+		<Unit filename="src/states/RotationState/RotationState.cpp" />
 		<Unit filename="src/states/ScalarVsVectorState.cpp" />
 		<Unit filename="src/states/TitleState.cpp" />
-		<Unit filename="src/states/TranslationDistanceLengthState.cpp" />
+		<Unit filename="src/states/TranslationDistanceLengthState/TranslationDistanceLengthState.cpp" />
 		<Unit filename="src/states/VectorState.cpp" />
 		<Extensions>
 			<code_completion />

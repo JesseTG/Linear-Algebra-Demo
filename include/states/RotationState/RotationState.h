@@ -30,6 +30,9 @@ class RotationState : public State
         //The heicopter itself
         Sprite helicopter;
 
+        VectorFloat acceleration;
+        VectorFloat velocity;
+
 
 };
 

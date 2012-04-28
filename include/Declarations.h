@@ -6,11 +6,11 @@
 #define EVEN(a) (((a) % 2) == 0)
 #define ODD(a) !EVEN(a)
 
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <memory>
-#include <stdexcept>
-#include <sstream>
+#include <SFML/Graphics.hpp>  //The graphics library; vital to this project!
+#include <iomanip>  //Manipulates how I/O streams represent data
+#include <memory>  //For smart pointers
+#include <stdexcept>  //For exceptions
+#include <sstream>  //To easily place numbers inside text
 
 class State;
 class TitleState;

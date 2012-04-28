@@ -54,6 +54,7 @@
 		<Unit filename="include/states/ReflectionState/ReflectionState.h" />
 		<Unit filename="include/states/RotationState/RotationState.h" />
 		<Unit filename="include/states/ScalarVsVectorState.h" />
+		<Unit filename="include/states/ScalingState/ScalingState.h" />
 		<Unit filename="include/states/TitleState.h" />
 		<Unit filename="include/states/TranslationDistanceLengthState/TranslationDistanceLengthState.h" />
 		<Unit filename="include/states/VectorState.h" />
@@ -67,6 +68,7 @@
 		<Unit filename="src/states/ReflectionState/ReflectionState.cpp" />
 		<Unit filename="src/states/RotationState/RotationState.cpp" />
 		<Unit filename="src/states/ScalarVsVectorState.cpp" />
+		<Unit filename="src/states/ScalingState/ScalingState.cpp" />
 		<Unit filename="src/states/TitleState.cpp" />
 		<Unit filename="src/states/TranslationDistanceLengthState/TranslationDistanceLengthState.cpp" />
 		<Unit filename="src/states/VectorState.cpp" />

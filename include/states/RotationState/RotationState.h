@@ -2,6 +2,7 @@
 #define ROTATIONSTATE_H
 
 #include <array>
+#include <sstream>
 
 #include "../../Declarations.h"
 #include "../../State.h"
@@ -18,8 +19,8 @@ class RotationState : public State
         void render() const;
 
     private:
-        //How much room the helicopter has until it stops at the edges
-        float buffer[4];
+        //helicopter's acceleration; added to velocity, calculated by direction
+        VectorFloat acceleration;
 
         //Stores the helicopter's current frame
         uint8_t currentframe;
@@ -30,7 +31,13 @@ class RotationState : public State
         //The heicopter itself
         Sprite helicopter;
 
-        VectorFloat acceleration;
+        //Shows the screen's information
+        StringGraphic stats;
+
+        //Converts numbers, etc. to string
+        std::ostringstream stats_to_string;
+
+        //helicopter's velocity; added to position
         VectorFloat velocity;
 
 

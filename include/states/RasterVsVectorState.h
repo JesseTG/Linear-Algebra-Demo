@@ -17,8 +17,7 @@ class RasterVsVectorState : public State
     private:
         Sprite rastercircle;
         Shape vectorcircle;
-        VectorFloat scalevector;
-
+        Timer scaletimer;
         StringGraphic rastertitle;
 };
 

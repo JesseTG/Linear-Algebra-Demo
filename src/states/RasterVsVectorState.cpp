@@ -10,9 +10,6 @@ RasterVsVectorState::RasterVsVectorState()
 
     vectorcircle = Shape::Circle(Window.GetWidth()*.75, center.y, 16, Color::Blue);
 
-
-    scalevector = VectorFloat(1.01, 1.01);
-
     rastertitle.SetText("Raster Vs. Vector Graphics");
 }
 
@@ -23,21 +20,14 @@ void RasterVsVectorState::input()
 
 void RasterVsVectorState::logic()
 {
-    //We're scaling both circles.  First we decide how big the scaling vector  /
-    //will be so we can properly handle the pulsing.  //////////////////////////
-    if (rastercircle.GetScale().x > 6)
-        scalevector = VectorFloat(2, 2) - scalevector;
-    else if (rastercircle.GetScale().x < .5)
-        scalevector = VectorFloat(2, 2) - scalevector;
-    ////////////////////////////////////////////////////////////////////////////
+    //Calculate how much to scale the circles.  Whee, trigonometry!
+    float temp = (sin(2*scaletimer.GetElapsedTime()) + 2) * 2;
 
     //Then we actually scale the circles.  Unfortunately I have to create  /////
     //another circle each frame, even though it's not very efficient.  /////////
-    rastercircle.Scale(scalevector);
+    rastercircle.SetScale(temp, temp);
     vectorcircle = Shape::Circle(Window.GetWidth()*.75, center.y,
-                                 16*rastercircle.GetScale().x, Color::Blue);
-    ////////////////////////////////////////////////////////////////////////////
-
+                                16*temp, Color::Blue);
 }
 
 void RasterVsVectorState::render() const

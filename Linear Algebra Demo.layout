@@ -5,10 +5,10 @@
 		<Cursor position="2341" topLine="63" />
 	</File>
 	<File name="include/State.h" open="0" top="0" tabpos="8">
-		<Cursor position="164" topLine="0" />
+		<Cursor position="530" topLine="10" />
 	</File>
-	<File name="include/StateManager.h" open="1" top="0" tabpos="6">
-		<Cursor position="587" topLine="61" />
+	<File name="include/StateManager.h" open="1" top="0" tabpos="5">
+		<Cursor position="2546" topLine="61" />
 	</File>
 	<File name="include/states/DotProductState.h" open="0" top="0" tabpos="1">
 		<Cursor position="507" topLine="5" />
@@ -28,8 +28,8 @@
 	<File name="include/states/ScalarVsVectorState.h" open="0" top="0" tabpos="3">
 		<Cursor position="852" topLine="22" />
 	</File>
-	<File name="include/states/ScalingState/ScalingState.h" open="1" top="1" tabpos="4">
-		<Cursor position="233" topLine="0" />
+	<File name="include/states/ScalingState/ScalingState.h" open="1" top="0" tabpos="3">
+		<Cursor position="263" topLine="0" />
 	</File>
 	<File name="include/states/TitleState.h" open="0" top="0" tabpos="9">
 		<Cursor position="217" topLine="15" />
@@ -46,7 +46,7 @@
 	<File name="src/State.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="152" topLine="0" />
 	</File>
-	<File name="src/states/DotProductState.cpp" open="1" top="0" tabpos="3">
+	<File name="src/states/DotProductState.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="3552" topLine="83" />
 	</File>
 	<File name="src/states/MatricesState.cpp" open="0" top="0" tabpos="0">
@@ -58,14 +58,14 @@
 	<File name="src/states/ReflectionState/ReflectionState.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="188" topLine="0" />
 	</File>
-	<File name="src/states/RotationState/RotationState.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="2150" topLine="48" />
+	<File name="src/states/RotationState/RotationState.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="1988" topLine="54" />
 	</File>
 	<File name="src/states/ScalarVsVectorState.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="2395" topLine="51" />
 	</File>
-	<File name="src/states/ScalingState/ScalingState.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="26" topLine="0" />
+	<File name="src/states/ScalingState/ScalingState.cpp" open="1" top="1" tabpos="4">
+		<Cursor position="186" topLine="0" />
 	</File>
 	<File name="src/states/TitleState.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="1534" topLine="17" />

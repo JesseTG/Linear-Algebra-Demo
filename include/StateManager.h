@@ -58,6 +58,8 @@ void StateManager::updateState()
         Window.Create(VideoMode(640, 480, 32), "Linear Algebra Demo",
                       sf::Style::Titlebar | sf::Style::Close |
                       (sf::Style::Fullscreen * (isfullscreen = !isfullscreen)));
+    } else if (INPUT.IsKeyDown(sf::Key::F1)) {
+        Window.Capture().SaveToFile("screenshot.png");
     }
 }
 

@@ -37,6 +37,12 @@ class RotationState : public State
         //Converts numbers, etc. to string
         std::ostringstream stats_to_string;
 
+        //The sound file of the helicopter bumping into the wall
+        SoundFile bumpfile;
+
+        //The sound we actually hear
+        SoundEffect bump;
+
         //helicopter's velocity; added to position
         VectorFloat velocity;
 

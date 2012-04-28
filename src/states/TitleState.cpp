@@ -14,9 +14,12 @@ TitleState::TitleState()
     ////////////////////////////////////////////////////////////////////////////
 
     //Sets up the title text  //////////////////////////////////////////////////
-    title.SetText("Linear Algebra Demo\n\n"
-                  "Jesse Talavera-Greenberg\n\n"
-                  "O/P: Previous/Next Screen");
+    title.SetText("Linear Algebra Demo       \n\n"
+                  "Jesse Talavera-Greenberg  \n\n"
+                  "O/P: Previous/Next Screen   \n"
+                  "F4: Toggle Fullscreen     \n\n"
+                  "GFX: Super Mario Bros. (Nintendo, 1985)"
+                  );
     ////////////////////////////////////////////////////////////////////////////
 
     Window.Clear();
@@ -35,7 +38,7 @@ void TitleState::logic()
 void TitleState::render() const
 {
     Window.Draw(bg);  //Puts the background on the screen.
-    Window.Draw(title);  //Puts the title on the screen.
     Window.Draw(mario);  //Puts the Mario sprite on the screen.
+    Window.Draw(title);  //Puts the title on the screen.
     Window.Display();  //Now actually displays the screen.
 }

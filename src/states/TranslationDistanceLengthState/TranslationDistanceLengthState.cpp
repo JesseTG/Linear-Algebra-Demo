@@ -86,7 +86,8 @@ void TranslationDistanceLengthState::logic()
                   << "Distance Between Ghost and Hero: " << distance
                   << "\n\nArrow Keys: Move Hero\n"
                   << "Mouse: Move Ghost\n\n"
-                  << (hero.GetColor() == Color::Blue ? "\"Oh s**t!\"" : "");
+                  << (hero.GetColor() == Color::Blue ? "\"Oh s**t!\"" : "") << "\n\n"
+                  << "GFX: Dragon Warrior (Enix, 1989)";
     stats.SetText(stats_to_text.str());
 }
 

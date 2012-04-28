@@ -91,10 +91,11 @@ void DotProductState::logic()
     setSpriteBuffer(bluefalcon, buffer);
 
     stats_to_string.str("");
-    stats_to_string << "Dot Products" <<
-                       "\n\nAngle: " << angletomouse << " degrees" <<
-                       "\n\nArrow Keys: Movement" <<
-                       "\nMouse: Rotate Vehicle";
+    stats_to_string << "Dot Products" << "\n\n"
+                    << "Angle: " << angletomouse << " degrees\n\n"
+                    << "Arrow Keys: Movement" << "\n"
+                    << "Mouse: Rotate Vehicle" << "\n\n"
+                    << "GFX: F-Zero GP Legend (Nintendo, 2004)";
     stats.SetText(stats_to_string.str());
 
 }

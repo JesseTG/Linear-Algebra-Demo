@@ -7,7 +7,7 @@ VectorState::VectorState()
 {
     //Setting up the tetrad sprite  ////////////////////////////////////////////
     initSprite(tetrad, sprites, RectInt(16, 0, 39, 15), TETRAD_SCALE,
-               VectorFloat(Window.GetWidth()/4, Window.GetHeight()*.8333)),
+               VectorFloat(Window.GetWidth()/4, 5*Window.GetHeight()/6)),
 
     tetradmovement = VectorFloat(TETRAD_SPEED, -TETRAD_SPEED);
     ////////////////////////////////////////////////////////////////////////////
@@ -18,7 +18,8 @@ VectorState::VectorState()
                            3, Color::White);
     ////////////////////////////////////////////////////////////////////////////
 
-    vectortitle.SetText("Vectors");
+    vectortitle.SetText("Vectors\n\n"
+                        "GFX: Tetris (Tengen, 1989)");
     vectortitle.SetPosition(8, 8);
 
     tetradstats.SetPosition(center.x, 5*Window.GetHeight()/6);
@@ -41,9 +42,9 @@ void VectorState::logic()
 
     //Displaying the tetrad's info  ////////////////////////////////////////////
     stats_to_string.str("");
-    stats_to_string << "Position: (" << int(tetrad.GetPosition().x) << ", "
-                    << int(tetrad.GetPosition().y) << ")\nVelocity: ("
-                    << int(tetradmovement.x) << ", " << int(tetradmovement.y)
+    stats_to_string << "Position: (" << tetrad.GetPosition().x << ", "
+                    << tetrad.GetPosition().y << ")\nVelocity: ("
+                    << tetradmovement.x << ", " << tetradmovement.y
                     << ")";
     tetradstats.SetText(stats_to_string.str());
 }

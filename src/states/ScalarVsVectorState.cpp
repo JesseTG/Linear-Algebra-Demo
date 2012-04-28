@@ -59,10 +59,12 @@ void ScalarVsVectorState::logic()
     //Prepares all statistics for output on-screen  ////////////////////////////
     VectorFloat distancetocenter = harrier.GetPosition() - center;
     stats_to_string.str("");
-    stats_to_string << "Vectors Vs. Scalars\n\nDistance Travelled: " << distance
-                    << "\nDisplacement From Center: "
-                    << hypot(distancetocenter.x, distancetocenter.y)
-                    << "\n\nArrow Keys: Move";
+    stats_to_string << "Vectors Vs. Scalars\n\n"
+                    << "Distance Travelled: " << distance << "\n"
+                    << "Displacement From Center: " << std::setprecision(3)
+                    << hypot(distancetocenter.x, distancetocenter.y) << "\n\n"
+                    << "Arrow Keys: Move" << "\n\n"
+                    << "GFX: Space Harrier 3D (Sega, 1988)";
     harrierstats.SetText(stats_to_string.str());
     ////////////////////////////////////////////////////////////////////////////
 

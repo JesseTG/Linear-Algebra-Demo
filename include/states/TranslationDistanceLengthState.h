@@ -4,8 +4,8 @@
 #include <unordered_map>
 #include <utility>
 
-#include "../../Declarations.h"
-#include "../../State.h"
+#include "../Declarations.h"
+#include "../State.h"
 
 //"LEFT/RIGHT" refer to whichever foot is higher
 enum class HeroFrame : char {

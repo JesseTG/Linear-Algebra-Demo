@@ -1,4 +1,4 @@
-#include "../../../include/states/RotationState/RotationState.h"
+#include "../../include/states/RotationState.h"
 
 #include <iomanip>
 
@@ -31,7 +31,7 @@ RotationState::~RotationState()
 
 void RotationState::input()
 {
-    checkForNextState(StateName::REFLECTION, StateName::NADA);
+    checkForNextState(StateName::DOT_PRODUCTS, StateName::NADA);
 
     //Rotates the helicopter if left or right are pressed  /////////////////////
     if (INPUT.IsKeyDown(sf::Key::Left)) helicopter.Rotate(HELI_ROTATION);

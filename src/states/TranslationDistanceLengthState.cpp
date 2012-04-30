@@ -1,4 +1,4 @@
-#include "../../../include/states/TranslationDistanceLengthState/TranslationDistanceLengthState.h"
+#include "../../include/states/TranslationDistanceLengthState.h"
 
 const int HERO_SCALE = 6;
 const int HERO_MOVE_SPEED = 2;
@@ -83,7 +83,7 @@ void TranslationDistanceLengthState::logic()
 
     stats_to_text.str("");
     stats_to_text << "Translation, Distance, and Length\n\n"
-                  << "Distance Between Ghost and Hero: " << distance
+                  << "Distance Between Ghost and Hero: " << std::setprecision(3) << distance
                   << "\n\nArrow Keys: Move Hero\n"
                   << "Mouse: Move Ghost\n\n"
                   << (hero.GetColor() == Color::Blue ? "\"Oh s**t!\"" : "") << "\n\n"

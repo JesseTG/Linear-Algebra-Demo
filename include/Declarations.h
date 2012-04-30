@@ -7,6 +7,7 @@
 #define ODD(a) !EVEN(a)
 
 #include <SFML/Graphics.hpp>  //The graphics library; vital to this project!
+#include <SFML/Audio.hpp>
 #include <iomanip>  //Manipulates how I/O streams represent data
 #include <memory>  //For smart pointers
 #include <stdexcept>  //For exceptions
@@ -29,6 +30,8 @@ typedef sf::RenderWindow RenderWindow;
 typedef sf::Vector2<int> VectorInt;
 typedef sf::Vector2<float> VectorFloat;
 typedef sf::Shape Shape;
+typedef sf::Sound SoundEffect;
+typedef sf::SoundBuffer SoundFile;
 typedef sf::Sprite Sprite;
 typedef sf::String StringGraphic;
 typedef sf::VideoMode VideoMode;
@@ -47,9 +50,7 @@ enum class StateName : char {
   MATRICES,
   TRANSLATION_DISTANCE_LENGTH,
   DOT_PRODUCTS,
-  REFLECTION,
   ROTATION,
-  SCALING,
   CONCLUSION
 };
 

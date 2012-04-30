@@ -65,7 +65,7 @@ DotProductState::DotProductState()
 
 void DotProductState::input()
 {
-    checkForNextState(StateName::TRANSLATION_DISTANCE_LENGTH, StateName::REFLECTION);
+    checkForNextState(StateName::TRANSLATION_DISTANCE_LENGTH, StateName::ROTATION);
 
     ismoving[UP] = INPUT.IsKeyDown(sf::Key::Up);
     ismoving[DOWN] = INPUT.IsKeyDown(sf::Key::Down);

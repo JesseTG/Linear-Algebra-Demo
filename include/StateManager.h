@@ -11,11 +11,10 @@
 #include "states/ScalarVsVectorState.h"
 #include "states/RasterVsVectorState.h"
 #include "states/MatricesState.h"
-#include "states/TranslationDistanceLengthState/TranslationDistanceLengthState.h"
+#include "states/TranslationDistanceLengthState.h"
 #include "states/DotProductState.h"
-#include "states/ReflectionState/ReflectionState.h"
-#include "states/RotationState/RotationState.h"
-#include "states/ScalingState/ScalingState.h"
+#include "states/RotationState.h"
+
 
 //Owns the active state and manages its lifetime.
 class StateManager
@@ -75,9 +74,7 @@ void StateManager::setState(const StateName newstate)
       case StateName::MATRICES: RESET(new MatricesState); return;
       case StateName::TRANSLATION_DISTANCE_LENGTH: RESET(new TranslationDistanceLengthState); return;
       case StateName::DOT_PRODUCTS: RESET(new DotProductState); return;
-      case StateName::REFLECTION: RESET(new ReflectionState); return;
       case StateName::ROTATION: RESET(new RotationState); return;
-      case StateName::SCALING: RESET(new ScalingState); return;
       default: throw std::runtime_error("Improper state!  Abort!");
     }
     ////////////////////////////////////////////////////////////////////////////

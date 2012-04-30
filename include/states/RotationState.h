@@ -4,8 +4,8 @@
 #include <array>
 #include <sstream>
 
-#include "../../Declarations.h"
-#include "../../State.h"
+#include "../Declarations.h"
+#include "../State.h"
 
 
 class RotationState : public State

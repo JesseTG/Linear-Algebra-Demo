@@ -14,6 +14,8 @@
 #include "states/TranslationDistanceLengthState.h"
 #include "states/DotProductState.h"
 #include "states/RotationState.h"
+#include "states/duckhunt/DuckHuntTitle.h"
+#include "states/duckhunt/DuckHuntGameState.h"
 
 
 //Owns the active state and manages its lifetime.
@@ -75,6 +77,8 @@ void StateManager::setState(const StateName newstate)
       case StateName::TRANSLATION_DISTANCE_LENGTH: RESET(new TranslationDistanceLengthState); return;
       case StateName::DOT_PRODUCTS: RESET(new DotProductState); return;
       case StateName::ROTATION: RESET(new RotationState); return;
+      case StateName::DUCKHUNT_TITLE: RESET(new DuckHuntTitle); return;
+      case StateName::DUCKHUNT_GAME: RESET(new DuckHuntGameState); return;
       default: throw std::runtime_error("Improper state!  Abort!");
     }
     ////////////////////////////////////////////////////////////////////////////

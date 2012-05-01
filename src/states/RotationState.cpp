@@ -31,7 +31,7 @@ RotationState::~RotationState()
 
 void RotationState::input()
 {
-    checkForNextState(StateName::DOT_PRODUCTS, StateName::NADA);
+    checkForNextState(StateName::DOT_PRODUCTS, StateName::DUCKHUNT_TITLE);
 
     //Rotates the helicopter if left or right are pressed  /////////////////////
     if (INPUT.IsKeyDown(sf::Key::Left)) helicopter.Rotate(HELI_ROTATION);

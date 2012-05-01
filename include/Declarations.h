@@ -51,7 +51,8 @@ enum class StateName : char {
   TRANSLATION_DISTANCE_LENGTH,
   DOT_PRODUCTS,
   ROTATION,
-  CONCLUSION
+  DUCKHUNT_TITLE,
+  DUCKHUNT_GAME
 };
 
 extern Event event;  //The object the latest event (external input) is stored in

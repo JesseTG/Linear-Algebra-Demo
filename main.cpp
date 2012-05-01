@@ -1,6 +1,8 @@
 #include "include/Declarations.h"
 #include "include/StateManager.h"
 
+#include <ctime>
+
 /*
  * Created by Jesse Talavera-Greenberg
  *
@@ -26,6 +28,8 @@ StateManager StateController;
 int main()
 {
     if (!init()) return EXIT_FAILURE;
+
+    Random::SetSeed(time(NULL));
 
     Window.Clear();
     Window.Display();

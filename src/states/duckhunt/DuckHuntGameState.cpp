@@ -20,6 +20,8 @@ DuckHuntGameState::DuckHuntGameState()
 
     ducks[0].reset(new Duck);
 
+    can_shoot = true;
+
 }
 
 DuckHuntGameState::~DuckHuntGameState()
@@ -30,6 +32,7 @@ DuckHuntGameState::~DuckHuntGameState()
 void DuckHuntGameState::input()
 {
     checkForNextState(StateName::DUCKHUNT_TITLE, StateName::NADA);
+    if (can_shoot) shoot();
 }
 
 void DuckHuntGameState::logic()
@@ -39,10 +42,21 @@ void DuckHuntGameState::logic()
 
 void DuckHuntGameState::render() const
 {
+    ducks[0]->updateAnimation();
+
     Window.Draw(bglayers[SKY]);
 
     Window.Draw(ducks[0]->getSprite());
     Window.Draw(bglayers[GROUND]);
     Window.Draw(bglayers[GRASS]);
     Window.Display();
+}
+
+void DuckHuntGameState::shoot()
+{
+    if (INPUT.IsMouseButtonDown(sf::Mouse::Left) &&
+        ducks[0]->getShotBox().Contains(INPUT.GetMouseX(), INPUT.GetMouseY())) {
+        ducks[0]->die();
+    }
+
 }

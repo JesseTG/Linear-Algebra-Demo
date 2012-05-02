@@ -12,8 +12,8 @@ DuckHuntTitle::DuckHuntTitle()
     text.SetText("Press P to Start");
     text.SetPosition(Window.GetWidth()/6, 3*Window.GetHeight()/4);
 
-    titlejinglefile.LoadFromFile("./sfx/duckhunt/title.wav");
-    titlejingle.SetBuffer(titlejinglefile);
+    titlejingle.file.LoadFromFile("./sfx/duckhunt/title.wav");
+    titlejingle.sound.SetBuffer(titlejingle.file);
     titlejingle.Play();
 
     Window.Clear();

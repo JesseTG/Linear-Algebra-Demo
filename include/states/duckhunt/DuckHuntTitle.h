@@ -11,14 +11,13 @@ class DuckHuntTitle : public State
 
         void input();
         void logic() {}
-        void render() const {}
+        void render() {}
 
     private:
         Sprite logo;
         Font font;
         StringGraphic text;
-        SoundFile titlejinglefile;
-        SoundEffect titlejingle;
+        Sound titlejingle;
 };
 
 #endif // DUCKHUNTTITLE_H

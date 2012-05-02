@@ -3,11 +3,9 @@
 
 #include "../../Declarations.h"
 
-#include <unordered_map>
-
 enum class DuckFrame : char {
+    NORM_1, NORM_2, NORM_3,
     UP_1, UP_2, UP_3,
-    DOWN_1, DOWN_2, DOWN_3,
     SHOT, FALLING
 };
 
@@ -58,7 +56,7 @@ class Duck
         float buffer[4];
         Sprite sprite;
         bool is_ski;
-        bool is_shot;
+        bool is_alive;
         bool is_hit_ground;
 
         //The odds of the duck changing velocity (thus direction) each frame

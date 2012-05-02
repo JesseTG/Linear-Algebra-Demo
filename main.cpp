@@ -16,13 +16,14 @@
 //Returns whether the program started up OK or not.
 bool init();
 
-Event event;  //The object the latest event (external input) is stored in
-Image sprites;  //The entire spritesheet.  All graphics taken from here.
-Image bgimage;  //The background image.
-Sprite bg;  //The sprite that represents this background image.
 RenderWindow Window(sf::VideoMode(640, 480, 32), "Linear Algebra Demo",
                     sf::Style::Titlebar | sf::Style::Close);
+
+Image bgimage;  //The background image.
+Sprite bg;  //The sprite that represents this background image.
 const VectorFloat center(Window.GetWidth()/2, Window.GetHeight()/2);
+Event event;  //The object the latest event (external input) is stored in
+Image sprites;  //The entire spritesheet.  All graphics taken from here.
 StateManager StateController;
 
 int main()

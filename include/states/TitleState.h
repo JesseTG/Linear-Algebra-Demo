@@ -22,7 +22,7 @@ class TitleState : public State
 
     void input();
     void logic();
-    void render() const;
+    void render();
 
   private:
     //The Mario sprite on-screen; only rotates, does not move  /////////////////

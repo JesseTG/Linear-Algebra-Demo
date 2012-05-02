@@ -15,7 +15,7 @@ class ScalarVsVectorState : public State
 
         void input();
         void logic();
-        void render() const;
+        void render();
 
     private:
         //A sprite representing the unnamed character from Space Harrier, an old

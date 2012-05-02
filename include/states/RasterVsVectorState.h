@@ -12,7 +12,7 @@ class RasterVsVectorState : public State
         ~RasterVsVectorState() {}
         void input();
         void logic();
-        void render() const;
+        void render();
 
     private:
         Sprite rastercircle;

@@ -49,9 +49,12 @@
 		<Unit filename="include/states/DotProductState.h" />
 		<Unit filename="include/states/MatricesState.h" />
 		<Unit filename="include/states/RasterVsVectorState.h" />
+		<Unit filename="include/states/RotationState.h" />
 		<Unit filename="include/states/ScalarVsVectorState.h" />
 		<Unit filename="include/states/TitleState.h" />
+		<Unit filename="include/states/TranslationDistanceLengthState.h" />
 		<Unit filename="include/states/VectorState.h" />
+		<Unit filename="include/states/duckhunt/Dog.h" />
 		<Unit filename="include/states/duckhunt/Duck.h" />
 		<Unit filename="include/states/duckhunt/DuckHuntGameState.h" />
 		<Unit filename="include/states/duckhunt/DuckHuntTitle.h" />
@@ -65,6 +68,7 @@
 		<Unit filename="src/states/TitleState.cpp" />
 		<Unit filename="src/states/TranslationDistanceLengthState.cpp" />
 		<Unit filename="src/states/VectorState.cpp" />
+		<Unit filename="src/states/duckhunt/Dog.cpp" />
 		<Unit filename="src/states/duckhunt/Duck.cpp" />
 		<Unit filename="src/states/duckhunt/DuckHuntGameState.cpp" />
 		<Unit filename="src/states/duckhunt/DuckHuntTitle.cpp" />

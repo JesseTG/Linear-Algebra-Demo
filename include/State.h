@@ -21,7 +21,7 @@ class State
     virtual void logic() = 0;
 
     //Renders everything; last third
-    virtual void render() const = 0;
+    virtual void render() = 0;
 
   protected:
     //Meant to be used in input(); checks whether we pressed O or P

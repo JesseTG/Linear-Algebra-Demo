@@ -16,7 +16,7 @@ class DotProductState : public State
 
         void input();
         void logic();
-        void render() const;
+        void render();
 
     private:
         std::array<RectInt, 32> frames;

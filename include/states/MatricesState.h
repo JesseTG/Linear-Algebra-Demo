@@ -12,7 +12,7 @@ class MatricesState : public State
 
         void input();
         void logic() {}  //No logic here, so we can leave this blank.
-        void render() const {}  //Only need to render this screen once.
+        void render() {}  //Only need to render this screen once.
 
     private:
         StringGraphic text;

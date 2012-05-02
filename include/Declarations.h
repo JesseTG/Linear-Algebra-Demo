@@ -3,15 +3,18 @@
 
 #define INPUT Window.GetInput()
 
-#define EVEN(a) (((a) % 2) == 0)
-#define ODD(a) !EVEN(a)
 
-#include <SFML/Graphics.hpp>  //The graphics library; vital to this project!
-#include <SFML/Audio.hpp>
+
+#include <array>  //A data structure we use to store frames by number
 #include <iomanip>  //Manipulates how I/O streams represent data
 #include <memory>  //For smart pointers
 #include <stdexcept>  //For exceptions
 #include <sstream>  //To easily place numbers inside text
+#include <unordered_map> //A data structure we use to store frames by name
+
+#include <SFML/Graphics.hpp>  //The graphics library; vital to this project!
+#include <SFML/Audio.hpp>
+
 
 class State;
 class TitleState;
@@ -24,6 +27,7 @@ typedef sf::Event Event;
 typedef sf::Font Font;
 typedef sf::Image Image;
 typedef sf::Input Input;
+typedef sf::Randomizer Random;
 typedef sf::Rect<float> RectFloat;
 typedef sf::Rect<int> RectInt;
 typedef sf::RenderWindow RenderWindow;
@@ -53,6 +57,13 @@ enum class StateName : char {
   ROTATION,
   DUCKHUNT_TITLE,
   DUCKHUNT_GAME
+};
+
+struct Sound {
+    SoundFile file;
+    SoundEffect sound;
+    void Play() { sound.Play(); }
+    void Stop() { sound.Stop(); }
 };
 
 extern Event event;  //The object the latest event (external input) is stored in

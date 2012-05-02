@@ -1,18 +1,15 @@
 #ifndef TRANSLATIONDISTANCELENGTHSTATE_H
 #define TRANSLATIONDISTANCELENGTHSTATE_H
 
-#include <unordered_map>
-#include <utility>
-
 #include "../Declarations.h"
 #include "../State.h"
 
 //"LEFT/RIGHT" refer to whichever foot is higher
 enum class HeroFrame : char {
-    NORTH_LEFT, NORTH_RIGHT,
-    SOUTH_LEFT, SOUTH_RIGHT,
-    EAST_LEFT, EAST_RIGHT,
-    WEST_LEFT, WEST_RIGHT
+    NORTH_LEFT,  NORTH_RIGHT,
+    SOUTH_LEFT,  SOUTH_RIGHT,
+    EAST_LEFT ,  EAST_RIGHT ,
+    WEST_LEFT ,  WEST_RIGHT ,
 };
 
 //Needed so I can define a hash for enum classes.  Kind of like ID numbers.  ///
@@ -24,9 +21,6 @@ namespace std {
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-typedef std::pair<HeroFrame, RectInt> HeroPair;
-
-
 class TranslationDistanceLengthState : public State
 {
     public:
@@ -35,7 +29,7 @@ class TranslationDistanceLengthState : public State
 
         void input();
         void logic();
-        void render() const;
+        void render();
 
     private:
         //Stores the rectangles that hold the frames in the spritesheet

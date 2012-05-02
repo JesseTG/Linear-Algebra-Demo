@@ -14,7 +14,7 @@ class VectorState : public State
 
         void input();
         void logic();
-        void render() const;
+        void render();
 
     private:
         //The line that shows the path the tetrad follows.

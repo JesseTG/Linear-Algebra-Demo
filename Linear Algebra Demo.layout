@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="include/Declarations.h" open="1" top="0" tabpos="4">
-		<Cursor position="1713" topLine="52" />
+	<File name="include/Declarations.h" open="0" top="0" tabpos="4">
+		<Cursor position="86" topLine="78" />
 	</File>
 	<File name="include/State.h" open="0" top="0" tabpos="8">
 		<Cursor position="530" topLine="10" />
@@ -29,7 +29,7 @@
 		<Cursor position="300" topLine="0" />
 	</File>
 	<File name="include/states/duckhunt/Duck.h" open="1" top="0" tabpos="3">
-		<Cursor position="192" topLine="18" />
+		<Cursor position="527" topLine="0" />
 	</File>
 	<File name="include/states/duckhunt/DuckHuntGameState.h" open="1" top="0" tabpos="1">
 		<Cursor position="425" topLine="48" />
@@ -38,7 +38,7 @@
 		<Cursor position="266" topLine="0" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="1693" topLine="0" />
+		<Cursor position="1765" topLine="31" />
 	</File>
 	<File name="src/State.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="152" topLine="0" />
@@ -52,7 +52,7 @@
 	<File name="src/states/RasterVsVectorState.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1014" topLine="0" />
 	</File>
-	<File name="src/states/RotationState.cpp" open="1" top="0" tabpos="5">
+	<File name="src/states/RotationState.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="2700" topLine="54" />
 	</File>
 	<File name="src/states/ScalarVsVectorState.cpp" open="0" top="0" tabpos="3">
@@ -67,13 +67,13 @@
 	<File name="src/states/VectorState.cpp" open="0" top="0" tabpos="7">
 		<Cursor position="946" topLine="22" />
 	</File>
-	<File name="src/states/duckhunt/Duck.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="1999" topLine="70" />
+	<File name="src/states/duckhunt/Duck.cpp" open="1" top="1" tabpos="4">
+		<Cursor position="3244" topLine="101" />
 	</File>
 	<File name="src/states/duckhunt/DuckHuntGameState.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="2047" topLine="0" />
+		<Cursor position="2595" topLine="2" />
 	</File>
-	<File name="src/states/duckhunt/DuckHuntTitle.cpp" open="1" top="1" tabpos="6">
+	<File name="src/states/duckhunt/DuckHuntTitle.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="705" topLine="7" />
 	</File>
 </CodeBlocks_layout_file>

@@ -7,14 +7,14 @@ const int GHOST_SCALE = 3;
 TranslationDistanceLengthState::TranslationDistanceLengthState()
 {
     //Preps the unordered map for easy sprite access  //////////////////////////
-    heroframes.insert(HeroPair(HeroFrame::NORTH_LEFT, RectInt(102, 0, 118, 16)));
-    heroframes.insert(HeroPair(HeroFrame::NORTH_RIGHT, RectInt(120, 0, 136, 16)));
-    heroframes.insert(HeroPair(HeroFrame::SOUTH_LEFT, RectInt(39, 0, 55, 16)));
-    heroframes.insert(HeroPair(HeroFrame::SOUTH_RIGHT, RectInt(57, 0, 73, 16)));
-    heroframes.insert(HeroPair(HeroFrame::WEST_LEFT, RectInt(88, 0, 100, 16)));
-    heroframes.insert(HeroPair(HeroFrame::WEST_RIGHT, RectInt(75, 0, 86, 16)));
-    heroframes.insert(HeroPair(HeroFrame::EAST_RIGHT, RectInt(138, 0, 150, 16)));
-    heroframes.insert(HeroPair(HeroFrame::EAST_LEFT, RectInt(152, 0, 163, 16)));
+    heroframes[HeroFrame::NORTH_LEFT ] = RectInt(102, 0, 118, 16);
+    heroframes[HeroFrame::NORTH_RIGHT] = RectInt(120, 0, 136, 16);
+    heroframes[HeroFrame::SOUTH_LEFT ] = RectInt(39, 0, 55, 16);
+    heroframes[HeroFrame::SOUTH_RIGHT] = RectInt(57, 0, 73, 16);
+    heroframes[HeroFrame::WEST_LEFT  ] = RectInt(88, 0, 100, 16);
+    heroframes[HeroFrame::WEST_RIGHT ] = RectInt(75, 0, 86, 16);
+    heroframes[HeroFrame::EAST_RIGHT ] = RectInt(138, 0, 150, 16);
+    heroframes[HeroFrame::EAST_LEFT  ] = RectInt(152, 0, 163, 16);
     ////////////////////////////////////////////////////////////////////////////
 
     //Preps the Hero sprite itself  ////////////////////////////////////////////
@@ -91,7 +91,7 @@ void TranslationDistanceLengthState::logic()
     stats.SetText(stats_to_text.str());
 }
 
-void TranslationDistanceLengthState::render() const
+void TranslationDistanceLengthState::render()
 {
     Window.Draw(bg);
     Window.Draw(hero);

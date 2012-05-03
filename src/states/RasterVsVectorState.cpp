@@ -30,7 +30,7 @@ void RasterVsVectorState::logic()
                                 16*temp, Color::Blue);
 }
 
-void RasterVsVectorState::render() const
+void RasterVsVectorState::render()
 {
     Window.Draw(bg);
     Window.Draw(rastercircle);

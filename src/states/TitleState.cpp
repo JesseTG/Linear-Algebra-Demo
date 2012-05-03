@@ -3,7 +3,7 @@
 //These are here so we avoid "magic numbers"; aka numbers that don't appear at
 //first glance to hold any significance.  Very bad in software development,
 //especially if this magic number is reused.
-const float ROTATION = .5;  //The angle the sprite spins each frame.
+const float MARIO_ROTATION = .5;  //The angle the sprite spins each frame.
 const int MARIO_SCALE = 10;  //The factor we scale the sprite by.
 
 TitleState::TitleState()
@@ -21,8 +21,6 @@ TitleState::TitleState()
                   "GFX: Super Mario Bros. (Nintendo, 1985)"
                   );
     ////////////////////////////////////////////////////////////////////////////
-
-    Window.Clear();
 }
 
 void TitleState::input()
@@ -32,10 +30,10 @@ void TitleState::input()
 
 void TitleState::logic()
 {
-    mario.Rotate(ROTATION);
+    mario.Rotate(MARIO_ROTATION);
 }
 
-void TitleState::render() const
+void TitleState::render()
 {
     Window.Draw(bg);  //Puts the background on the screen.
     Window.Draw(mario);  //Puts the Mario sprite on the screen.

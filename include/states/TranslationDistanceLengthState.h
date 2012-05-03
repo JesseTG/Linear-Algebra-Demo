@@ -53,7 +53,7 @@ class TranslationDistanceLengthState : public State
         //The Ghost that follows the mouse.  (That's really the monster's name)
         Sprite ghost;
 
-        //The
+        //The display for several numerical bits of info
         StringGraphic stats;
 
         //Lets us put the stats inside the StringGraphic

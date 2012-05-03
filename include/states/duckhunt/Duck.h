@@ -22,9 +22,11 @@ class Duck
         Duck();
         virtual ~Duck();
 
-        void fly();
+        void move();
         void flyAway();
         void die();
+
+        bool isAlive() const { return is_alive; }
 
         void updateAnimation();
 
@@ -42,6 +44,11 @@ class Duck
         //Sets the direction of the duck to be random
         void setRandomDirection();
 
+        void fly();
+        void fall();
+
+        Timer actiontimer;
+
         //Times the duck's animation
         Timer animationtimer;
 
@@ -51,12 +58,22 @@ class Duck
         //SPEED, not velocity
         static float speed;
 
+        //The box that the cursor has to be in to register a hit
         RectFloat shotbox;
 
+        //The buffer room a duck has before it turns around
         float buffer[4];
+
+        //The actual visible sprite
         Sprite sprite;
+
+        //Whether this is a Mr. Ski duck
         bool is_ski;
+
+        //Whether this duck is alive
         bool is_alive;
+
+        //Whether the duck has hit the ground
         bool is_hit_ground;
 
         //The odds of the duck changing velocity (thus direction) each frame

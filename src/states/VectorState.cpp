@@ -49,7 +49,7 @@ void VectorState::logic()
     tetradstats.SetText(stats_to_string.str());
 }
 
-void VectorState::render() const
+void VectorState::render()
 {
     Window.Draw(bg);
     Window.Draw(pathline);

@@ -2,13 +2,7 @@
 
 ScalarVsVectorState::ScalarVsVectorState()
 {
-    //Set up the Harrier  //////////////////////////////////////////////////////
-    harrier.SetImage(sprites);
-    harrier.SetSubRect(RectInt(0, 49, 24, 96));
-    harrier.SetCenter(harrier.GetSubRect().GetWidth()/2,
-                      harrier.GetSubRect().GetHeight()/2);
-    harrier.SetScale(HARRIER_SCALE, HARRIER_SCALE);
-    harrier.SetPosition(center);
+    initSprite(harrier, sprites, RectInt(0, 49, 24, 96), HARRIER_SCALE);
 
     distance = 0;
 
@@ -77,7 +71,7 @@ void ScalarVsVectorState::logic()
         centerline = Shape::Line(harrier.GetPosition(), center, 5, Color::White);
 }
 
-void ScalarVsVectorState::render() const
+void ScalarVsVectorState::render()
 {
     Window.Draw(bg);
     Window.Draw(centerline);

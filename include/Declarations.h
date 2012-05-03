@@ -3,6 +3,8 @@
 
 #define INPUT Window.GetInput()
 
+#define IN_RANGE(num, min, max) (((min) <= (num)) && ((num) <= (max)))
+
 
 
 #include <array>  //A data structure we use to store frames by number
@@ -14,7 +16,6 @@
 
 #include <SFML/Graphics.hpp>  //The graphics library; vital to this project!
 #include <SFML/Audio.hpp>
-
 
 class State;
 class TitleState;
@@ -99,4 +100,5 @@ auto initSprite = [](Sprite& sprite, const Image& image, const RectInt& subrect,
     sprite.SetCenter(subrect.GetWidth()/2, subrect.GetHeight()/2);
     sprite.SetPosition(position);
 };
+
 #endif //DECLARATIONS_H

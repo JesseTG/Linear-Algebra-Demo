@@ -19,8 +19,8 @@ RotationState::RotationState()
     acceleration = VectorFloat(sin(helicopter.GetRotation()*(M_PI/180)),
                          cos(helicopter.GetRotation()*(M_PI/180)));
 
-    bumpfile.LoadFromFile("./sfx/copterbump.wav");
-    bump.SetBuffer(bumpfile);
+    bump.file.LoadFromFile("./sfx/copterbump.wav");
+    bump.sound.SetBuffer(bump.file);
 
 }
 
@@ -57,10 +57,26 @@ void RotationState::logic()
     helicopter.Move(velocity += VectorFloat(velocity.x * -.1, velocity.y*-.1));
 
     //Ensures that the helicopter doesn't leave the screen  ////////////////////
-    if (helicopter.GetPosition().x < 0) { velocity.x *= -1; helicopter.SetX(0); bump.Play(); }
-    if (helicopter.GetPosition().x > Window.GetWidth()) { velocity.x *= -1; helicopter.SetX(Window.GetWidth()); bump.Play(); }
-    if (helicopter.GetPosition().y < 0) { velocity.y *= -1; helicopter.SetY(0); bump.Play(); }
-    if (helicopter.GetPosition().y > Window.GetHeight()) { velocity.y *= -1; helicopter.SetY(Window.GetHeight()); bump.Play(); }
+    if (helicopter.GetPosition().x < 0) {
+        velocity.x *= -1;
+        helicopter.SetX(0);
+        bump.Play();
+    }
+    if (helicopter.GetPosition().x > Window.GetWidth()) {
+        velocity.x *= -1;
+        helicopter.SetX(Window.GetWidth());
+        bump.Play();
+    }
+    if (helicopter.GetPosition().y < 0) {
+        velocity.y *= -1;
+        helicopter.SetY(0);
+        bump.Play();
+    }
+    if (helicopter.GetPosition().y > Window.GetHeight()) {
+        velocity.y *= -1;
+        helicopter.SetY(Window.GetHeight());
+        bump.Play();
+    }
     ////////////////////////////////////////////////////////////////////////////
 
     stats_to_string.str("");
@@ -73,7 +89,7 @@ void RotationState::logic()
     stats.SetText(stats_to_string.str());
 }
 
-void RotationState::render() const
+void RotationState::render()
 {
     Window.Draw(bg);
     Window.Draw(helicopter);

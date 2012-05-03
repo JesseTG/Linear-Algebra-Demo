@@ -100,7 +100,7 @@ void DotProductState::logic()
 
 }
 
-void DotProductState::render() const
+void DotProductState::render()
 {
     Window.Draw(bg);
     Window.Draw(bluefalcon);

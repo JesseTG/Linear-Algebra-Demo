@@ -15,9 +15,16 @@ class RasterVsVectorState : public State
         void render();
 
     private:
+        //A circle pulled from a sprite sheet
         Sprite rastercircle;
+
+        //A circle created with sf::Shape
         Shape vectorcircle;
+
+        //Affects the scale of the circles
         Timer scaletimer;
+
+        //The title of this screen
         StringGraphic rastertitle;
 };
 

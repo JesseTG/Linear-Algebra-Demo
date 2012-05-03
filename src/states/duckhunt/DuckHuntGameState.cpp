@@ -75,7 +75,7 @@ void DuckHuntGameState::logic()
         is_screen_flash = false;
         can_shoot = true;
     }
-    for (auto& i : ducks) i.fly();
+    for (auto& i : ducks) i.move();
 }
 
 void DuckHuntGameState::render()
@@ -106,7 +106,7 @@ void DuckHuntGameState::shoot()
         can_shoot = false;
 
         for (auto& i : ducks) {
-            if (i.getShotBox().Contains(INPUT.GetMouseX(), INPUT.GetMouseY())) {
+            if (i.getShotBox().Contains(INPUT.GetMouseX(), INPUT.GetMouseY()) && i.isAlive()) {
                 i.die();
             }
         }

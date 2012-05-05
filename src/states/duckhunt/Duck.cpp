@@ -1,9 +1,7 @@
 #include "../../../include/states/duckhunt/Duck.h"
 
-#include <iostream>
-
-
 const int DUCK_SCALE = 2;
+const VectorFloat gravity(0, .3);
 
 float Duck::speed = 3;
 std::unordered_map<DuckFrame, RectInt> Duck::frames;
@@ -23,12 +21,14 @@ Duck::Duck()
     initSprite(sprite, sprites, frames[DuckFrame::NORM_1], DUCK_SCALE);
     setSpriteBuffer(sprite, buffer);
 
-    is_alive = true;
+    can_move      = false;
+    can_be_shot   = false;
+    is_alive      = true;
     is_hit_ground = false;
 
     updateShotBox();
 
-    sprite.SetPosition(Random::Random(0, 640), Random::Random(0, 240));
+    sprite.SetPosition(Random::Random(0, 640), Window.GetHeight()*.8);
     setRandomDirection();
     probChangeVel = .0085;
 }
@@ -40,22 +40,34 @@ Duck::~Duck()
 
 void Duck::move()
 {
-    if (is_alive) fly();
+    if (is_alive && can_be_shot) fly();
     else if (!is_hit_ground) fall();
 
     updateShotBox();
 
 }
 
-void Duck::flyAway()
+void Duck::flyIn()
+{
+    can_be_shot = true;
+}
+
+void Duck::flyOut()
 {
 
+}
+
+void Duck::act()
+{
+    switch (ingame)
 }
 
 void Duck::die()
 {
     if (is_alive) {
+        can_be_shot = false;
         is_alive = false;
+        sprite.FlipX(false);
         sprite.SetSubRect(frames[DuckFrame::SHOT]);
         velocity = VectorFloat(0, 3);
         actiontimer.Reset();
@@ -75,9 +87,11 @@ void Duck::updateAnimation()
 {
     sprite.FlipX(velocity.x < 0);  //If the duck is flying left, flip its sprite
 
-    if (is_alive) {
+    if (is_alive && can_be_shot) {
         //This expression uses a sine wave to animate the duck
         sprite.SetSubRect(frames[DuckFrame(lround(sin(25*animationtimer.GetElapsedTime()-.5)+1))]);
+    } else if (is_alive && !can_be_shot) {
+        sprite.SetSubRect(frames[DuckFrame(lround(sin(25*animationtimer.GetElapsedTime()-.5)+1)+3)]);
     }
 
 }
@@ -91,22 +105,24 @@ void Duck::setRandomDirection()
 
 void Duck::fly()
 {
-    if (Random::Random(0.0f, 1.0f) <= probChangeVel) setRandomDirection();
+    if (can_move) {
+        if (Random::Random(0.0f, 1.0f) <= probChangeVel) setRandomDirection();
 
 
-    sprite.Move(velocity);
+        sprite.Move(velocity);
 
-    if (!IN_RANGE(sprite.GetPosition().x, buffer[LEFT], buffer[RIGHT])) {
-        if (sprite.GetPosition().x < buffer[LEFT]) sprite.SetX(buffer[LEFT]);
-        else sprite.SetX(buffer[RIGHT]);
-        velocity.x *= -1;
-    }
+        if (can_be_shot) {
+            if (!IN_RANGE(sprite.GetPosition().x, buffer[LEFT], buffer[RIGHT])) {
+                sprite.SetX(buffer[sprite.GetPosition().x < buffer[LEFT] ? LEFT : RIGHT]);
+                velocity.x *= -1;
+            }
 
-    float temp = 3*Window.GetHeight()/5;
-    if (!IN_RANGE(sprite.GetPosition().y, buffer[UP], temp)) {
-        if (sprite.GetPosition().y < temp) sprite.SetY(buffer[UP]);
-        else sprite.SetY(temp);
-        velocity.y *= -1;
+            float temp = 3*Window.GetHeight()/5;
+            if (!IN_RANGE(sprite.GetPosition().y, buffer[UP], temp)) {
+                sprite.SetY(sprite.GetPosition().y < temp ? buffer[UP] : temp);
+                velocity.y *= -1;
+            }
+        }
     }
 }
 
@@ -121,8 +137,8 @@ void Duck::fall()
         if (sprite.GetSubRect().GetHeight() != frames[DuckFrame::FALLING].GetHeight())
             sprite.SetSubRect(frames[DuckFrame::FALLING]);
 
-        sprite.Move(velocity);
-        int temp = floor(sin(10*animationtimer.GetElapsedTime()))+1;
+        sprite.Move(velocity += gravity);
+        bool temp = (floor(sin(20*animationtimer.GetElapsedTime()))+1) <= 0;
         sprite.FlipX(temp);
         //TODO: Fix bug; ducks will FlipY() but not FlipX()
     }

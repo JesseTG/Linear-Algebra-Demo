@@ -1,8 +1,7 @@
 #ifndef STATEMANAGER_H
 #define STATEMANAGER_H
 
-#define RESET currentstate.reset  //Cut down on text
-
+#define RESET(a) currentstate.reset(a); return;  //Cut down on text
 
 #include "Declarations.h"
 #include "State.h"
@@ -17,6 +16,7 @@
 #include "states/duckhunt/DuckHuntTitle.h"
 #include "states/duckhunt/DuckHuntGameState.h"
 
+constexpr uint_fast8_t normalstyle = sf::Style::Titlebar | sf::Style::Close;
 
 //Owns the active state and manages its lifetime.
 class StateManager
@@ -57,8 +57,7 @@ void StateManager::updateState()
     }
     else if (INPUT.IsKeyDown(sf::Key::F4)) {  //Toggles full-screen mode
         Window.Create(VideoMode(640, 480, 32), "Linear Algebra Demo",
-                      sf::Style::Titlebar | sf::Style::Close |
-                      (sf::Style::Fullscreen * (isfullscreen = !isfullscreen)));
+                      normalstyle | (sf::Style::Fullscreen * (isfullscreen = !isfullscreen)));
     } else if (INPUT.IsKeyDown(sf::Key::F1)) {
         Window.Capture().SaveToFile("screenshot.png");
     }
@@ -68,17 +67,17 @@ void StateManager::setState(const StateName newstate)
 {
     //Creates whatever state matches with the enum class  //////////////////////
     switch (newstate) {
-      case StateName::NADA: return;
-      case StateName::TITLE: RESET(new TitleState); return;
-      case StateName::VECTORS: RESET(new VectorState); return;
-      case StateName::SCALARS_VS_VECTORS: RESET(new ScalarVsVectorState); return;
-      case StateName::RASTER_VS_VECTOR: RESET(new RasterVsVectorState); return;
-      case StateName::MATRICES: RESET(new MatricesState); return;
-      case StateName::TRANSLATION_DISTANCE_LENGTH: RESET(new TranslationDistanceLengthState); return;
-      case StateName::DOT_PRODUCTS: RESET(new DotProductState); return;
-      case StateName::ROTATION: RESET(new RotationState); return;
-      case StateName::DUCKHUNT_TITLE: RESET(new DuckHuntTitle); return;
-      case StateName::DUCKHUNT_GAME: RESET(new DuckHuntGameState); return;
+      case StateName::NADA              : return;
+      case StateName::TITLE             : RESET(new TitleState                    );
+      case StateName::VECTORS           : RESET(new VectorState                   );
+      case StateName::SCALARS_VS_VECTORS: RESET(new ScalarVsVectorState           );
+      case StateName::RASTER_VS_VECTOR  : RESET(new RasterVsVectorState           );
+      case StateName::MATRICES          : RESET(new MatricesState                 );
+      case StateName::TRANSLATION       : RESET(new TranslationDistanceLengthState);
+      case StateName::DOT_PRODUCTS      : RESET(new DotProductState               );
+      case StateName::ROTATION          : RESET(new RotationState                 );
+      case StateName::DUCKHUNT_TITLE    : RESET(new DuckHuntTitle                 );
+      case StateName::DUCKHUNT_GAME     : RESET(new DuckHuntGameState             );
       default: throw std::runtime_error("Improper state!  Abort!");
     }
     ////////////////////////////////////////////////////////////////////////////

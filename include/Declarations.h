@@ -7,39 +7,39 @@
 
 
 
-#include <array>  //A data structure we use to store frames by number
-#include <iomanip>  //Manipulates how I/O streams represent data
-#include <memory>  //For smart pointers
-#include <stdexcept>  //For exceptions
-#include <sstream>  //To easily place numbers inside text
+#include <array>         //A data structure we use to store frames by number
+#include <iomanip>       //Manipulates how I/O streams represent data
+#include <memory>        //For smart pointers
+#include <stdexcept>     //For exceptions
+#include <sstream>       //To easily place numbers inside text
 #include <unordered_map> //A data structure we use to store frames by name
 
 #include <SFML/Graphics.hpp>  //The graphics library; vital to this project!
-#include <SFML/Audio.hpp>
+#include <SFML/Audio.hpp>     //The sound library that's also used
 
 class State;
 class TitleState;
 class StateManager;
 
 //Typedefs for less typing (the scope operator :: looks ugly)  /////////////////
-typedef sf::Clock Timer;
-typedef sf::Color Color;
-typedef sf::Event Event;
-typedef sf::Font Font;
-typedef sf::Image Image;
-typedef sf::Input Input;
-typedef sf::Randomizer Random;
-typedef sf::Rect<float> RectFloat;
-typedef sf::Rect<int> RectInt;
-typedef sf::RenderWindow RenderWindow;
-typedef sf::Vector2<int> VectorInt;
+typedef sf::Clock          Timer;
+typedef sf::Color          Color;
+typedef sf::Event          Event;
+typedef sf::Font           Font;
+typedef sf::Image          Image;
+typedef sf::Input          Input;
+typedef sf::Randomizer     Random;
+typedef sf::Rect<float>    RectFloat;
+typedef sf::Rect<int>      RectInt;
+typedef sf::RenderWindow   RenderWindow;
+typedef sf::Vector2<int>   VectorInt;
 typedef sf::Vector2<float> VectorFloat;
-typedef sf::Shape Shape;
-typedef sf::Sound SoundEffect;
-typedef sf::SoundBuffer SoundFile;
-typedef sf::Sprite Sprite;
-typedef sf::String StringGraphic;
-typedef sf::VideoMode VideoMode;
+typedef sf::Shape          Shape;
+typedef sf::Sound          SoundEffect;
+typedef sf::SoundBuffer    SoundFile;
+typedef sf::Sprite         Sprite;
+typedef sf::String         StringGraphic;
+typedef sf::VideoMode      VideoMode;
 ////////////////////////////////////////////////////////////////////////////////
 
 //It's easy to interchange regular enumerations with integers.
@@ -47,17 +47,17 @@ enum Direction { UP, DOWN, LEFT, RIGHT };
 
 //Enum classes, on the other hand, force you to do so explicitly.
 enum class StateName : char {
-  NADA = 0,
-  TITLE,
-  VECTORS,
+  NADA = 0          ,
+  TITLE             ,
+  VECTORS           ,
   SCALARS_VS_VECTORS,
-  RASTER_VS_VECTOR,
-  MATRICES,
-  TRANSLATION_DISTANCE_LENGTH,
-  DOT_PRODUCTS,
-  ROTATION,
-  DUCKHUNT_TITLE,
-  DUCKHUNT_GAME
+  RASTER_VS_VECTOR  ,
+  MATRICES          ,
+  TRANSLATION       ,
+  DOT_PRODUCTS      ,
+  ROTATION          ,
+  DUCKHUNT_TITLE    ,
+  DUCKHUNT_GAME     ,
 };
 
 struct Sound {
@@ -67,12 +67,12 @@ struct Sound {
     void Stop() { sound.Stop(); }
 };
 
-extern Event event;  //The object the latest event (external input) is stored in
+extern Event event;  //The object the latest external input is stored in
 extern Image sprites;  //The entire spritesheet.  All graphics taken from here.
 extern Image bgimage;  //The background image.
 extern Sprite bg;  //The sprite that represents this background image.
 extern RenderWindow Window;
-extern const VectorFloat center;
+extern const VectorFloat center;  //The center of the screen
 extern StateManager StateController;
 
 //Moves the sprite in question.

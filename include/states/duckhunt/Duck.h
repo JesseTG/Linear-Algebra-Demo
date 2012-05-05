@@ -28,6 +28,10 @@ class Duck
 
         bool isAlive() const { return is_alive; }
 
+        void flyIn();
+
+        void flyOut();
+
         void updateAnimation();
 
         RectFloat getShotBox() const { return shotbox; }
@@ -44,7 +48,10 @@ class Duck
         //Sets the direction of the duck to be random
         void setRandomDirection();
 
+        void act();
+
         void fly();
+
         void fall();
 
         Timer actiontimer;
@@ -75,6 +82,10 @@ class Duck
 
         //Whether the duck has hit the ground
         bool is_hit_ground;
+
+        bool can_be_shot;
+
+        bool can_move;
 
         //The odds of the duck changing velocity (thus direction) each frame
         float probChangeVel;

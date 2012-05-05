@@ -44,8 +44,9 @@ DuckHuntGameState::DuckHuntGameState()
     }
 
     //Prepare member variables  ////////////////////////////////////////////////
-    can_shoot = true;
+    can_shoot = false;
     is_screen_flash = false;
+    state = InGameState::INTRO;
     ////////////////////////////////////////////////////////////////////////////
 
     sounds[DuckHuntSound::INTRO].Play();
@@ -59,23 +60,29 @@ DuckHuntGameState::~DuckHuntGameState()
 void DuckHuntGameState::input()
 {
     checkForNextState(StateName::DUCKHUNT_TITLE, StateName::NADA);
-    if (INPUT.IsMouseButtonDown(sf::Mouse::Left)) {
+    if (INPUT.IsMouseButtonDown(sf::Mouse::Left) && can_shoot) {
         shoot();
     }
 }
 
 void DuckHuntGameState::logic()
 {
-    if (dog.getState() == DogState::WALKING && sounds[DuckHuntSound::INTRO].sound.GetStatus() == sf::Sound::Playing) {
-        dog.getSprite().Move(sounds[DuckHuntSound::INTRO].file.GetDuration()/7, 0);
-        intro();
+    switch (state) {
+        case InGameState::INTRO     :  intro();      break;
+        case InGameState::GAME      :  game();       break;
+        case InGameState::ROUND_OVER:  round_over(); break;
+        case InGameState::GAME_OVER :  game_over();  break;
+        default: throw std::invalid_argument("Game state not recognized!");
+
     }
+
 
     if (flashtimer.GetElapsedTime() > FLASH_LENGTH && is_screen_flash) {
         is_screen_flash = false;
         can_shoot = true;
     }
-    for (auto& i : ducks) i.move();
+
+    for (auto& i : ducks) i.act();
 }
 
 void DuckHuntGameState::render()
@@ -94,7 +101,31 @@ void DuckHuntGameState::render()
 
 void DuckHuntGameState::intro()
 {
+    if (dog.getState() != DogState::IDLE && sounds[DuckHuntSound::INTRO].sound.GetStatus() == sf::Sound::Playing) {
+        can_shoot = false;
+        dog.getSprite().Move(sounds[DuckHuntSound::INTRO].file.GetDuration()/7, 0);
+        dog.animate();
+    } else {
+        dog.setState(DogState::IDLE);
+        state = InGameState::GAME;
+        can_shoot = true;
+        for (auto& i : ducks) i.flyIn();
+    }
+}
 
+void DuckHuntGameState::game_over()
+{
+
+}
+
+void DuckHuntGameState::round_over()
+{
+
+}
+
+void DuckHuntGameState::game()
+{
+    for (auto& i : ducks) i.move();
 }
 
 void DuckHuntGameState::shoot()

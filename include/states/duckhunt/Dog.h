@@ -32,14 +32,14 @@ class Dog
     public:
         Dog();
         ~Dog();
-
+        void animate();
 
         Sprite& getSprite()                    { return sprite;    }
         DogState getState() const              { return state;     }
         void setState(const DogState newstate) { state = newstate; }
 
     private:
-        void animate();
+
         void walk();
 
         void jump();

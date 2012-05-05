@@ -20,6 +20,14 @@ enum class DuckHuntSound : char {
     INTRO    ,
 };
 
+enum class InGameState : char {
+    INTRO,
+    GAME ,
+    ROUND_OVER,
+    GAME_OVER,
+};
+//TODO: ROUND_OVER is same no matter how many ducks were shot, relies on other variables
+
 namespace std {
     template<> struct hash<DuckHuntSound> {
         std::size_t operator()(const DuckHuntSound dhs) const
@@ -37,8 +45,15 @@ class DuckHuntGameState : public State
         void render();
 
     private:
-        //The introductory screen
+        //The introductory animation
         void intro();
+
+        void game();
+
+        void round_over();
+
+        void game_over();
+
 
         //Called by input(); sees if a duck was hit
         void shoot();
@@ -68,12 +83,14 @@ class DuckHuntGameState : public State
         std::list<sf::Drawable*> renderlist;
 
         //What round we're on
-        int round;
+        uint_fast16_t round;
 
         //The score for this game
-        int score;
+        uint_fast32_t score;
 
         std::unordered_map<DuckHuntSound, Sound> sounds;
+
+        InGameState state;
 
         //How much time has passed; when it hits 5, the ducks fly away
         Timer timepassed;

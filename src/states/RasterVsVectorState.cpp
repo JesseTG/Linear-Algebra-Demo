@@ -32,9 +32,9 @@ void RasterVsVectorState::logic()
 
 void RasterVsVectorState::render()
 {
-    Window.Draw(bg);
+    Window.Draw(bg          );
     Window.Draw(rastercircle);
     Window.Draw(vectorcircle);
-    Window.Draw(rastertitle);
+    Window.Draw(rastertitle );
     Window.Display();
 }

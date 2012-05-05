@@ -4,7 +4,7 @@
 //first glance to hold any significance.  Very bad in software development,
 //especially if this magic number is reused.
 const float MARIO_ROTATION = .5;  //The angle the sprite spins each frame.
-const int MARIO_SCALE = 10;  //The factor we scale the sprite by.
+const int MARIO_SCALE      = 10;  //The factor we scale the sprite by.
 
 TitleState::TitleState()
 {
@@ -35,7 +35,7 @@ void TitleState::logic()
 
 void TitleState::render()
 {
-    Window.Draw(bg);  //Puts the background on the screen.
+    Window.Draw(bg   );  //Puts the background on the screen.
     Window.Draw(mario);  //Puts the Mario sprite on the screen.
     Window.Draw(title);  //Puts the title on the screen.
     Window.Display();  //Now actually displays the screen.

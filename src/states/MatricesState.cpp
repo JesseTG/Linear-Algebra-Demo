@@ -20,12 +20,12 @@ MatricesState::MatricesState()
                  "[14  4 28] x [45  8]   \n  "
                  "[91  0  1]             \n  ");
 
-    Window.Draw(bg);
+    Window.Draw(bg  );
     Window.Draw(text);
     Window.Display();
 }
 
 void MatricesState::input()
 {
-    checkForNextState(StateName::RASTER_VS_VECTOR, StateName::TRANSLATION_DISTANCE_LENGTH);
+    checkForNextState(StateName::RASTER_VS_VECTOR, StateName::TRANSLATION);
 }

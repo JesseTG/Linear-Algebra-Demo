@@ -16,9 +16,9 @@ void ScalarVsVectorState::input()
 {
     checkForNextState(StateName::VECTORS, StateName::RASTER_VS_VECTOR);
 
-    ismoving[UP] = INPUT.IsKeyDown(sf::Key::Up);
-    ismoving[DOWN] = INPUT.IsKeyDown(sf::Key::Down);
-    ismoving[LEFT] = INPUT.IsKeyDown(sf::Key::Left);
+    ismoving[UP   ] = INPUT.IsKeyDown(sf::Key::Up   );
+    ismoving[DOWN ] = INPUT.IsKeyDown(sf::Key::Down );
+    ismoving[LEFT ] = INPUT.IsKeyDown(sf::Key::Left );
     ismoving[RIGHT] = INPUT.IsKeyDown(sf::Key::Right);
 }
 
@@ -73,9 +73,9 @@ void ScalarVsVectorState::logic()
 
 void ScalarVsVectorState::render()
 {
-    Window.Draw(bg);
-    Window.Draw(centerline);
-    Window.Draw(harrier);
+    Window.Draw(bg          );
+    Window.Draw(centerline  );
+    Window.Draw(harrier     );
     Window.Draw(harrierstats);
     Window.Display();
 }

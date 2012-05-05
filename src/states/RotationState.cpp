@@ -91,8 +91,8 @@ void RotationState::logic()
 
 void RotationState::render()
 {
-    Window.Draw(bg);
+    Window.Draw(bg        );
     Window.Draw(helicopter);
-    Window.Draw(stats);
+    Window.Draw(stats     );
     Window.Display();
 }

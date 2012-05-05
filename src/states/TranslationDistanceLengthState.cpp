@@ -1,8 +1,8 @@
 #include "../../include/states/TranslationDistanceLengthState.h"
 
-const int HERO_SCALE = 6;
+const int HERO_SCALE      = 6;
 const int HERO_MOVE_SPEED = 2;
-const int GHOST_SCALE = 3;
+const int GHOST_SCALE     = 3;
 
 TranslationDistanceLengthState::TranslationDistanceLengthState()
 {
@@ -36,11 +36,11 @@ void TranslationDistanceLengthState::input()
     checkForNextState(StateName::MATRICES, StateName::DOT_PRODUCTS);
 
     bool movinghorizontal = !ismoving[LEFT] * !ismoving[RIGHT];
-    ismoving[UP] = INPUT.IsKeyDown(sf::Key::Up) * movinghorizontal;
-    ismoving[DOWN] = INPUT.IsKeyDown(sf::Key::Down) * movinghorizontal;
-    bool movingvertical = !ismoving[UP] * !ismoving[DOWN];
-    ismoving[LEFT] = INPUT.IsKeyDown(sf::Key::Left) * movingvertical;
-    ismoving[RIGHT] = INPUT.IsKeyDown(sf::Key::Right) * movingvertical;
+    ismoving[UP   ]       = INPUT.IsKeyDown(sf::Key::Up) * movinghorizontal;
+    ismoving[DOWN ]       = INPUT.IsKeyDown(sf::Key::Down) * movinghorizontal;
+    bool movingvertical   = !ismoving[UP] * !ismoving[DOWN];
+    ismoving[LEFT ]       = INPUT.IsKeyDown(sf::Key::Left) * movingvertical;
+    ismoving[RIGHT]       = INPUT.IsKeyDown(sf::Key::Right) * movingvertical;
 }
 
 void TranslationDistanceLengthState::logic()
@@ -72,7 +72,7 @@ void TranslationDistanceLengthState::logic()
     //Keeps the animation at JUST the right speed  /////////////////////////////
     if (animationtimer.GetElapsedTime() >= 1) {
         for (bool& i : ismoving) if (i) break;  //Don't change the frame if moving
-        if (frame % 2 == 0) frame += 1; else frame -= 1;
+        frame += (frame % 2 == 0) ? 1 : -1;
         animationtimer.Reset();
         hero.SetSubRect(heroframes[HeroFrame(frame)]);
     }
@@ -93,8 +93,8 @@ void TranslationDistanceLengthState::logic()
 
 void TranslationDistanceLengthState::render()
 {
-    Window.Draw(bg);
-    Window.Draw(hero);
+    Window.Draw(bg   );
+    Window.Draw(hero );
     Window.Draw(ghost);
     Window.Draw(stats);
     Window.Display();

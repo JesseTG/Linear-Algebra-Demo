@@ -51,9 +51,9 @@ void VectorState::logic()
 
 void VectorState::render()
 {
-    Window.Draw(bg);
-    Window.Draw(pathline);
-    Window.Draw(tetrad);
+    Window.Draw(bg         );
+    Window.Draw(pathline   );
+    Window.Draw(tetrad     );
     Window.Draw(vectortitle);
     Window.Draw(tetradstats);
     Window.Display();

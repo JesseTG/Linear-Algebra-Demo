@@ -14,6 +14,8 @@
 #include <sstream>       //To easily place numbers inside text
 #include <unordered_map> //A data structure we use to store frames by name
 
+#include <boost/lexical_cast.hpp>  //So we can report state IDs if an error is thrown
+
 #include <SFML/Graphics.hpp>  //The graphics library; vital to this project!
 #include <SFML/Audio.hpp>     //The sound library that's also used
 

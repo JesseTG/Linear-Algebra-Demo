@@ -60,7 +60,9 @@ DuckHuntGameState::~DuckHuntGameState()
 void DuckHuntGameState::input()
 {
     checkForNextState(StateName::DUCKHUNT_TITLE, StateName::NADA);
-    if (INPUT.IsMouseButtonDown(sf::Mouse::Left) && can_shoot) {
+    button_last_down = button_down;
+    button_down = INPUT.IsMouseButtonDown(sf::Mouse::Left);
+    if (button_down == true && button_last_down == false && can_shoot) {
         shoot();
     }
 }
@@ -106,10 +108,10 @@ void DuckHuntGameState::intro()
         dog.getSprite().Move(sounds[DuckHuntSound::INTRO].file.GetDuration()/7, 0);
         dog.animate();
     } else {
-        dog.setState(DogState::IDLE);
         state = InGameState::GAME;
+        dog.setState(DogState::IDLE);
+        for (auto& i : ducks) i.setState(DuckState::FLYING_IN);
         can_shoot = true;
-        for (auto& i : ducks) i.flyIn();
     }
 }
 
@@ -125,7 +127,7 @@ void DuckHuntGameState::round_over()
 
 void DuckHuntGameState::game()
 {
-    for (auto& i : ducks) i.move();
+    for (auto& i : ducks) i.act();
 }
 
 void DuckHuntGameState::shoot()
@@ -137,8 +139,8 @@ void DuckHuntGameState::shoot()
         can_shoot = false;
 
         for (auto& i : ducks) {
-            if (i.getShotBox().Contains(INPUT.GetMouseX(), INPUT.GetMouseY()) && i.isAlive()) {
-                i.die();
+            if (i.getShotBox().Contains(INPUT.GetMouseX(), INPUT.GetMouseY()) && i.getState() == DuckState::FLYING_AROUND) {
+                i.setState(DuckState::SHOT);
             }
         }
     }

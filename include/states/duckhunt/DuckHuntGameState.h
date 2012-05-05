@@ -21,10 +21,10 @@ enum class DuckHuntSound : char {
 };
 
 enum class InGameState : char {
-    INTRO,
-    GAME ,
+    INTRO     ,
+    GAME      ,
     ROUND_OVER,
-    GAME_OVER,
+    GAME_OVER ,
 };
 //TODO: ROUND_OVER is same no matter how many ducks were shot, relies on other variables
 
@@ -48,12 +48,14 @@ class DuckHuntGameState : public State
         //The introductory animation
         void intro();
 
+        //Actual gameplay
         void game();
+
 
         void round_over();
 
+        //The game has ended, since you've missed too many times!
         void game_over();
-
 
         //Called by input(); sees if a duck was hit
         void shoot();
@@ -67,10 +69,16 @@ class DuckHuntGameState : public State
         //Whether the user is allowed to shoot or not
         bool can_shoot;
 
+        //True if the left mouse button is held down this frame
+        bool button_down;
+
+        //True if the left mouse button was held down the previous frame
+        bool button_last_down;
+
         //The dog that annoys the player
         Dog dog;
 
-        //The pointers to the ducks
+        //The ducks in this minigame
         Duck ducks[2];
 
         //How long the screen remains white when clicked
@@ -83,13 +91,14 @@ class DuckHuntGameState : public State
         std::list<sf::Drawable*> renderlist;
 
         //What round we're on
-        uint_fast16_t round;
+        uint16_t round;
 
         //The score for this game
-        uint_fast32_t score;
+        uint32_t score;
 
         std::unordered_map<DuckHuntSound, Sound> sounds;
 
+        //The state of the game (a state within a state?)
         InGameState state;
 
         //How much time has passed; when it hits 5, the ducks fly away

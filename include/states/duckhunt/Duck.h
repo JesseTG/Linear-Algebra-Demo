@@ -4,9 +4,24 @@
 #include "../../Declarations.h"
 
 enum class DuckFrame : char {
-    NORM_1, NORM_2, NORM_3,
-    UP_1, UP_2, UP_3,
-    SHOT, FALLING
+    NORM_1 ,
+    NORM_2 ,
+    NORM_3 ,
+    UP_1   ,
+    UP_2   ,
+    UP_3   ,
+    SHOT   ,
+    FALLING,
+};
+
+enum class DuckState : char {
+    IDLE         ,
+    FLYING_IN    ,
+    FLYING_AROUND,
+    SHOT         ,
+    FALLING      ,
+    HIT_GROUND   ,
+    FLYING_OUT   ,
 };
 
 namespace std {
@@ -23,14 +38,17 @@ class Duck
         virtual ~Duck();
 
         void move();
-        void flyAway();
         void die();
 
-        bool isAlive() const { return is_alive; }
+        void act();
 
-        void flyIn();
+        DuckState getState() const { return state; }
 
-        void flyOut();
+        DuckState setState(const DuckState newstate) {
+            prevstate = state;
+            state = newstate;
+            if (prevstate != state) actiontimer.Reset();
+        }
 
         void updateAnimation();
 
@@ -48,11 +66,15 @@ class Duck
         //Sets the direction of the duck to be random
         void setRandomDirection();
 
-        void act();
+        void flyIn();
 
-        void fly();
+        void flyOut();
+
+        void flyAround();
 
         void fall();
+
+        void detectBoundaries();
 
         Timer actiontimer;
 
@@ -74,18 +96,15 @@ class Duck
         //The actual visible sprite
         Sprite sprite;
 
+        //Whether this duck has been shot dead
+        bool is_dead;
+
         //Whether this is a Mr. Ski duck
         bool is_ski;
 
-        //Whether this duck is alive
-        bool is_alive;
+        DuckState prevstate;
 
-        //Whether the duck has hit the ground
-        bool is_hit_ground;
-
-        bool can_be_shot;
-
-        bool can_move;
+        DuckState state;
 
         //The odds of the duck changing velocity (thus direction) each frame
         float probChangeVel;

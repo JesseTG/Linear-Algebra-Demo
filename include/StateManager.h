@@ -78,7 +78,7 @@ void StateManager::setState(const StateName newstate)
       case StateName::ROTATION          : RESET(new RotationState                 );
       case StateName::DUCKHUNT_TITLE    : RESET(new DuckHuntTitle                 );
       case StateName::DUCKHUNT_GAME     : RESET(new DuckHuntGameState             );
-      default: throw std::runtime_error("Improper state " + boost::lexical_cast<std::string, int>(int(newstate)) + "!  Abort!");
+      default: throw std::runtime_error("Improper state #" + boost::lexical_cast<std::string, int>(int(newstate)) + "!");
     }
     ////////////////////////////////////////////////////////////////////////////
 }

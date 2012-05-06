@@ -21,15 +21,13 @@ Duck::Duck()
 
     initSprite(sprite, sprites, frames[DuckFrame::NORM_1], DUCK_SCALE);
     setSpriteBuffer(sprite, buffer);
-
-    is_dead = false;
-
     sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), Window.GetHeight()*.7);
     updateShotBox();
-    velocity = VectorFloat(0, 0);
-    probChangeVel = .0085;
 
-    state = DuckState::IDLE;
+    is_dead       = false;
+    probChangeVel = .0085;
+    velocity      = VectorFloat(0, 0);
+    state         = DuckState::IDLE;
 }
 
 Duck::~Duck()

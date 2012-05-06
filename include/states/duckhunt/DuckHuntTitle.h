@@ -14,10 +14,17 @@ class DuckHuntTitle : public State
         void render() {}
 
     private:
-        Sprite logo;
-        Font font;
+        //The logo for the original game
+        Sprite        logo;
+
+        //The font we use to render the text
+        Font          font;
+
+        //The text that invites the user to play
         StringGraphic text;
-        Sound titlejingle;
+
+        //The theme of the original game
+        Sound         titlejingle;
 };
 
 #endif // DUCKHUNTTITLE_H

@@ -19,8 +19,9 @@
 #include <SFML/Graphics.hpp>  //The graphics library; vital to this project!
 #include <SFML/Audio.hpp>     //The sound library that's also used
 
-class State;
-class TitleState;
+//The class forward declarations.
+class State       ;
+class TitleState  ;
 class StateManager;
 
 //Typedefs for less typing (the scope operator :: looks ugly)  /////////////////
@@ -48,6 +49,7 @@ typedef sf::VideoMode      VideoMode;
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
 //Enum classes, on the other hand, force you to do so explicitly.
+//The states available in this program
 enum class StateName : char {
   NADA = 0          ,
   TITLE             ,
@@ -62,20 +64,23 @@ enum class StateName : char {
   DUCKHUNT_GAME     ,
 };
 
+//A structure that holds sound, so we can juggle one object rather than two
 struct Sound {
-    SoundFile file;
+    SoundFile   file ;
     SoundEffect sound;
     void Play() { sound.Play(); }
     void Stop() { sound.Stop(); }
 };
 
-extern Event event;  //The object the latest external input is stored in
-extern Image sprites;  //The entire spritesheet.  All graphics taken from here.
-extern Image bgimage;  //The background image.
-extern Sprite bg;  //The sprite that represents this background image.
-extern RenderWindow Window;
-extern const VectorFloat center;  //The center of the screen
+extern Image        bgimage;  //The background image.
+extern Sprite       bg     ;  //The sprite that represents the background image.
+extern Event        event  ;  //The latest external input is stored in
+extern Image        sprites;  //The spritesheet file.  Most gfx come from here.
+extern RenderWindow Window ;  //The window we actually see
+
 extern StateManager StateController;
+
+extern const VectorFloat center;  //The center of the screen
 
 //Moves the sprite in question.
 auto inputmove = [](const int speed, const bool ismoving[4],
@@ -88,9 +93,9 @@ auto inputmove = [](const int speed, const bool ismoving[4],
 
 //Ensures that a sprite stops at the edge of the screen
 auto setSpriteBuffer = [&Window](const Sprite& sprite, float buffer[4]) {
-    buffer[UP] = sprite.GetSize().y/2;
-    buffer[DOWN] = Window.GetHeight() - buffer[UP];
-    buffer[LEFT] = sprite.GetSize().x/2;
+    buffer[UP   ] = sprite.GetSize().y/2;
+    buffer[DOWN ] = Window.GetHeight() - buffer[UP];
+    buffer[LEFT ] = sprite.GetSize().x/2;
     buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
 };
 
@@ -98,7 +103,7 @@ auto initSprite = [](Sprite& sprite, const Image& image, const RectInt& subrect,
                      const float scale, const VectorFloat& position = center) {
     sprite.SetImage(image);
     sprite.SetSubRect(subrect);
-    sprite.SetScale(VectorFloat(scale, scale));
+    sprite.SetScale(scale, scale);
     sprite.SetCenter(subrect.GetWidth()/2, subrect.GetHeight()/2);
     sprite.SetPosition(position);
 };

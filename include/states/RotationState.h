@@ -17,32 +17,31 @@ class RotationState : public State
         void input();
         void logic();
         void render();
+
     private:
         //helicopter's acceleration; added to velocity, calculated by direction
-        VectorFloat acceleration;
+        VectorFloat            acceleration;
+
+        //The bump that plays whenever we hit the wall
+        Sound                  bump;
 
         //Stores the helicopter's current frame
-        uint8_t currentframe;
+        uint8_t                currentframe;
 
         //Stores each of the four frames the helicopter can have
         std::array<RectInt, 4> frames;
 
         //The heicopter itself
-        Sprite helicopter;
+        Sprite                 helicopter;
 
         //Shows the screen's information
-        StringGraphic stats;
+        StringGraphic          stats;
 
         //Converts numbers, etc. to string
-        std::ostringstream stats_to_string;
-
-        //The bump that plays whenever we hit the wall
-        Sound bump;
+        std::ostringstream     stats_to_string;
 
         //helicopter's velocity; added to position
-        VectorFloat velocity;
-
-
+        VectorFloat            velocity;
 };
 
 #endif // ROTATIONSTATE_H

@@ -15,10 +15,10 @@ class State
     StateName getNextState() const;
 
     //Handles input; first third of the game loop
-    virtual void input() = 0;
+    virtual void input()  = 0;
 
     //Does something after the input; second third
-    virtual void logic() = 0;
+    virtual void logic()  = 0;
 
     //Renders everything; last third
     virtual void render() = 0;

@@ -18,22 +18,22 @@ class VectorState : public State
 
     private:
         //The line that shows the path the tetrad follows.
-        Shape pathline;
-
-        //The tetrad itself
-        Sprite tetrad;
+        Shape              pathline;
 
         //The stringstream that puts the statistics to text
         std::ostringstream stats_to_string;
 
+        //The tetrad itself
+        Sprite             tetrad;
+
         //Constantly added to tetrad's position
-        VectorFloat tetradmovement;
+        VectorFloat        tetradmovement;
 
         //Displays tetrad's position and velocity
-        StringGraphic tetradstats;
+        StringGraphic      tetradstats;
 
         //The title for this screen
-        StringGraphic vectortitle;
+        StringGraphic      vectortitle;
 };
 
 

@@ -26,7 +26,7 @@ class TitleState : public State
 
   private:
     //The Mario sprite on-screen; only rotates, does not move  /////////////////
-    Sprite mario;
+    Sprite        mario;
 
     //The title; shows the information about this presentation  ////////////////
     StringGraphic title;

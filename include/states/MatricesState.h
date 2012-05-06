@@ -15,11 +15,11 @@ class MatricesState : public State
         void render() {}  //Only need to render this screen once.
 
     private:
+        //The font used for this screen (it must be fixed-width)
+        Font          matrixfont;
+
         //Shows the matrices on-screen
         StringGraphic text;
-
-        //The font used for this screen (it must be fixed-width)
-        Font matrixfont;
 };
 
 #endif // MATRICESSTATE_H

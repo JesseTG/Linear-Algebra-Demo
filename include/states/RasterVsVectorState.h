@@ -4,7 +4,6 @@
 #include "../Declarations.h"
 #include "../State.h"
 
-
 class RasterVsVectorState : public State
 {
     public:
@@ -16,16 +15,16 @@ class RasterVsVectorState : public State
 
     private:
         //A circle pulled from a sprite sheet
-        Sprite rastercircle;
-
-        //A circle created with sf::Shape
-        Shape vectorcircle;
-
-        //Affects the scale of the circles
-        Timer scaletimer;
+        Sprite        rastercircle;
 
         //The title of this screen
         StringGraphic rastertitle;
+
+        //Affects the scale of the circles
+        Timer         scaletimer;
+
+        //A circle created with sf::Shape
+        Shape         vectorcircle;
 };
 
 #endif // RASTERVSVECTORSTATE_H

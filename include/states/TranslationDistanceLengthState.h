@@ -32,32 +32,32 @@ class TranslationDistanceLengthState : public State
         void render();
 
     private:
+        //Used to time the Hero's animation
+        Timer                                  animationtimer;
+
+        //How much space the Hero has until he stops moving.
+        float                                  buffer[4];
+
+        //Reperesents the frame.  Evens mean left foot is up, odds mean right.
+        char                                   frame;
+
+        //The Ghost that follows the mouse.  (That's really the monster's name)
+        Sprite                                 ghost;
+
         //Stores the rectangles that hold the frames in the spritesheet
         std::unordered_map<HeroFrame, RectInt> heroframes;
 
         //The sprite that represents the hero.
-        Sprite hero;
-
-        //Used to time the Hero's animation
-        Timer animationtimer;
+        Sprite                                 hero;
 
         //Whether the Hero is moving in the four cardinal directions.
-        bool ismoving[4];
-
-        //How much space the Hero has until he stops moving.
-        float buffer[4];
-
-        //Reperesents the frame.  Evens mean left foot is up, odds mean right.
-        char frame;
-
-        //The Ghost that follows the mouse.  (That's really the monster's name)
-        Sprite ghost;
+        bool                                   ismoving[4];
 
         //The display for several numerical bits of info
-        StringGraphic stats;
+        StringGraphic                          stats;
 
         //Lets us put the stats inside the StringGraphic
-        std::ostringstream stats_to_text;
+        std::ostringstream                     stats_to_text;
 
 };
 

@@ -17,28 +17,28 @@ class DotProductState : public State
 
     private:
         //The angle that the mouse is from the Blue Falcon
-        float angletomouse;
+        float                   angletomouse;
 
         //The Blue Falcon's own image file
-        Image bfsprites;
+        Image                   bfsprites;
 
         //The Blue Falcon itself
-        Sprite bluefalcon;
+        Sprite                  bluefalcon;
 
         //How much buffer room the BF has before it stops at the edge
-        float buffer[4];
+        float                   buffer[4];
 
         //The available frames for the Blue Falcon
         std::array<RectInt, 32> frames;
 
         //Whether the Blue Falcon is moving
-        bool ismoving[4];
+        bool                    ismoving[4];
 
         //Displays information such as angle, etc.
-        StringGraphic stats;
+        StringGraphic           stats;
 
         //Converts numbers and etc. into text
-        std::ostringstream stats_to_string;
+        std::ostringstream      stats_to_string;
 };
 
 #endif // DOTPRODUCTSTATE_H

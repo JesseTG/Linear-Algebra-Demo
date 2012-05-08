@@ -2,9 +2,9 @@
 
 const int DUCK_SCALE        =  2;  //How much the duck's sprites are scaled
 const float ANGLE_RANGE     = 15;  //The range of angles the ducks can fly up
-const VectorFloat GRAVITY(0, .3);
+const VectorFloat GRAVITY(0, .5);
 
-float Duck::speed = 2;
+float Duck::speed = 3;
 std::unordered_map<DuckFrame, RectInt> Duck::frames;
 
 Duck::Duck()
@@ -47,6 +47,8 @@ void Duck::act()
         case DuckState::FLYING_OUT   : flyOut();    break;
         default: throw std::invalid_argument("Duck state #" + boost::lexical_cast<std::string, int>(int(state)) + " not recognized!");
     }
+
+    prevstate = state;
 }
 
 void Duck::move()
@@ -58,6 +60,12 @@ void Duck::move()
 
 void Duck::flyIn()
 {
+    if (prevstate != DuckState::FLYING_IN) {
+        sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), Window.GetHeight()*.7);
+        updateShotBox();
+        is_dead = false;
+    }
+
     if (velocity == VectorFloat(0, 0)) {
         float angle = Random::Random(-ANGLE_RANGE, ANGLE_RANGE);
         velocity = VectorFloat(speed*cos(angle), -fabs(speed*sin(angle)));
@@ -92,18 +100,18 @@ void Duck::flyAround()
 
 void Duck::flyOut()
 {
+    if (prevstate == DuckState::FLYING_AROUND) {
+        float angle = Random::Random(-ANGLE_RANGE, ANGLE_RANGE);
+        velocity = VectorFloat(speed*cos(angle), -fabs(speed*sin(angle)));
+    }
     sprite.Move(velocity);
 }
 
 void Duck::die()
 {
-    if (!is_dead) {
-        sprite.FlipX(false);
-        sprite.SetSubRect(frames[DuckFrame::SHOT]);
-        velocity = VectorFloat(0, 0);
-        setState(DuckState::SHOT);
-        animationtimer.Reset();
-    }
+    sprite.FlipX(false);
+    sprite.SetSubRect(frames[DuckFrame::SHOT]);
+    velocity = VectorFloat(0, 0);
 
     if (actiontimer.GetElapsedTime() >= 1) setState(DuckState::FALLING);
 }
@@ -150,7 +158,7 @@ void Duck::detectBoundaries()
     }
 
     //This way, the ducks only turn around at the left and right edges
-    if (state != DuckState::FLYING_IN) {
+    if (state == DuckState::FLYING_AROUND) {
         float temp = 3*Window.GetHeight()/5;
         if (!IN_RANGE(sprite.GetPosition().y, buffer[UP], temp)) {
             sprite.SetY(sprite.GetPosition().y < temp ? buffer[UP] : temp);

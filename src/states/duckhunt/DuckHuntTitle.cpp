@@ -10,7 +10,7 @@ DuckHuntTitle::DuckHuntTitle()
     font.LoadFromFile("./gfx/emulogic.ttf");
     text.SetFont(font);
     text.SetText("Press P to Start");
-    text.SetPosition(Window.GetWidth()/6, 3*Window.GetHeight()/4);
+    text.SetPosition(Window.GetWidth()/6, Window.GetHeight()*.75);
 
     titlejingle.file.LoadFromFile("./sfx/duckhunt/title.wav");
     titlejingle.sound.SetBuffer(titlejingle.file);

@@ -1,8 +1,10 @@
 #ifndef DUCKHUNTGAMESTATE_H
 #define DUCKHUNTGAMESTATE_H
 
-#include <list>
+
 #include <memory>
+#include <utility>
+#include <vector>
 
 #include "Dog.h"
 #include "Duck.h"
@@ -23,7 +25,9 @@ enum class DuckHuntSound : char {
 enum class InGameState : char {
     INTRO     ,
     GAME      ,
-    ROUND_OVER,
+    ROUND_END ,
+    ROUND_WIN ,
+    ROUND_FAIL,
     GAME_OVER ,
 };
 //TODO: ROUND_OVER is same no matter how many ducks were shot, relies on other variables
@@ -52,7 +56,11 @@ class DuckHuntGameState : public State
         void game();
 
 
-        void round_over();
+        void round_end();
+
+        void round_win() {}
+
+        void round_fail() {}
 
         //The game has ended, since you've missed too many times!
         void game_over();
@@ -65,6 +73,9 @@ class DuckHuntGameState : public State
 
         //The actual visible background layers
         Sprite bglayers[3];
+
+        //Whether the dog is behind the grass
+        bool dog_behind_grass;
 
         //Whether the user is allowed to shoot or not
         bool can_shoot;
@@ -88,7 +99,13 @@ class DuckHuntGameState : public State
         bool is_screen_flash;
 
         //Pointers to all objects to render; this time, objects will change layer
-        std::list<sf::Drawable*> renderlist;
+        std::vector<sf::Drawable*> renderlist;
+
+        //How much ammunition we have left
+        int8_t ammo;
+
+        //How many ducks the user has shot dead this round
+        uint8_t ducks_dead;
 
         //What round we're on
         uint16_t round;
@@ -100,6 +117,9 @@ class DuckHuntGameState : public State
 
         //The state of the game (a state within a state?)
         InGameState state;
+
+        //The previous state
+        InGameState prevstate;
 
         //How much time has passed; when it hits 5, the ducks fly away
         Timer timepassed;

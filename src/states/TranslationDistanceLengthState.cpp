@@ -27,7 +27,7 @@ TranslationDistanceLengthState::TranslationDistanceLengthState()
 
     //Preps the Ghost sprite  //////////////////////////////////////////////////
     initSprite(ghost, sprites, RectInt(34, 18, 58, 48), GHOST_SCALE,
-               VectorFloat(INPUT.GetMouseX(), INPUT.GetMouseY()));
+               VectorFloat(MOUSE));
     ////////////////////////////////////////////////////////////////////////////
 }
 
@@ -79,7 +79,7 @@ void TranslationDistanceLengthState::logic()
     ////////////////////////////////////////////////////////////////////////////
 
     //The Ghost follows the mouse
-    ghost.SetPosition(INPUT.GetMouseX(), INPUT.GetMouseY());
+    ghost.SetPosition(MOUSE);
 
     stats_to_text.str("");
     stats_to_text << "Translation, Distance, and Length\n\n"

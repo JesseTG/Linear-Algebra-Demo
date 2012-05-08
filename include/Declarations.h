@@ -2,6 +2,7 @@
 #define DECLARATIONS_H
 
 #define INPUT Window.GetInput()
+#define MOUSE INPUT.GetMouseX(), INPUT.GetMouseY()
 
 #define IN_RANGE(num, min, max) (((min) <= (num)) && ((num) <= (max)))
 

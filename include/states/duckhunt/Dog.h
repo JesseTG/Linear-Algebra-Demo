@@ -14,10 +14,13 @@ enum class DogFrame : char {
 };
 
 enum class DogState : char {
-    IDLE        ,
-    WALKING     ,
-    JUMPING     ,
-    HOLDING_DUCK,
+    IDLE         ,
+    WALKING      ,
+    JUMPING_UP   ,
+    JUMPING_DOWN ,
+    HOLDING_1DUCK,
+    HOLDING_2DUCK,
+    LAUGHING     ,
 };
 
 namespace std {
@@ -32,17 +35,23 @@ class Dog
     public:
         Dog();
         ~Dog();
-        void animate();
+        void updateAnimation();
+        void act();
 
         Sprite& getSprite()                    { return sprite;    }
         DogState getState() const              { return state;     }
-        void setState(const DogState newstate) { state = newstate; }
+        void setState(const DogState newstate) {
+            state = newstate;
+            actiontimer.Reset();
+        }
 
     private:
 
         void walk();
 
         void jump();
+
+        void rise(uint8_t num_of_ducks);
 
         uint8_t frame;
 
@@ -55,6 +64,8 @@ class Dog
         Sprite sprite;
 
         DogState state;
+
+        DogState prevstate;
 };
 
 #endif // DOG_H

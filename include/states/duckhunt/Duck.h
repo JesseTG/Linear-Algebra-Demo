@@ -44,10 +44,9 @@ class Duck
 
         DuckState getState() const { return state; }
 
-        DuckState setState(const DuckState newstate) {
-            prevstate = state;
+        void setState(const DuckState newstate) {
             state = newstate;
-            if (prevstate != state) actiontimer.Reset();
+            actiontimer.Reset();
         }
 
         void updateAnimation();
@@ -66,12 +65,16 @@ class Duck
         //Sets the direction of the duck to be random
         void setRandomDirection();
 
+        //The duck flying into the screen; can't be shot yet!
         void flyIn();
 
+        //The duck flying away; can't be shot anymore!
         void flyOut();
 
+        //The duck flying around; fair game!
         void flyAround();
 
+        //The duck falling; you've shot him already!
         void fall();
 
         void detectBoundaries();

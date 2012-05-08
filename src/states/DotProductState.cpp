@@ -77,9 +77,7 @@ void DotProductState::logic()
 {
     inputmove(BLUE_FALCON_SPEED, ismoving, bluefalcon, buffer);
 
-    VectorFloat temp = bluefalcon.GetPosition() -
-                       VectorFloat(INPUT.GetMouseX(),
-                                   INPUT.GetMouseY());
+    VectorFloat temp = bluefalcon.GetPosition() - VectorFloat(MOUSE);
 
     float angletomouse = atan2(temp.x, temp.y) * (180/PI);
     angletomouse = map(angletomouse, -180, 180, 0, 360);

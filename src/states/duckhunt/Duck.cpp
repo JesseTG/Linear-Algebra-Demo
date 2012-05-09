@@ -1,8 +1,9 @@
 #include "../../../include/states/duckhunt/Duck.h"
 
 const int DUCK_SCALE        =  2;  //How much the duck's sprites are scaled
-const float ANGLE_RANGE     = 15;  //The range of angles the ducks can fly up
+const float ANGLE_RANGE     = 10;  //The range of angles the ducks can fly up
 const VectorFloat GRAVITY(0, .5);
+const float START_HEIGHT    = SCREEN.GetHeight()*.75;  //What row the ducks start
 
 float Duck::speed = 3;
 std::unordered_map<DuckFrame, RectInt> Duck::frames;
@@ -20,7 +21,7 @@ Duck::Duck()
 
     initSprite(sprite, sprites, frames[DuckFrame::NORM_1], DUCK_SCALE);
     setSpriteBuffer(sprite, buffer);
-    sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), Window.GetHeight()*.7);
+    sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), START_HEIGHT);
     updateShotBox();
 
     is_dead       = false;
@@ -42,7 +43,6 @@ void Duck::act()
         case DuckState::FLYING_AROUND: flyAround();   break;
         case DuckState::SHOT         : die();         break;
         case DuckState::FALLING      : fall();        break;
-        case DuckState::HIT_GROUND   : lieOnGround(); break;
         case DuckState::FLYING_OUT   : flyOut();      break;
         default: throw std::invalid_argument("Duck state #" + boost::lexical_cast<std::string, int>(int(state)) + " not recognized!");
     }
@@ -60,18 +60,16 @@ void Duck::move()
 void Duck::flyIn()
 {
     if (prevstate != DuckState::FLYING_IN) {
-        sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), Window.GetHeight()*.7);
+        sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), START_HEIGHT);
         updateShotBox();
         is_dead = false;
-    }
-
-    if (velocity == VectorFloat(0, 0)) {
         float angle = Random::Random(-ANGLE_RANGE, ANGLE_RANGE);
         velocity = VectorFloat(speed*cos(angle), -fabs(speed*sin(angle)));
     }
 
     if (actiontimer.GetElapsedTime() < 1 && sprite.GetPosition().y > buffer[UP]) {
         sprite.Move(velocity);
+        detectBoundaries();
     } else {
         setState(DuckState::FLYING_AROUND);
         setRandomDirection();
@@ -114,16 +112,6 @@ void Duck::fall()
         sprite.SetSubRect(frames[DuckFrame::FALLING]);
 
     sprite.Move(velocity += GRAVITY);
-
-
-    if (sprite.GetPosition().y >= Window.GetHeight()*.8) {
-        setState(DuckState::HIT_GROUND);
-    }
-}
-
-void Duck::lieOnGround()
-{
-
 }
 
 void Duck::updateShotBox()
@@ -156,7 +144,7 @@ void Duck::detectBoundaries()
 
     //This way, the ducks only turn around at the left and right edges
     if (state == DuckState::FLYING_AROUND) {
-        float temp = 3*Window.GetHeight()/5;
+        float temp = SCREEN.GetHeight()*.6;
         if (!IN_RANGE(sprite.GetPosition().y, buffer[UP], temp)) {
             sprite.SetY(sprite.GetPosition().y < temp ? buffer[UP] : temp);
             velocity.y *= -1;

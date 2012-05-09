@@ -2,7 +2,7 @@
 #define DECLARATIONS_H
 
 #define INPUT Window.GetInput()
-#define MOUSE INPUT.GetMouseX(), INPUT.GetMouseY()
+#define MOUSE VectorFloat(INPUT.GetMouseX(), INPUT.GetMouseY())
 
 #define IN_RANGE(num, min, max) (((min) <= (num)) && ((num) <= (max)))
 
@@ -81,7 +81,8 @@ extern RenderWindow Window ;  //The window we actually see
 
 extern StateManager StateController;
 
-extern const VectorFloat center;  //The center of the screen
+extern const VectorFloat CENTER;  //The center of the screen
+extern const RectInt     SCREEN;  //The rectangle that comprises the screen
 
 //Moves the sprite in question.
 auto inputmove = [](const int speed, const bool ismoving[4],
@@ -93,15 +94,15 @@ auto inputmove = [](const int speed, const bool ismoving[4],
 };
 
 //Ensures that a sprite stops at the edge of the screen
-auto setSpriteBuffer = [&Window](const Sprite& sprite, float buffer[4]) {
+auto setSpriteBuffer = [&SCREEN](const Sprite& sprite, float buffer[4]) {
     buffer[UP   ] = sprite.GetSize().y/2;
-    buffer[DOWN ] = Window.GetHeight() - buffer[UP];
+    buffer[DOWN ] = SCREEN.GetHeight() - buffer[UP];
     buffer[LEFT ] = sprite.GetSize().x/2;
-    buffer[RIGHT] = Window.GetWidth() - buffer[LEFT];
+    buffer[RIGHT] = SCREEN.GetWidth() - buffer[LEFT];
 };
 
 auto initSprite = [](Sprite& sprite, const Image& image, const RectInt& subrect,
-                     const float scale, const VectorFloat& position = center) {
+                     const float scale, const VectorFloat& position = CENTER) {
     sprite.SetImage(image);
     sprite.SetSubRect(subrect);
     sprite.SetScale(scale, scale);

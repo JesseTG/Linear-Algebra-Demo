@@ -20,7 +20,6 @@ enum class DuckState : char {
     FLYING_AROUND,
     SHOT         ,
     FALLING      ,
-    HIT_GROUND   ,
     FLYING_OUT   ,
 };
 

@@ -34,14 +34,14 @@
 	<File name="include/states/VectorState.h" open="0" top="0" tabpos="8">
 		<Cursor position="390" topLine="14" />
 	</File>
-	<File name="include/states/duckhunt/Dog.h" open="1" top="0" tabpos="6">
-		<Cursor position="221" topLine="0" />
+	<File name="include/states/duckhunt/Dog.h" open="1" top="0" tabpos="4">
+		<Cursor position="1343" topLine="49" />
 	</File>
-	<File name="include/states/duckhunt/Duck.h" open="1" top="0" tabpos="4">
-		<Cursor position="1584" topLine="50" />
+	<File name="include/states/duckhunt/Duck.h" open="1" top="0" tabpos="3">
+		<Cursor position="1532" topLine="53" />
 	</File>
 	<File name="include/states/duckhunt/DuckHuntGameState.h" open="1" top="0" tabpos="1">
-		<Cursor position="2358" topLine="87" />
+		<Cursor position="298" topLine="11" />
 	</File>
 	<File name="include/states/duckhunt/DuckHuntTitle.h" open="0" top="0" tabpos="0">
 		<Cursor position="324" topLine="3" />
@@ -77,13 +77,13 @@
 		<Cursor position="44" topLine="0" />
 	</File>
 	<File name="src/states/duckhunt/Dog.cpp" open="1" top="1" tabpos="5">
-		<Cursor position="1646" topLine="51" />
+		<Cursor position="4177" topLine="100" />
 	</File>
-	<File name="src/states/duckhunt/Duck.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="1911" topLine="49" />
+	<File name="src/states/duckhunt/Duck.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="332" topLine="0" />
 	</File>
 	<File name="src/states/duckhunt/DuckHuntGameState.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="2076" topLine="0" />
+		<Cursor position="4841" topLine="137" />
 	</File>
 	<File name="src/states/duckhunt/DuckHuntTitle.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="400" topLine="0" />

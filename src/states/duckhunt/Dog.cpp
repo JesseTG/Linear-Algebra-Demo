@@ -2,24 +2,24 @@
 
 const int DOG_SCALE = 2;
 const float FACTOR = 2;
-const float DOG_RISE_SPEED = 1.4;  //How fast the dog rises
+const float DOG_RISE_SPEED = 1.35;  //How fast the dog rises
 
 #include <iostream>
 
 Dog::Dog()
 {
-    frames[DogFrame::SNIFF_1  ] = RectInt(  3, 233,  56, 275);
-    frames[DogFrame::SNIFF_2  ] = RectInt( 59, 233, 114, 275);
-    frames[DogFrame::WALK_1   ] = RectInt(119, 233, 170, 275);
-    frames[DogFrame::WALK_2   ] = RectInt(173, 233, 226, 275);
-    frames[DogFrame::WALK_3   ] = RectInt(230, 233, 282, 275);
-    frames[DogFrame::EXCITED  ] = RectInt(  2, 280,  55, 328);
-    frames[DogFrame::JUMP_UP  ] = RectInt( 62, 276,  97, 322);
-    frames[DogFrame::JUMP_DOWN] = RectInt(104, 290, 137, 322);
-    frames[DogFrame::ONE_DUCK ] = RectInt(  1, 331,  44, 370);
-    frames[DogFrame::TWO_DUCK ] = RectInt( 45, 331, 101, 370);
-    frames[DogFrame::LAUGH_1  ] = RectInt(102, 329, 131, 368);
-    frames[DogFrame::LAUGH_2  ] = RectInt(133, 329, 162, 368);
+    frames[DogFrame::SNIFF_1  ] = RectInt(  3, 239,  56, 281);
+    frames[DogFrame::SNIFF_2  ] = RectInt( 59, 239, 114, 281);
+    frames[DogFrame::WALK_1   ] = RectInt(119, 233, 170, 281);
+    frames[DogFrame::WALK_2   ] = RectInt(174, 233, 227, 281);
+    frames[DogFrame::WALK_3   ] = RectInt(230, 233, 282, 281);
+    frames[DogFrame::EXCITED  ] = RectInt(  2, 286,  55, 334);
+    frames[DogFrame::JUMP_UP  ] = RectInt( 62, 282,  97, 328);
+    frames[DogFrame::JUMP_DOWN] = RectInt(104, 296, 137, 328);
+    frames[DogFrame::ONE_DUCK ] = RectInt(  1, 337,  44, 376);
+    frames[DogFrame::TWO_DUCK ] = RectInt( 45, 337, 101, 376);
+    frames[DogFrame::LAUGH_1  ] = RectInt(102, 335, 131, 374);
+    frames[DogFrame::LAUGH_2  ] = RectInt(133, 335, 162, 374);
 
     sounds[DogSound::SUCCESS].file.LoadFromFile("./sfx/duckhunt/success.wav");
     sounds[DogSound::SUCCESS].sound.SetBuffer(sounds[DogSound::SUCCESS].file);
@@ -29,7 +29,7 @@ Dog::Dog()
     sounds[DogSound::BARK   ].sound.SetBuffer(sounds[DogSound::BARK].file   );
 
     initSprite(sprite, sprites, frames[DogFrame::SNIFF_1], DOG_SCALE,
-               VectorFloat(Window.GetWidth()*.1, Window.GetHeight()*.70));
+               VectorFloat(SCREEN.GetWidth()*.1, SCREEN.GetHeight()*.7));
 
     barks = 3;
 
@@ -59,6 +59,7 @@ void Dog::act()
 
 void Dog::walk()
 {
+    sprite.SetSubRect(frames[DogFrame((int(5*actiontimer.GetElapsedTime())%3)+2)]);
     sprite.Move(5.0/7.0, 0);
 }
 
@@ -97,9 +98,12 @@ void Dog::rise()
         if (prevstate == DogState::IDLE)
             sounds[DogSound::SUCCESS].Play();
         sprite.Move(0, -DOG_RISE_SPEED);
-    }
+    }  //And then he lowers again
     else if (actiontimer.GetElapsedTime() >= 1.65 && actiontimer.GetElapsedTime() <= 2.65) {
         sprite.Move(0, DOG_RISE_SPEED);
+    }
+    else if (actiontimer.GetElapsedTime() > 2.65) {
+        setState(DogState::IDLE);
     }
 
 
@@ -117,11 +121,11 @@ void Dog::laugh()
     else if (actiontimer.GetElapsedTime() >= 1.65 && actiontimer.GetElapsedTime() <= 2.65) {
         sprite.Move(0, DOG_RISE_SPEED);
     }
+    else if (actiontimer.GetElapsedTime() > 2.65) {
+        setState(DogState::IDLE);
+    }
 }
 
 void Dog::updateAnimation()
 {
-    if (state == DogState::WALKING) {
-        sprite.SetSubRect(frames[DogFrame((int(5*animationtimer.GetElapsedTime())%3)+2)]);
-    }
 }

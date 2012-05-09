@@ -37,11 +37,11 @@ DuckHuntGameState::DuckHuntGameState()
     }
 
     {  //Prepare render list  //////////////////////////////////////////////////
-    renderlist.push_back(&bglayers[SKY]       );
+    renderlist.push_back(&bglayers[SKY   ]    );
     renderlist.push_back(&ducks[0].getSprite());
     renderlist.push_back(&ducks[1].getSprite());
     renderlist.push_back(&bglayers[GROUND]    );
-    renderlist.push_back(&bglayers[GRASS]     );
+    renderlist.push_back(&bglayers[GRASS ]    );
     renderlist.push_back(&dog.getSprite()     );
     }
 
@@ -74,8 +74,11 @@ void DuckHuntGameState::input()
 void DuckHuntGameState::logic()
 {
     prevstate = state;
+    std::cout << "*************************************\n";
     std::cout << "State: " << int(state) << std::endl;
     std::cout << "Ducks Dead: " << int(ducks_dead) << std::endl;
+    std::cout << "Ammo: " << int(ammo) << std::endl;
+    std::cout << "Round: " << round << std::endl;
 
     switch (state) {
         case InGameState::INTRO      : intro();       break;
@@ -155,10 +158,12 @@ void DuckHuntGameState::game()
 
 void DuckHuntGameState::round_start()
 {
-    can_shoot = true;
+    ammo            = 3;
+    can_shoot       = true;
+    ducks_dead      = 0;
     is_screen_flash = false;
-    ducks_dead = 0;
     ++round;
+    for (auto& i : ducks) i.setState(DuckState::FLYING_IN);
     timepassed.Reset();
 
     setState(InGameState::GAME);
@@ -171,8 +176,8 @@ void DuckHuntGameState::game_over()
 
 void DuckHuntGameState::round_end()
 {
-    if (!IN_RANGE(ducks[0].getSprite().GetPosition().y, 0, Window.GetHeight()*.7) &&
-        !IN_RANGE(ducks[1].getSprite().GetPosition().y, 0, Window.GetHeight()*.7)) {
+    if (!SCREEN.Contains(ducks[0].getSprite().GetPosition().x, ducks[0].getSprite().GetPosition().y) &&
+        !SCREEN.Contains(ducks[1].getSprite().GetPosition().x, ducks[1].getSprite().GetPosition().y)) {
         switch (ducks_dead) {
             case 0: dog.setState(DogState::LAUGHING     ); setState(InGameState::ROUND_FAIL);  break;
             case 1: dog.setState(DogState::HOLDING_1DUCK); setState(InGameState::ROUND_WIN );  break;
@@ -184,8 +189,7 @@ void DuckHuntGameState::round_end()
 
 void DuckHuntGameState::round_win()
 {
-    if (actiontimer.GetElapsedTime() >= 5 && dog.getState() != DogState::HOLDING_1DUCK &&
-        dog.getState() != DogState::HOLDING_2DUCK)
+    if (dog.getState() != DogState::HOLDING_1DUCK && dog.getState() != DogState::HOLDING_2DUCK)
             setState(InGameState::ROUND_START);
 }
 
@@ -205,7 +209,7 @@ void DuckHuntGameState::shoot()
         --ammo;
 
         for (auto& i : ducks) {
-            if (i.getShotBox().Contains(MOUSE) && i.getState() == DuckState::FLYING_AROUND) {
+            if (i.getShotBox().Contains(MOUSE.x, MOUSE.y) && i.getState() == DuckState::FLYING_AROUND || i.getState() == DuckState::FLYING_IN) {
                 i.setState(DuckState::SHOT);
                 ++ducks_dead;
             }

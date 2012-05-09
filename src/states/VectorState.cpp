@@ -7,14 +7,14 @@ VectorState::VectorState()
 {
     //Setting up the tetrad sprite  ////////////////////////////////////////////
     initSprite(tetrad, sprites, RectInt(16, 0, 39, 15), TETRAD_SCALE,
-               VectorFloat(Window.GetWidth()/4, 5*Window.GetHeight()/6)),
+               VectorFloat(SCREEN.GetWidth()/4, 5*SCREEN.GetHeight()/6)),
 
     tetradmovement = VectorFloat(TETRAD_SPEED, -TETRAD_SPEED);
     ////////////////////////////////////////////////////////////////////////////
 
     //Setting up the line that the tetrad travels along  ///////////////////////
-    pathline = Shape::Line(Window.GetWidth()/4, 5*Window.GetHeight()/6,
-                           Window.GetWidth()*.75, Window.GetHeight()/6,
+    pathline = Shape::Line(SCREEN.GetWidth()/4, 5*SCREEN.GetHeight()/6,
+                           SCREEN.GetWidth()*.75, SCREEN.GetHeight()/6,
                            3, Color::White);
     ////////////////////////////////////////////////////////////////////////////
 
@@ -22,7 +22,7 @@ VectorState::VectorState()
                         "GFX: Tetris (Tengen, 1989)");
     vectortitle.SetPosition(8, 8);
 
-    tetradstats.SetPosition(center.x, 5*Window.GetHeight()/6);
+    tetradstats.SetPosition(CENTER.x, 5*SCREEN.GetHeight()/6);
 }
 
 void VectorState::input()
@@ -34,8 +34,8 @@ void VectorState::input()
 void VectorState::logic()
 {
     //Moving the tetrad  ///////////////////////////////////////////////////////
-    if (tetrad.GetPosition().x > Window.GetWidth()*.75 ||
-        tetrad.GetPosition().x < Window.GetWidth()/4)
+    if (tetrad.GetPosition().x > SCREEN.GetWidth()*.75 ||
+        tetrad.GetPosition().x < SCREEN.GetWidth()/4)
         tetradmovement = -tetradmovement;
     tetrad.Move(tetradmovement);
     ////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,8 @@
 #include "../../include/states/ScalarVsVectorState.h"
 
+const int HARRIER_SCALE      = 3;
+const int HARRIER_MOVE_SPEED = 8;
+
 ScalarVsVectorState::ScalarVsVectorState()
 {
     initSprite(harrier, sprites, RectInt(0, 49, 24, 96), HARRIER_SCALE);
@@ -8,7 +11,7 @@ ScalarVsVectorState::ScalarVsVectorState()
 
     setSpriteBuffer(harrier, buffer);
 
-    centerline = Shape::Line(harrier.GetPosition(), center, 5, Color::White);
+    centerline = Shape::Line(harrier.GetPosition(), CENTER, 5, Color::White);
     ////////////////////////////////////////////////////////////////////////////
 }
 
@@ -34,16 +37,16 @@ void ScalarVsVectorState::logic()
     distance += hypot(currentpos.x, currentpos.y);
 
     //Changes the harrier's sprite based on which third of the screen he's in  /
-    if (harrier.GetPosition().x < Window.GetWidth()/3) {
+    if (harrier.GetPosition().x < SCREEN.GetWidth()/3) {
         harrier.SetSubRect(RectInt(25, 49, 48, 96));
         harrier.FlipX(true);
     }
-    else if (harrier.GetPosition().x >= Window.GetWidth()/3 &&
-             harrier.GetPosition().x <= 2*Window.GetWidth()/3) {
+    else if (harrier.GetPosition().x >= SCREEN.GetWidth()/3 &&
+             harrier.GetPosition().x <= 2*SCREEN.GetWidth()/3) {
         harrier.SetSubRect(RectInt(0, 49, 24, 96));
         harrier.FlipX(false);  //The Harrier faces the center
     }
-    else if (harrier.GetPosition().x > 2*Window.GetWidth()/3) {
+    else if (harrier.GetPosition().x > 2*SCREEN.GetWidth()/3) {
         harrier.SetSubRect(RectInt(25, 49, 48, 96));
         harrier.FlipX(false);
     }
@@ -51,7 +54,7 @@ void ScalarVsVectorState::logic()
 
 
     //Prepares all statistics for output on-screen  ////////////////////////////
-    VectorFloat distancetocenter = harrier.GetPosition() - center;
+    VectorFloat distancetocenter = harrier.GetPosition() - CENTER;
     stats_to_string.str("");
     stats_to_string << "Vectors Vs. Scalars\n\n"
                     << "Distance Travelled: " << distance << "\n"
@@ -68,7 +71,7 @@ void ScalarVsVectorState::logic()
      *don't have many other options.  At least it works.
      */
     if (currentpos != VectorFloat(0, 0))
-        centerline = Shape::Line(harrier.GetPosition(), center, 5, Color::White);
+        centerline = Shape::Line(harrier.GetPosition(), CENTER, 5, Color::White);
 }
 
 void ScalarVsVectorState::render()

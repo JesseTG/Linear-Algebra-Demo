@@ -27,6 +27,9 @@ class StateManager
     //Runs the game loop
     void updateState();
 
+    //Creates the initial state
+    void init();
+
   private:
     //Resets currentstate with a new state
     void setState(const StateName newstate);
@@ -40,8 +43,12 @@ class StateManager
 
 StateManager::StateManager()
 {
-    RESET(new TitleState);
     isfullscreen = false;
+}
+
+void StateManager::init()
+{
+    currentstate.reset(new TitleState);
 }
 
 void StateManager::updateState()

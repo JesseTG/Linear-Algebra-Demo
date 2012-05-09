@@ -10,7 +10,7 @@ TitleState::TitleState()
 {
     //Sets up Mario's sprite  //////////////////////////////////////////////////
     initSprite(mario, sprites, RectInt(0, 0, 16, 16), MARIO_SCALE,
-               VectorFloat(center.x, Window.GetHeight()/1.5));
+               VectorFloat(CENTER.x, SCREEN.GetHeight()/1.5));
     ////////////////////////////////////////////////////////////////////////////
 
     //Sets up the title text  //////////////////////////////////////////////////

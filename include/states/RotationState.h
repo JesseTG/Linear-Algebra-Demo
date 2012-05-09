@@ -22,11 +22,11 @@ class RotationState : public State
         //helicopter's acceleration; added to velocity, calculated by direction
         VectorFloat            acceleration;
 
+        //Used to time the helicopter's animation
+        Timer                  animationtimer;
+
         //The bump that plays whenever we hit the wall
         Sound                  bump;
-
-        //Stores the helicopter's current frame
-        uint8_t                currentframe;
 
         //Stores each of the four frames the helicopter can have
         std::array<RectInt, 4> frames;

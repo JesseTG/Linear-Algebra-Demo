@@ -5,10 +5,10 @@ RasterVsVectorState::RasterVsVectorState()
 
     //Sets up the raster circle (aka the circle with pixels).  /////////////////
     initSprite(rastercircle, sprites, RectInt(0, 16, 32, 48), 1,
-               VectorFloat(Window.GetWidth()/4, center.y));
+               VectorFloat(SCREEN.GetWidth()/4, CENTER.y));
     ////////////////////////////////////////////////////////////////////////////
 
-    vectorcircle = Shape::Circle(Window.GetWidth()*.75, center.y, 16, Color::Blue);
+    vectorcircle = Shape::Circle(Window.GetWidth()*.75, CENTER.y, 16, Color::Blue);
 
     rastertitle.SetText("Raster Vs. Vector Graphics");
 }
@@ -26,8 +26,7 @@ void RasterVsVectorState::logic()
     //Then we actually scale the circles.  Unfortunately I have to create  /////
     //another circle each frame, even though it's not very efficient.  /////////
     rastercircle.SetScale(temp, temp);
-    vectorcircle = Shape::Circle(Window.GetWidth()*.75, center.y,
-                                16*temp, Color::Blue);
+    vectorcircle = Shape::Circle(SCREEN.GetWidth()*.75, CENTER.y, temp*16, Color::Blue);
 }
 
 void RasterVsVectorState::render()

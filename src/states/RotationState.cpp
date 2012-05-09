@@ -8,16 +8,16 @@ const int HELI_ROTATION = 5;  //This many degrees per frame
 RotationState::RotationState()
 {
     //Initializes all frames of the helicopter (and the frame counter)  ////////
-    frames[currentframe = 0] = RectInt(58, 36, 85, 63);
-    frames[1] = RectInt(86, 37, 113, 64);
-    frames[2] = RectInt(113, 37, 140, 64);
-    frames[3] = RectInt(139, 37, 166, 64);
+    frames[0] = RectInt( 58,  36,  85,  63);
+    frames[1] = RectInt( 86,  37, 113,  64);
+    frames[2] = RectInt(113,  37, 140,  64);
+    frames[3] = RectInt(139,  37, 166,  64);
     ////////////////////////////////////////////////////////////////////////////
 
     initSprite(helicopter, sprites, frames[0], HELI_SCALE);
 
     acceleration = VectorFloat(sin(helicopter.GetRotation()*(M_PI/180)),
-                         cos(helicopter.GetRotation()*(M_PI/180)));
+                               cos(helicopter.GetRotation()*(M_PI/180)));
 
     bump.file.LoadFromFile("./sfx/copterbump.wav");
     bump.sound.SetBuffer(bump.file);
@@ -48,7 +48,7 @@ void RotationState::input()
 
 void RotationState::logic()
 {
-    helicopter.SetSubRect(frames[(++currentframe) % 4]);
+    helicopter.SetSubRect(frames[int(animationtimer.GetElapsedTime()*1500) % 4]);
 
     acceleration = VectorFloat(sin(helicopter.GetRotation()*(M_PI/180)),
                                cos(helicopter.GetRotation()*(M_PI/180)));
@@ -62,9 +62,9 @@ void RotationState::logic()
         helicopter.SetX(0);
         bump.Play();
     }
-    if (helicopter.GetPosition().x > Window.GetWidth()) {
+    if (helicopter.GetPosition().x > SCREEN.GetWidth()) {
         velocity.x *= -1;
-        helicopter.SetX(Window.GetWidth());
+        helicopter.SetX(SCREEN.GetWidth());
         bump.Play();
     }
     if (helicopter.GetPosition().y < 0) {
@@ -72,9 +72,9 @@ void RotationState::logic()
         helicopter.SetY(0);
         bump.Play();
     }
-    if (helicopter.GetPosition().y > Window.GetHeight()) {
+    if (helicopter.GetPosition().y > SCREEN.GetHeight()) {
         velocity.y *= -1;
-        helicopter.SetY(Window.GetHeight());
+        helicopter.SetY(SCREEN.GetHeight());
         bump.Play();
     }
     ////////////////////////////////////////////////////////////////////////////

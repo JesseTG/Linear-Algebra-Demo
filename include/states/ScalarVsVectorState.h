@@ -4,9 +4,6 @@
 #include "../Declarations.h"
 #include "../State.h"
 
-const int HARRIER_SCALE = 3;
-const int HARRIER_MOVE_SPEED = 8;
-
 class ScalarVsVectorState : public State
 {
     public:

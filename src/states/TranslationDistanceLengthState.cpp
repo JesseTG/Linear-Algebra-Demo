@@ -26,8 +26,7 @@ TranslationDistanceLengthState::TranslationDistanceLengthState()
     ////////////////////////////////////////////////////////////////////////////
 
     //Preps the Ghost sprite  //////////////////////////////////////////////////
-    initSprite(ghost, sprites, RectInt(34, 18, 58, 48), GHOST_SCALE,
-               VectorFloat(MOUSE));
+    initSprite(ghost, sprites, RectInt(34, 18, 58, 48), GHOST_SCALE, MOUSE);
     ////////////////////////////////////////////////////////////////////////////
 }
 
@@ -36,10 +35,10 @@ void TranslationDistanceLengthState::input()
     checkForNextState(StateName::MATRICES, StateName::DOT_PRODUCTS);
 
     bool movinghorizontal = !ismoving[LEFT] * !ismoving[RIGHT];
-    ismoving[UP   ]       = INPUT.IsKeyDown(sf::Key::Up) * movinghorizontal;
+    ismoving[UP   ]       = INPUT.IsKeyDown(sf::Key::Up  ) * movinghorizontal;
     ismoving[DOWN ]       = INPUT.IsKeyDown(sf::Key::Down) * movinghorizontal;
     bool movingvertical   = !ismoving[UP] * !ismoving[DOWN];
-    ismoving[LEFT ]       = INPUT.IsKeyDown(sf::Key::Left) * movingvertical;
+    ismoving[LEFT ]       = INPUT.IsKeyDown(sf::Key::Left ) * movingvertical;
     ismoving[RIGHT]       = INPUT.IsKeyDown(sf::Key::Right) * movingvertical;
 }
 
@@ -71,7 +70,7 @@ void TranslationDistanceLengthState::logic()
 
     //Keeps the animation at JUST the right speed  /////////////////////////////
     if (animationtimer.GetElapsedTime() >= 1) {
-        for (bool& i : ismoving) if (i) break;  //Don't change the frame if moving
+        for (const bool& i : ismoving) if (i) break;  //Don't change the frame if moving
         frame += (frame % 2 == 0) ? 1 : -1;
         animationtimer.Reset();
         hero.SetSubRect(heroframes[HeroFrame(frame)]);

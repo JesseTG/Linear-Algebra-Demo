@@ -59,6 +59,9 @@ class Duck
         //The frames that the ducks can use
         static std::unordered_map<DuckFrame, RectInt> frames;
 
+        //SPEED, not velocity, of the ducks
+        static float speed;
+
         //Updates the position of the box we can shoot at
         void updateShotBox();
 
@@ -77,6 +80,8 @@ class Duck
         //The duck falling; you've shot him already!
         void fall();
 
+        void lieOnGround();
+
         void detectBoundaries();
 
         Timer actiontimer;
@@ -84,11 +89,7 @@ class Duck
         //Times the duck's animation
         Timer animationtimer;
 
-        //The current frame this duck has
-        uint8_t frame;
 
-        //SPEED, not velocity
-        static float speed;
 
         //The box that the cursor has to be in to register a hit
         RectFloat shotbox;

@@ -9,7 +9,6 @@ std::unordered_map<DuckFrame, RectInt> Duck::frames;
 
 Duck::Duck()
 {
-    frame = 0;
     frames[DuckFrame::UP_1   ] = RectInt(  0, 197,  29, 229);
     frames[DuckFrame::UP_2   ] = RectInt( 35, 197,  64, 229);
     frames[DuckFrame::UP_3   ] = RectInt( 67, 197,  96, 229);
@@ -39,12 +38,12 @@ void Duck::act()
 {
     switch (state) {
         case DuckState::IDLE         : break;
-        case DuckState::FLYING_IN    : flyIn();     break;
-        case DuckState::FLYING_AROUND: flyAround(); break;
-        case DuckState::SHOT         : die();       break;
-        case DuckState::FALLING      : fall();      break;
-        case DuckState::HIT_GROUND   : break;
-        case DuckState::FLYING_OUT   : flyOut();    break;
+        case DuckState::FLYING_IN    : flyIn();       break;
+        case DuckState::FLYING_AROUND: flyAround();   break;
+        case DuckState::SHOT         : die();         break;
+        case DuckState::FALLING      : fall();        break;
+        case DuckState::HIT_GROUND   : lieOnGround(); break;
+        case DuckState::FLYING_OUT   : flyOut();      break;
         default: throw std::invalid_argument("Duck state #" + boost::lexical_cast<std::string, int>(int(state)) + " not recognized!");
     }
 
@@ -81,13 +80,6 @@ void Duck::flyIn()
 
 void Duck::flyAround()
 {
-    if (actiontimer.GetElapsedTime() >= 5.0) {
-        setState(DuckState::FLYING_OUT);
-        float angle = Random::Random(-ANGLE_RANGE, ANGLE_RANGE);
-        velocity = VectorFloat(speed*cos(angle), -fabs(speed*sin(angle)));
-        return;
-    }
-
     if (state == DuckState::FLYING_AROUND) {
         if (Random::Random(0.0f, 1.0f) <= probChangeVel) setRandomDirection();
 
@@ -127,6 +119,11 @@ void Duck::fall()
     if (sprite.GetPosition().y >= Window.GetHeight()*.8) {
         setState(DuckState::HIT_GROUND);
     }
+}
+
+void Duck::lieOnGround()
+{
+
 }
 
 void Duck::updateShotBox()

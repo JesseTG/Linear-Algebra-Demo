@@ -16,6 +16,7 @@ class Duck;
 enum class DuckHuntSound : char {
     DUCK_FALL,
     FAIL     ,
+    SUCCEED  ,
     FLAP     ,
     QUACK    ,
     SHOT     ,
@@ -23,12 +24,13 @@ enum class DuckHuntSound : char {
 };
 
 enum class InGameState : char {
-    INTRO     ,
-    GAME      ,
-    ROUND_END ,
-    ROUND_WIN ,
-    ROUND_FAIL,
-    GAME_OVER ,
+    INTRO      ,
+    GAME       ,
+    ROUND_START,
+    ROUND_END  ,
+    ROUND_WIN  ,
+    ROUND_FAIL ,
+    GAME_OVER  ,
 };
 //TODO: ROUND_OVER is same no matter how many ducks were shot, relies on other variables
 
@@ -55,18 +57,26 @@ class DuckHuntGameState : public State
         //Actual gameplay
         void game();
 
+        void setState(const InGameState newstate) {
+            state = newstate;
+            timepassed.Reset();
+        }
+
+        void round_start();
 
         void round_end();
 
-        void round_win() {}
+        void round_win();
 
-        void round_fail() {}
+        void round_fail();
 
         //The game has ended, since you've missed too many times!
         void game_over();
 
         //Called by input(); sees if a duck was hit
         void shoot();
+
+        Timer actiontimer;
 
         //The image that represents the background layers
         Image bglayersimage;
@@ -123,10 +133,6 @@ class DuckHuntGameState : public State
 
         //How much time has passed; when it hits 5, the ducks fly away
         Timer timepassed;
-
-
-
-
 };
 
 #endif // DUCKHUNTGAMESTATE_H

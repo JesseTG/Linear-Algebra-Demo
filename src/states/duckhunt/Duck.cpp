@@ -5,8 +5,10 @@ const float ANGLE_RANGE     = 10;  //The range of angles the ducks can fly up
 const VectorFloat GRAVITY(0, .5);
 const float START_HEIGHT    = SCREEN.GetHeight()*.75;  //What row the ducks start
 
+float Duck::probChangeVel = .0085;
 float Duck::speed = 3;
 std::unordered_map<DuckFrame, RectInt> Duck::frames;
+std::unordered_map<DuckSound, Sound>   Duck::sounds;
 
 Duck::Duck()
 {
@@ -19,13 +21,21 @@ Duck::Duck()
     frames[DuckFrame::SHOT   ] = RectInt(212, 202, 243, 231);
     frames[DuckFrame::FALLING] = RectInt(245, 201, 263, 232);
 
+    sounds[DuckSound::FLAP      ].file.LoadFromFile("./sfx/duckhunt/flap.wav");
+    sounds[DuckSound::FLAP      ].sound.SetBuffer(sounds[DuckSound::FLAP].file);
+    sounds[DuckSound::QUACK     ].file.LoadFromFile("./sfx/duckhunt/quack.wav");
+    sounds[DuckSound::QUACK     ].sound.SetBuffer(sounds[DuckSound::QUACK].file);
+    sounds[DuckSound::FALL      ].file.LoadFromFile("./sfx/duckhunt/fall.wav");
+    sounds[DuckSound::FALL      ].sound.SetBuffer(sounds[DuckSound::FALL].file);
+    sounds[DuckSound::HIT_GROUND].file.LoadFromFile("./sfx/duckhunt/hitground.wav");
+    sounds[DuckSound::HIT_GROUND].sound.SetBuffer(sounds[DuckSound::HIT_GROUND].file);
+
     initSprite(sprite, sprites, frames[DuckFrame::NORM_1], DUCK_SCALE);
     setSpriteBuffer(sprite, buffer);
     sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), START_HEIGHT);
     updateShotBox();
 
     is_dead       = false;
-    probChangeVel = .0085;
     velocity      = VectorFloat(0, 0);
     state         = DuckState::IDLE;
 }
@@ -48,13 +58,6 @@ void Duck::act()
     }
 
     prevstate = state;
-}
-
-void Duck::move()
-{
-
-
-
 }
 
 void Duck::flyIn()
@@ -108,10 +111,19 @@ void Duck::die()
 
 void Duck::fall()
 {
-    if (sprite.GetSubRect().GetHeight() != frames[DuckFrame::FALLING].GetHeight())
+    if (sprite.GetSubRect().GetHeight() != frames[DuckFrame::FALLING].GetHeight()) {
         sprite.SetSubRect(frames[DuckFrame::FALLING]);
+        sounds[DuckSound::FALL].Play();
+    }
 
     sprite.Move(velocity += GRAVITY);
+
+    if (sprite.GetPosition().y >= SCREEN.GetHeight()*.7) {
+        sprite.SetY(SCREEN.GetHeight()*2);  //Move off screen to satisfy a conditional in DuckHuntGameState
+        sounds[DuckSound::FALL      ].Stop();
+        sounds[DuckSound::HIT_GROUND].Play();
+        setState(DuckState::IDLE);
+    }
 }
 
 void Duck::updateShotBox()

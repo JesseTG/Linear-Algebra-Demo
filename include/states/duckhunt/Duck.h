@@ -23,10 +23,24 @@ enum class DuckState : char {
     FLYING_OUT   ,
 };
 
+enum class DuckSound : char {
+    FLAP      ,
+    QUACK     ,
+    FALL      ,
+    HIT_GROUND,
+};
+
 namespace std {
     template<> struct hash<DuckFrame> {
         std::size_t operator()(const DuckFrame df) const
         { return hash<char>()(static_cast<char>(df)); }
+    };
+}
+
+namespace std {
+    template<> struct hash<DuckSound> {
+        std::size_t operator()(const DuckSound ds) const
+        { return hash<char>()(static_cast<char>(ds)); }
     };
 }
 
@@ -36,10 +50,12 @@ class Duck
         Duck();
         virtual ~Duck();
 
-        void move();
-        void die();
-
         void act();
+
+        static void increaseDifficulty(const int round) {
+            speed = (round/10.0) + 3;
+            probChangeVel = ((round+1.0)/(round+2.0))/90.0;
+        }
 
         DuckState getState() const { return state; }
 
@@ -58,8 +74,14 @@ class Duck
         //The frames that the ducks can use
         static std::unordered_map<DuckFrame, RectInt> frames;
 
+        //The sounds that the ducks can play
+        static std::unordered_map<DuckSound, Sound> sounds;
+
         //SPEED, not velocity, of the ducks
         static float speed;
+
+        //The odds of the duck changing velocity (thus direction) each frame
+        static float probChangeVel;
 
         //Updates the position of the box we can shoot at
         void updateShotBox();
@@ -78,6 +100,8 @@ class Duck
 
         //The duck falling; you've shot him already!
         void fall();
+
+        void die();
 
         void lieOnGround();
 
@@ -109,8 +133,7 @@ class Duck
 
         DuckState state;
 
-        //The odds of the duck changing velocity (thus direction) each frame
-        float probChangeVel;
+
 
         //How fast this duck is going on both dimensions
         VectorFloat velocity;

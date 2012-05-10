@@ -6,8 +6,6 @@
 
 #define IN_RANGE(num, min, max) (((min) <= (num)) && ((num) <= (max)))
 
-
-
 #include <array>         //A data structure we use to store frames by number
 #include <iomanip>       //Manipulates how I/O streams represent data
 #include <memory>        //For smart pointers

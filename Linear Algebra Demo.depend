@@ -111,7 +111,7 @@
 1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/pins_arduino.h
 	<avr/pgmspace.h>
 
-1336596584 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
+1336615106 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
 	<array>
 	<iomanip>
 	<memory>
@@ -202,7 +202,7 @@
 	"../Declarations.h"
 	"../State.h"
 
-1336260620 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TranslationDistanceLengthState.h
+1336614036 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TranslationDistanceLengthState.h
 	"../Declarations.h"
 	"../State.h"
 
@@ -333,11 +333,10 @@
 1336599395 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntTitle.cpp
 	"../../../include/states/duckhunt/DuckHuntTitle.h"
 
-1336598515 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntGameState.cpp
+1336690042 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntGameState.cpp
 	"../../../include/states/duckhunt/DuckHuntGameState.h"
 
-1336516788 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/DuckHuntGameState.h
-	<memory>
+1336691057 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/DuckHuntGameState.h
 	<utility>
 	<vector>
 	"Dog.h"
@@ -345,13 +344,13 @@
 	"../../Declarations.h"
 	"../../State.h"
 
-1336599141 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Duck.cpp
+1336681034 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Duck.cpp
 	"../../../include/states/duckhunt/Duck.h"
 
-1336598725 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/Duck.h
+1336682686 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/Duck.h
 	"../../Declarations.h"
 
-1336599173 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Dog.cpp
+1336689462 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Dog.cpp
 	"../../../include/states/duckhunt/Dog.h"
 	<iostream>
 

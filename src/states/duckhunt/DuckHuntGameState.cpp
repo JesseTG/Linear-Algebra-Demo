@@ -1,7 +1,8 @@
 #include "../../../include/states/duckhunt/DuckHuntGameState.h"
 
-const int BG_SCALE = 2;
-const float FLASH_LENGTH = .1;
+const int BG_SCALE         = 2;
+const float FLASH_LENGTH   = .1;  //How long each flash lasts in seconds
+const float TIME_LIMIT     = 5.0;  //In seconds
 
 enum { GROUND, GRASS, SKY };
 
@@ -22,6 +23,20 @@ DuckHuntGameState::DuckHuntGameState()
     bglayers[GROUND].SetSubRect(RectInt(  0,   0, 320, 240));
     bglayers[GRASS ].SetSubRect(RectInt(320,   0, 640, 240));
     bglayers[SKY   ].SetSubRect(RectInt(  0, 240, 320, 480));
+
+
+    hudstats[HUDStat::AMMO ].SetFont(font);
+    hudstats[HUDStat::AMMO ].SetSize(16  );
+    hudstats[HUDStat::AMMO ].SetPosition( 28, 435);
+    hudstats[HUDStat::ROUND].SetFont(font);
+    hudstats[HUDStat::ROUND].SetSize(16  );
+    hudstats[HUDStat::ROUND].SetPosition(108, 435);
+    hudstats[HUDStat::SCORE].SetFont(font);
+    hudstats[HUDStat::SCORE].SetSize(8   );
+    hudstats[HUDStat::SCORE].SetPosition(174, 435);
+    hudstats[HUDStat::QUOTA].SetFont(font);
+    hudstats[HUDStat::QUOTA].SetSize(8   );
+    hudstats[HUDStat::QUOTA].SetPosition(255, 435);
     }
 
 
@@ -32,17 +47,18 @@ DuckHuntGameState::DuckHuntGameState()
     sounds[DuckHuntSound::INTRO].sound.SetBuffer(sounds[DuckHuntSound::INTRO].file  );
     }
 
-
-    {  //Prepare objects  //////////////////////////////////////////////////////
-    }
-
     {  //Prepare render list  //////////////////////////////////////////////////
-    renderlist.push_back(&bglayers[SKY   ]    );
-    renderlist.push_back(&ducks[0].getSprite());
-    renderlist.push_back(&ducks[1].getSprite());
-    renderlist.push_back(&bglayers[GROUND]    );
-    renderlist.push_back(&bglayers[GRASS ]    );
-    renderlist.push_back(&dog.getSprite()     );
+    renderlist.push_back(&bglayers[SKY   ]        );
+    renderlist.push_back(&ducks[0].getSprite()    );
+    renderlist.push_back(&ducks[1].getSprite()    );
+    renderlist.push_back(&bglayers[GROUND]        );
+    renderlist.push_back(&bglayers[GRASS ]        );
+    renderlist.push_back(&dog.getSprite()         );
+    renderlist.push_back(&stats                   );
+    renderlist.push_back(&hudstats[HUDStat::AMMO ]);
+    renderlist.push_back(&hudstats[HUDStat::ROUND]);
+    renderlist.push_back(&hudstats[HUDStat::SCORE]);
+    renderlist.push_back(&hudstats[HUDStat::QUOTA]);
     }
 
     {  //Prepare member variables  /////////////////////////////////////////////
@@ -50,9 +66,19 @@ DuckHuntGameState::DuckHuntGameState()
     can_shoot        = false;
     dog_behind_grass = false;
     ducks_dead       = 0;
+    font.LoadFromFile("./gfx/emulogic.ttf");
     is_screen_flash  = false;
-    round            = 1;
+    miss_left        = 3;
+    round            = 0;
+    score            = 0;
+    total_shot       = 0;
+    stats.SetFont(font);
+    stats.SetSize(8);
+    stats.SetPosition(15, 422);
+    stats.SetText("AMMO      ROUND     SCORE     QUOTA");
+
     setState(InGameState::INTRO);
+
     }
 
     sounds[DuckHuntSound::INTRO].Play();
@@ -74,11 +100,11 @@ void DuckHuntGameState::input()
 void DuckHuntGameState::logic()
 {
     prevstate = state;
-    std::cout << "*************************************\n";
+    /*std::cout << "*************************************\n";
     std::cout << "State: " << int(state) << std::endl;
     std::cout << "Ducks Dead: " << int(ducks_dead) << std::endl;
     std::cout << "Ammo: " << int(ammo) << std::endl;
-    std::cout << "Round: " << round << std::endl;
+    std::cout << "Round: " << round << std::endl;*/
 
     switch (state) {
         case InGameState::INTRO      : intro();       break;
@@ -97,7 +123,11 @@ void DuckHuntGameState::logic()
         can_shoot = true;
     }
 
-
+    //Update the status displays
+    hudstats[HUDStat::AMMO ].SetText(boost::lexical_cast<std::string, int>(ammo ));
+    hudstats[HUDStat::ROUND].SetText(boost::lexical_cast<std::string, int>(round));
+    hudstats[HUDStat::SCORE].SetText(boost::lexical_cast<std::string, int>(score));
+    hudstats[HUDStat::QUOTA].SetText(boost::lexical_cast<std::string, int>(total_shot) + "/" + boost::lexical_cast<std::string, int>(round));
 
     for (auto& i : ducks) i.act();
     dog.act();
@@ -105,14 +135,17 @@ void DuckHuntGameState::logic()
 
 void DuckHuntGameState::render()
 {
+    //Animate the dog and ducks
     for (auto& i : ducks) i.updateAnimation();
     dog.updateAnimation();
 
-    if (!is_screen_flash) {
-        for (const auto& i : renderlist) Window.Draw(*i);
+
+
+    if (!is_screen_flash) {  //If the screen currently isn't flashing white...
+        for (const auto& i : renderlist) Window.Draw(*i);  //Draw everything on the render list, from back to front
     }
     else {
-        Window.Clear(Color::White);
+        Window.Clear(Color::White);  //Or else flash the screen white
     }
 
     Window.Display();
@@ -147,10 +180,11 @@ void DuckHuntGameState::game()
     }
 
     //If we run out of ammo, time, or ducks to shoot...
-    if (ammo <= 0 || timepassed.GetElapsedTime() >= 5 || ducks_dead == 2) {
+    if (ammo <= 0 || timepassed.GetElapsedTime() >= TIME_LIMIT || ducks_dead == 2) {
         for (auto& i : ducks)
             if (i.getState() == DuckState::FLYING_AROUND)  //If they haven't died...
                 i.setState(DuckState::FLYING_OUT);  //The ducks fly away
+        time_used = TIME_LIMIT - timepassed.GetElapsedTime();
         setState(InGameState::ROUND_END);
     }
 
@@ -158,13 +192,13 @@ void DuckHuntGameState::game()
 
 void DuckHuntGameState::round_start()
 {
+    //Reset all necessary variables
     ammo            = 3;
     can_shoot       = true;
     ducks_dead      = 0;
     is_screen_flash = false;
-    ++round;
+    Duck::increaseDifficulty(++round);
     for (auto& i : ducks) i.setState(DuckState::FLYING_IN);
-    timepassed.Reset();
 
     setState(InGameState::GAME);
 }
@@ -176,31 +210,38 @@ void DuckHuntGameState::game_over()
 
 void DuckHuntGameState::round_end()
 {
-    if (!SCREEN.Contains(ducks[0].getSprite().GetPosition().x, ducks[0].getSprite().GetPosition().y) &&
-        !SCREEN.Contains(ducks[1].getSprite().GetPosition().x, ducks[1].getSprite().GetPosition().y)) {
-        switch (ducks_dead) {
-            case 0: dog.setState(DogState::LAUGHING     ); setState(InGameState::ROUND_FAIL);  break;
-            case 1: dog.setState(DogState::HOLDING_1DUCK); setState(InGameState::ROUND_WIN );  break;
-            case 2: dog.setState(DogState::HOLDING_2DUCK); setState(InGameState::ROUND_WIN );  break;
-            default: throw std::out_of_range("Wrong amount of ducks died!  (Should not be " + boost::lexical_cast<std::string, int>(ducks_dead) + ")");
+    if (timepassed.GetElapsedTime() >= 1) {
+        if (!SCREEN.Contains(ducks[0].getSprite().GetPosition().x, ducks[0].getSprite().GetPosition().y) &&
+            !SCREEN.Contains(ducks[1].getSprite().GetPosition().x, ducks[1].getSprite().GetPosition().y)) {
+                score += (ducks_dead > 0)*(time_used * 100 * (ammo+1) + round*10 + ducks_dead*300);  //Increase the score
+                switch (ducks_dead) {
+                    case 0: dog.setState(DogState::LAUGHING     ); setState(InGameState::ROUND_FAIL);  break;
+                    case 1: dog.setState(DogState::HOLDING_1DUCK); setState(InGameState::ROUND_WIN );  break;
+                    case 2: dog.setState(DogState::HOLDING_2DUCK); setState(InGameState::ROUND_WIN );  break;
+                    default: throw std::out_of_range("Wrong amount of ducks died!  (Should not be " + boost::lexical_cast<std::string, int>(ducks_dead) + ")");
+            }
         }
     }
 }
 
 void DuckHuntGameState::round_win()
 {
-    if (dog.getState() != DogState::HOLDING_1DUCK && dog.getState() != DogState::HOLDING_2DUCK)
-            setState(InGameState::ROUND_START);
+    if (dog.getState() == DogState::IDLE) {
+
+        setState(InGameState::ROUND_START);
+    }
 }
 
 void DuckHuntGameState::round_fail()
 {
-    if (actiontimer.GetElapsedTime() >= 5 && dog.getState() != DogState::LAUGHING)
+    if (dog.getState() == DogState::IDLE)
         setState(InGameState::ROUND_START);
+    //TODO: Move closer to game over
 }
 
 void DuckHuntGameState::shoot()
 {
+    //If we can currently shoot (have ammo, screen's not flashing, we have permission)...
     if (can_shoot && !is_screen_flash && ammo > 0) {
         sounds[DuckHuntSound::SHOT].Play();
         flashtimer.Reset();
@@ -208,10 +249,13 @@ void DuckHuntGameState::shoot()
         can_shoot       = false;
         --ammo;
 
+        //Check both ducks for whether our mouse is on top of them
         for (auto& i : ducks) {
-            if (i.getShotBox().Contains(MOUSE.x, MOUSE.y) && i.getState() == DuckState::FLYING_AROUND || i.getState() == DuckState::FLYING_IN) {
+            if (i.getShotBox().Contains(MOUSE.x, MOUSE.y) &&
+                (i.getState() == DuckState::FLYING_AROUND || i.getState() == DuckState::FLYING_IN)) {
                 i.setState(DuckState::SHOT);
                 ++ducks_dead;
+                ++total_shot;
             }
         }
     }

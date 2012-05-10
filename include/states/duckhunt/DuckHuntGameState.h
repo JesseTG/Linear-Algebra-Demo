@@ -1,8 +1,6 @@
 #ifndef DUCKHUNTGAMESTATE_H
 #define DUCKHUNTGAMESTATE_H
 
-
-#include <memory>
 #include <utility>
 #include <vector>
 
@@ -11,6 +9,7 @@
 #include "../../Declarations.h"
 #include "../../State.h"
 
+class Dog;
 class Duck;
 
 enum class DuckHuntSound : char {
@@ -32,12 +31,26 @@ enum class InGameState : char {
     ROUND_FAIL ,
     GAME_OVER  ,
 };
+
+enum class HUDStat : char {
+    AMMO ,
+    SCORE,
+    ROUND,
+    QUOTA,
+};
 //TODO: ROUND_OVER is same no matter how many ducks were shot, relies on other variables
 
 namespace std {
     template<> struct hash<DuckHuntSound> {
         std::size_t operator()(const DuckHuntSound dhs) const
         { return hash<char>()(static_cast<char>(dhs)); }
+    };
+}
+
+namespace std {
+    template<> struct hash<HUDStat> {
+        std::size_t operator()(const HUDStat huds) const
+        { return hash<char>()(static_cast<char>(huds)); }
     };
 }
 
@@ -76,13 +89,11 @@ class DuckHuntGameState : public State
         //Called by input(); sees if a duck was hit
         void shoot();
 
-        Timer actiontimer;
-
         //The image that represents the background layers
         Image bglayersimage;
 
         //The actual visible background layers
-        Sprite bglayers[3];
+        std::array<Sprite, 3> bglayers;
 
         //Whether the dog is behind the grass
         bool dog_behind_grass;
@@ -100,7 +111,11 @@ class DuckHuntGameState : public State
         Dog dog;
 
         //The ducks in this minigame
-        Duck ducks[2];
+        std::array<Duck, 2> ducks;
+
+        Font font;
+
+        StringGraphic stats;
 
         //How long the screen remains white when clicked
         Timer flashtimer;
@@ -111,11 +126,22 @@ class DuckHuntGameState : public State
         //Pointers to all objects to render; this time, objects will change layer
         std::vector<sf::Drawable*> renderlist;
 
+        std::unordered_map<HUDStat, StringGraphic> hudstats;
+
         //How much ammunition we have left
         int8_t ammo;
 
+        //How long the player took to shoot the ducks
+        float time_used;
+
         //How many ducks the user has shot dead this round
         uint8_t ducks_dead;
+
+        //How many times the player can fall below quota until game over
+        uint8_t miss_left;
+
+        //How many ducks since the beginning the user has shot
+        uint32_t total_shot;
 
         //What round we're on
         uint16_t round;
@@ -127,6 +153,7 @@ class DuckHuntGameState : public State
 
         //The state of the game (a state within a state?)
         InGameState state;
+
 
         //The previous state
         InGameState prevstate;

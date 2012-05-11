@@ -22,10 +22,14 @@ MatricesState::MatricesState()
 
     Window.Draw(bg  );
     Window.Draw(text);
-    Window.Display();
 }
 
 void MatricesState::input()
 {
     checkForNextState(StateName::RASTER_VS_VECTOR, StateName::TRANSLATION);
+}
+
+void MatricesState::render()
+{
+    Window.Display();
 }

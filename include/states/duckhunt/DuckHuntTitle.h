@@ -11,7 +11,7 @@ class DuckHuntTitle : public State
 
         void input();
         void logic() {}
-        void render() {}
+        void render();
 
     private:
         //The logo for the original game

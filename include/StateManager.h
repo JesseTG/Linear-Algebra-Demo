@@ -1,7 +1,7 @@
 #ifndef STATEMANAGER_H
 #define STATEMANAGER_H
 
-#define RESET(a) currentstate.reset(a); return;  //Cut down on text
+#define RESET(a) currentstate.reset(a); changedstate.Play(); return;  //Cut down on text
 
 #include "Declarations.h"
 #include "State.h"
@@ -39,11 +39,16 @@ class StateManager
 
     //If true, we're in fullscreen mode
     bool isfullscreen;
+
+    //The sound effect that plays whenever we change states
+    Sound changedstate;
 };
 
 StateManager::StateManager()
 {
     isfullscreen = false;
+    changedstate.file.LoadFromFile("./sfx/changescreen.wav");
+    changedstate.sound.SetBuffer(changedstate.file);
 }
 
 void StateManager::init()

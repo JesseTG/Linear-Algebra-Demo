@@ -23,7 +23,7 @@ DuckHuntTitle::DuckHuntTitle()
     Window.Clear();
     Window.Draw(logo);
     Window.Draw(text);
-    Window.Display();
+
 }
 
 DuckHuntTitle::~DuckHuntTitle()
@@ -34,4 +34,9 @@ DuckHuntTitle::~DuckHuntTitle()
 void DuckHuntTitle::input()
 {
     checkForNextState(StateName::ROTATION, StateName::DUCKHUNT_GAME);
+}
+
+void DuckHuntTitle::render()
+{
+    Window.Display();
 }

@@ -36,6 +36,8 @@ Duck::Duck()
     sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), START_HEIGHT);
     updateShotBox();
 
+
+
     is_dead  = false;
     velocity = VectorFloat(0, 0);
     state    = DuckState::IDLE;

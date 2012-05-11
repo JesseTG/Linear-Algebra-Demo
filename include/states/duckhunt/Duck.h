@@ -112,8 +112,6 @@ class Duck
         //Times the duck's animation
         Timer animationtimer;
 
-
-
         //The box that the cursor has to be in to register a hit
         RectFloat shotbox;
 

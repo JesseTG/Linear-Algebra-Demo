@@ -143,7 +143,7 @@
 
 1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/eraser.h
 
-1336597179 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
+1336699357 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
 	"Declarations.h"
 	"State.h"
 	"states/TitleState.h"
@@ -198,7 +198,7 @@
 	"../Declarations.h"
 	"../State.h"
 
-1336260841 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/MatricesState.h
+1336699374 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/MatricesState.h
 	"../Declarations.h"
 	"../State.h"
 
@@ -327,16 +327,16 @@
 	"../../include/states/RotationState.h"
 	<iomanip>
 
-1336261030 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/DuckHuntTitle.h
+1336699412 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/DuckHuntTitle.h
 	"../../State.h"
 
 1336599395 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntTitle.cpp
 	"../../../include/states/duckhunt/DuckHuntTitle.h"
 
-1336691123 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntGameState.cpp
+1336699150 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntGameState.cpp
 	"../../../include/states/duckhunt/DuckHuntGameState.h"
 
-1336691057 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/DuckHuntGameState.h
+1336698985 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/DuckHuntGameState.h
 	<utility>
 	<vector>
 	"Dog.h"
@@ -344,10 +344,10 @@
 	"../../Declarations.h"
 	"../../State.h"
 
-1336697308 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Duck.cpp
+1336698966 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Duck.cpp
 	"../../../include/states/duckhunt/Duck.h"
 
-1336682686 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/Duck.h
+1336698965 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/Duck.h
 	"../../Declarations.h"
 
 1336689462 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Dog.cpp

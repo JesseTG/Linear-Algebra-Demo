@@ -59,6 +59,7 @@ DuckHuntGameState::DuckHuntGameState()
     renderlist.push_back(&hudstats[HUDStat::ROUND]);
     renderlist.push_back(&hudstats[HUDStat::SCORE]);
     renderlist.push_back(&hudstats[HUDStat::QUOTA]);
+    renderlist.push_back(&crosshair               );
     }
 
     {  //Prepare member variables  /////////////////////////////////////////////
@@ -77,16 +78,20 @@ DuckHuntGameState::DuckHuntGameState()
     stats.SetPosition(15, 422);
     stats.SetText("AMMO      ROUND     SCORE     QUOTA");
 
+    initSprite(crosshair, sprites, RectInt(194, 152, 212, 170), BG_SCALE, MOUSE);
+    Window.ShowMouseCursor(false);  //The crosshair IS the cursor
+
     setState(InGameState::INTRO);
 
     }
+
 
     sounds[DuckHuntSound::INTRO].Play();
 }
 
 DuckHuntGameState::~DuckHuntGameState()
 {
-    //dtor
+    Window.ShowMouseCursor(true);  //Best let the other screens have the cursor!
 }
 
 void DuckHuntGameState::input()
@@ -100,11 +105,7 @@ void DuckHuntGameState::input()
 void DuckHuntGameState::logic()
 {
     prevstate = state;
-    /*std::cout << "*************************************\n";
-    std::cout << "State: " << int(state) << std::endl;
-    std::cout << "Ducks Dead: " << int(ducks_dead) << std::endl;
-    std::cout << "Ammo: " << int(ammo) << std::endl;
-    std::cout << "Round: " << round << std::endl;*/
+
 
     switch (state) {
         case InGameState::INTRO      : intro();       break;
@@ -131,6 +132,7 @@ void DuckHuntGameState::logic()
 
     for (auto& i : ducks) i.act();
     dog.act();
+    crosshair.SetPosition(MOUSE);
 }
 
 void DuckHuntGameState::render()

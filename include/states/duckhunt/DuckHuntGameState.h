@@ -128,6 +128,8 @@ class DuckHuntGameState : public State
 
         std::unordered_map<HUDStat, StringGraphic> hudstats;
 
+        Sprite crosshair;
+
         //How much ammunition we have left
         int8_t ammo;
 

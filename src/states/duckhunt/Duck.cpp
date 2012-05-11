@@ -4,6 +4,7 @@ const int DUCK_SCALE        =  2;  //How much the duck's sprites are scaled
 const float ANGLE_RANGE     = 10;  //The range of angles the ducks can fly up
 const VectorFloat GRAVITY(0, .5);
 const float START_HEIGHT    = SCREEN.GetHeight()*.75;  //What row the ducks start
+const float PROB_OF_QUACK   = .02;  //The probability of a duck quacking in any given frame
 
 float Duck::probChangeVel = .0085;
 float Duck::speed = 3;
@@ -35,9 +36,9 @@ Duck::Duck()
     sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), START_HEIGHT);
     updateShotBox();
 
-    is_dead       = false;
-    velocity      = VectorFloat(0, 0);
-    state         = DuckState::IDLE;
+    is_dead  = false;
+    velocity = VectorFloat(0, 0);
+    state    = DuckState::IDLE;
 }
 
 Duck::~Duck()
@@ -81,12 +82,13 @@ void Duck::flyIn()
 
 void Duck::flyAround()
 {
-    if (state == DuckState::FLYING_AROUND) {
-        if (Random::Random(0.0f, 1.0f) <= probChangeVel) setRandomDirection();
+    if (Random::Random(0.0f, 1.0f) <= probChangeVel) setRandomDirection();
 
-        detectBoundaries();
-        sprite.Move(velocity);
-    }
+    if (Random::Random(0.0f, 1.0f) <= PROB_OF_QUACK && sounds[DuckSound::QUACK].sound.GetStatus() == sf::Sound::Stopped)
+        sounds[DuckSound::QUACK].Play();
+
+    detectBoundaries();
+    sprite.Move(velocity);
 
     updateShotBox();
 }
@@ -138,24 +140,33 @@ void Duck::updateAnimation()
 {
     sprite.FlipX(velocity.x < 0);  //If the duck is flying left, flip its sprite
 
-    if (state == DuckState::FLYING_AROUND) {
-        //This expression uses a sine wave to animate the duck
-        sprite.SetSubRect(frames[DuckFrame(lround(sin(25*animationtimer.GetElapsedTime()-.5)+1))]);
-    } else if (state == DuckState::FLYING_IN || state == DuckState::FLYING_OUT) {
-        sprite.SetSubRect(frames[DuckFrame(lround(sin(25*animationtimer.GetElapsedTime()-.5)+1)+3)]);
+    if (state == DuckState::FLYING_AROUND || state == DuckState::FLYING_IN || state == DuckState::FLYING_OUT) {
+        if (state == DuckState::FLYING_AROUND) {
+            //This expression uses a sine wave to animate the duck
+            sprite.SetSubRect(frames[DuckFrame(lround(sin(25*animationtimer.GetElapsedTime()-.5)+1))]);
+        } else if (state == DuckState::FLYING_IN || state == DuckState::FLYING_OUT) {
+            sprite.SetSubRect(frames[DuckFrame(lround(sin(25*animationtimer.GetElapsedTime()-.5)+1)+3)]);
+        }
+
+        if (sounds[DuckSound::FLAP].sound.GetStatus() == sf::Sound::Stopped && velocity != VectorFloat(0, 0) &&
+            SCREEN.Contains(sprite.GetPosition().x, sprite.GetPosition().y))
+                sounds[DuckSound::FLAP].Play();
     }
+
+
 
 }
 
 void Duck::detectBoundaries()
 {
+    //If we're outside the screen's x range...
     if (!IN_RANGE(sprite.GetPosition().x, buffer[LEFT], buffer[RIGHT])) {
         sprite.SetX(buffer[sprite.GetPosition().x < buffer[LEFT] ? LEFT : RIGHT]);
         velocity.x *= -1;
     }
 
-    //This way, the ducks only turn around at the left and right edges
-    if (state == DuckState::FLYING_AROUND) {
+    //If we're outside the screen's y range...
+    if (state == DuckState::FLYING_AROUND) {  //The ducks ignore up and down boundaries if flying in or out
         float temp = SCREEN.GetHeight()*.6;
         if (!IN_RANGE(sprite.GetPosition().y, buffer[UP], temp)) {
             sprite.SetY(sprite.GetPosition().y < temp ? buffer[UP] : temp);

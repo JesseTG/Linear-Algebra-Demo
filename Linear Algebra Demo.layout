@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="include/Declarations.h" open="1" top="0" tabpos="8">
-		<Cursor position="513" topLine="0" />
+	<File name="include/Declarations.h" open="0" top="0" tabpos="8">
+		<Cursor position="513" topLine="57" />
 	</File>
 	<File name="include/State.h" open="0" top="0" tabpos="1">
 		<Cursor position="834" topLine="6" />
 	</File>
-	<File name="include/StateManager.h" open="0" top="0" tabpos="1">
-		<Cursor position="1133" topLine="29" />
+	<File name="include/StateManager.h" open="1" top="0" tabpos="7">
+		<Cursor position="108" topLine="0" />
 	</File>
 	<File name="include/states/DotProductState.h" open="0" top="0" tabpos="1">
 		<Cursor position="387" topLine="0" />
 	</File>
 	<File name="include/states/MatricesState.h" open="0" top="0" tabpos="10">
-		<Cursor position="542" topLine="0" />
+		<Cursor position="318" topLine="0" />
 	</File>
 	<File name="include/states/RasterVsVectorState.h" open="0" top="0" tabpos="4">
 		<Cursor position="112" topLine="0" />
@@ -34,20 +34,20 @@
 	<File name="include/states/VectorState.h" open="0" top="0" tabpos="8">
 		<Cursor position="390" topLine="14" />
 	</File>
-	<File name="include/states/duckhunt/Dog.h" open="1" top="0" tabpos="5">
-		<Cursor position="519" topLine="19" />
+	<File name="include/states/duckhunt/Dog.h" open="1" top="0" tabpos="3">
+		<Cursor position="519" topLine="16" />
 	</File>
-	<File name="include/states/duckhunt/Duck.h" open="1" top="0" tabpos="3">
-		<Cursor position="872" topLine="45" />
+	<File name="include/states/duckhunt/Duck.h" open="1" top="0" tabpos="6">
+		<Cursor position="1044" topLine="36" />
 	</File>
 	<File name="include/states/duckhunt/DuckHuntGameState.h" open="1" top="0" tabpos="1">
-		<Cursor position="2765" topLine="42" />
+		<Cursor position="2830" topLine="116" />
 	</File>
 	<File name="include/states/duckhunt/DuckHuntTitle.h" open="0" top="0" tabpos="0">
-		<Cursor position="324" topLine="0" />
+		<Cursor position="244" topLine="3" />
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="1179" topLine="30" />
+	<File name="main.cpp" open="0" top="0" tabpos="7">
+		<Cursor position="1179" topLine="39" />
 	</File>
 	<File name="src/State.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="239" topLine="0" />
@@ -56,7 +56,7 @@
 		<Cursor position="3159" topLine="68" />
 	</File>
 	<File name="src/states/MatricesState.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="860" topLine="0" />
+		<Cursor position="863" topLine="8" />
 	</File>
 	<File name="src/states/RasterVsVectorState.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="94" topLine="12" />
@@ -76,16 +76,16 @@
 	<File name="src/states/VectorState.cpp" open="0" top="0" tabpos="7">
 		<Cursor position="1399" topLine="9" />
 	</File>
-	<File name="src/states/duckhunt/Dog.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="3913" topLine="84" />
+	<File name="src/states/duckhunt/Dog.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="1786" topLine="15" />
 	</File>
-	<File name="src/states/duckhunt/Duck.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="4591" topLine="114" />
+	<File name="src/states/duckhunt/Duck.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="33" topLine="135" />
 	</File>
 	<File name="src/states/duckhunt/DuckHuntGameState.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="4635" topLine="201" />
+		<Cursor position="3296" topLine="65" />
 	</File>
-	<File name="src/states/duckhunt/DuckHuntTitle.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="584" topLine="0" />
+	<File name="src/states/duckhunt/DuckHuntTitle.cpp" open="1" top="1" tabpos="8">
+		<Cursor position="906" topLine="17" />
 	</File>
 </CodeBlocks_layout_file>

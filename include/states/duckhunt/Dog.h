@@ -53,36 +53,51 @@ class Dog
 
         Sprite& getSprite()                    { return sprite;    }
         DogState getState() const              { return state;     }
+
+        //Resets the Dog's actiontimer when called
         void setState(const DogState newstate) {
             state = newstate;
             actiontimer.Reset();
         }
 
     private:
-
-        void walk();
-
+        //The dog jumps behind the grass
         void jump();
 
-        void rise();
-
+        //The dog mocks you since you shot no ducks
         void laugh();
 
-        int8_t barks;
+        //The dog shows you the ducks you shot
+        void rise();
 
+        //The dog walks along the screen
+        void walk();
+
+        //The timer that monitors the dog's actions
+        Timer                                 actiontimer;
+
+        //The timer that monitors the dog's animation
+        Timer                                 animationtimer;
+
+        //How many times the dog barks in the intro
+        int8_t                                barks;
+
+        //The available frames the dog has
         std::unordered_map<DogFrame, RectInt> frames;
 
-        std::unordered_map<DogSound, Sound> sounds;
+        //The dog's previous state
+        DogState                              prevstate;
 
-        Timer actiontimer;
+        //The sounds the dog is capable of playing
+        std::unordered_map<DogSound, Sound>   sounds;
 
-        Timer animationtimer;
+        //The actual visible sprite
+        Sprite                                sprite;
 
-        Sprite sprite;
+        //The dog's current state
+        DogState                              state;
 
-        DogState state;
 
-        DogState prevstate;
 };
 
 #endif // DOG_H

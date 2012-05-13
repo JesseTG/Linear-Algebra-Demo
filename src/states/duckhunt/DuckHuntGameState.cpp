@@ -24,19 +24,23 @@ DuckHuntGameState::DuckHuntGameState()
     bglayers[GRASS ].SetSubRect(RectInt(320,   0, 640, 240));
     bglayers[SKY   ].SetSubRect(RectInt(  0, 240, 320, 480));
 
-
-    hudstats[HUDStat::AMMO ].SetFont(font);
     hudstats[HUDStat::AMMO ].SetSize(16  );
     hudstats[HUDStat::AMMO ].SetPosition( 28, 435);
     hudstats[HUDStat::ROUND].SetFont(font);
     hudstats[HUDStat::ROUND].SetSize(16  );
     hudstats[HUDStat::ROUND].SetPosition(108, 435);
-    hudstats[HUDStat::SCORE].SetFont(font);
     hudstats[HUDStat::SCORE].SetSize(8   );
     hudstats[HUDStat::SCORE].SetPosition(174, 435);
-    hudstats[HUDStat::QUOTA].SetFont(font);
+    hudstats[HUDStat::STATS].SetSize(8   );
+    hudstats[HUDStat::STATS].SetPosition(15, 422);
+    hudstats[HUDStat::STATS].SetText("AMMO      ROUND     SCORE     QUOTA");
     hudstats[HUDStat::QUOTA].SetSize(8   );
     hudstats[HUDStat::QUOTA].SetPosition(255, 435);
+    hudstats[HUDStat::GAME_OVER].SetSize(48);
+    hudstats[HUDStat::GAME_OVER].SetPosition(0, CENTER.y - 128);
+    hudstats[HUDStat::GAME_OVER].SetText("GAME OVER");
+
+    for (auto& i : hudstats) i.second.SetFont(font);
     }
 
 
@@ -54,11 +58,11 @@ DuckHuntGameState::DuckHuntGameState()
     renderlist.push_back(&bglayers[GROUND]        );
     renderlist.push_back(&bglayers[GRASS ]        );
     renderlist.push_back(&dog.getSprite()         );
-    renderlist.push_back(&stats                   );
     renderlist.push_back(&hudstats[HUDStat::AMMO ]);
     renderlist.push_back(&hudstats[HUDStat::ROUND]);
     renderlist.push_back(&hudstats[HUDStat::SCORE]);
     renderlist.push_back(&hudstats[HUDStat::QUOTA]);
+    renderlist.push_back(&hudstats[HUDStat::STATS]);
     renderlist.push_back(&crosshair               );
     }
 
@@ -73,10 +77,7 @@ DuckHuntGameState::DuckHuntGameState()
     round            = 0;
     score            = 0;
     total_shot       = 0;
-    stats.SetFont(font);
-    stats.SetSize(8);
-    stats.SetPosition(15, 422);
-    stats.SetText("AMMO      ROUND     SCORE     QUOTA");
+
 
     initSprite(crosshair, sprites, RectInt(194, 152, 212, 170), BG_SCALE, MOUSE);
     Window.ShowMouseCursor(false);  //The crosshair IS the cursor
@@ -169,22 +170,16 @@ void DuckHuntGameState::intro()
     //If the dog has landed on the ground...
     if (dog.getState() == DogState::IDLE) {
         can_shoot = true;
-        for (auto& i : ducks) i.setState(DuckState::FLYING_IN);
         setState(InGameState::ROUND_START);
     }
 }
 
 void DuckHuntGameState::game()
 {
-    //Let the ducks loose
-    if (prevstate == InGameState::ROUND_START) {
-        for (auto& i : ducks) i.setState(DuckState::FLYING_IN);
-    }
-
     //If we run out of ammo, time, or ducks to shoot...
     if (ammo <= 0 || timepassed.GetElapsedTime() >= TIME_LIMIT || ducks_dead == 2) {
         for (auto& i : ducks)
-            if (i.getState() == DuckState::FLYING_AROUND)  //If they haven't died...
+            if (i.getState() == DuckState::FLYING_AROUND || i.getState() == DuckState::FLYING_IN)  //If they haven't died...
                 i.setState(DuckState::FLYING_OUT);  //The ducks fly away
         time_used = TIME_LIMIT - timepassed.GetElapsedTime();
         setState(InGameState::ROUND_END);
@@ -207,11 +202,14 @@ void DuckHuntGameState::round_start()
 
 void DuckHuntGameState::game_over()
 {
-
+    if (renderlist.back() == &crosshair) renderlist.back() = &hudstats[HUDStat::GAME_OVER];
 }
 
 void DuckHuntGameState::round_end()
 {
+    //If we failed to meet the quota for ducks shot...
+    if (total_shot < round) setState(InGameState::GAME_OVER);
+
     if (timepassed.GetElapsedTime() >= 1) {
         if (!SCREEN.Contains(ducks[0].getSprite().GetPosition().x, ducks[0].getSprite().GetPosition().y) &&
             !SCREEN.Contains(ducks[1].getSprite().GetPosition().x, ducks[1].getSprite().GetPosition().y)) {
@@ -229,7 +227,6 @@ void DuckHuntGameState::round_end()
 void DuckHuntGameState::round_win()
 {
     if (dog.getState() == DogState::IDLE) {
-
         setState(InGameState::ROUND_START);
     }
 }
@@ -238,7 +235,6 @@ void DuckHuntGameState::round_fail()
 {
     if (dog.getState() == DogState::IDLE)
         setState(InGameState::ROUND_START);
-    //TODO: Move closer to game over
 }
 
 void DuckHuntGameState::shoot()
@@ -253,11 +249,10 @@ void DuckHuntGameState::shoot()
 
         //Check both ducks for whether our mouse is on top of them
         for (auto& i : ducks) {
-            if (i.getShotBox().Contains(MOUSE.x, MOUSE.y) &&
-                (i.getState() == DuckState::FLYING_AROUND || i.getState() == DuckState::FLYING_IN)) {
-                i.setState(DuckState::SHOT);
-                ++ducks_dead;
-                ++total_shot;
+            if ((i.getState() == DuckState::FLYING_IN || i.getState() == DuckState::FLYING_AROUND) && i.getShotBox().Contains(MOUSE.x, MOUSE.y)) {
+                    i.setState(DuckState::SHOT);
+                    ++ducks_dead;
+                    ++total_shot;
             }
         }
     }

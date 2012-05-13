@@ -10,9 +10,11 @@ DuckHuntTitle::DuckHuntTitle()
     font.LoadFromFile("./gfx/emulogic.ttf");
     text.SetFont(font);
     text.SetSize(16);
-    text.SetText("Sounds and Graphics Copyright Nintendo\n"
-                 "Mouse: Shoot Ducks\n"
-                 "Goal: Score high, do not miss too many\n\n"
+    text.SetText("\nSounds, Graphics, and Original Game\n"
+                 "Copyright Nintendo 1985\n\n"
+                 "Mouse: Shoot Ducks\n\n"
+                 "Goal: Shoot lots of ducks\n"
+                 "Do not fall below quota (round #)\n\n"
                  "Press P to Start");
     text.SetPosition(SCREEN.GetWidth()*.03, SCREEN.GetHeight()*.65);
 

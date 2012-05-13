@@ -34,14 +34,16 @@ class StateManager
     //Resets currentstate with a new state
     void setState(const StateName newstate);
 
+    //The sound effect that plays whenever we change states
+    Sound                  changedstate;
+
     //The pointer to the current state (relies on polymorphism)
     std::unique_ptr<State> currentstate;
 
     //If true, we're in fullscreen mode
-    bool isfullscreen;
+    bool                   isfullscreen;
 
-    //The sound effect that plays whenever we change states
-    Sound changedstate;
+
 };
 
 StateManager::StateManager()

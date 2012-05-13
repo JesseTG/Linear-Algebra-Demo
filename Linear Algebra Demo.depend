@@ -111,7 +111,7 @@
 1320887940 /home/jesse/.arduino-0023/hardware/arduino/cores/arduino/pins_arduino.h
 	<avr/pgmspace.h>
 
-1336615106 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
+1336862048 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/Declarations.h
 	<array>
 	<iomanip>
 	<memory>
@@ -143,7 +143,7 @@
 
 1332024877 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/etc/eraser.h
 
-1336699357 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
+1336850732 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/StateManager.h
 	"Declarations.h"
 	"State.h"
 	"states/TitleState.h"
@@ -202,7 +202,7 @@
 	"../Declarations.h"
 	"../State.h"
 
-1336614036 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TranslationDistanceLengthState.h
+1336857065 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/TranslationDistanceLengthState.h
 	"../Declarations.h"
 	"../State.h"
 
@@ -249,7 +249,7 @@
 	<cmath>
 	"../../include/states/DotProductState.h"
 
-1336241400 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/MatricesState.cpp
+1336699396 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/MatricesState.cpp
 	"../../include/states/MatricesState.h"
 
 1336597074 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/RasterVsVectorState.cpp
@@ -264,7 +264,7 @@
 1336596607 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TitleState.cpp
 	"../../include/states/TitleState.h"
 
-1336596615 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TranslationDistanceLengthState.cpp
+1336862126 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/TranslationDistanceLengthState.cpp
 	"../../include/states/TranslationDistanceLengthState.h"
 
 1336595616 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/VectorState.cpp
@@ -330,13 +330,13 @@
 1336699412 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/DuckHuntTitle.h
 	"../../State.h"
 
-1336599395 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntTitle.cpp
+1336700742 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntTitle.cpp
 	"../../../include/states/duckhunt/DuckHuntTitle.h"
 
-1336699150 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntGameState.cpp
+1336856104 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/DuckHuntGameState.cpp
 	"../../../include/states/duckhunt/DuckHuntGameState.h"
 
-1336698985 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/DuckHuntGameState.h
+1336853532 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/DuckHuntGameState.h
 	<utility>
 	<vector>
 	"Dog.h"
@@ -344,16 +344,16 @@
 	"../../Declarations.h"
 	"../../State.h"
 
-1336698966 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Duck.cpp
+1336856191 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Duck.cpp
 	"../../../include/states/duckhunt/Duck.h"
 
-1336698965 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/Duck.h
+1336856881 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/Duck.h
 	"../../Declarations.h"
 
 1336689462 source:/home/jesse/Desktop/Code/Linear_Algebra_Demo/src/states/duckhunt/Dog.cpp
 	"../../../include/states/duckhunt/Dog.h"
 	<iostream>
 
-1336528048 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/Dog.h
+1336851125 /home/jesse/Desktop/Code/Linear_Algebra_Demo/include/states/duckhunt/Dog.h
 	"../../Declarations.h"
 

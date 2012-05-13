@@ -50,92 +50,106 @@ class Duck
         Duck();
         virtual ~Duck();
 
-        void act();
-
+        //Makes the ducks harder to hit
         static void increaseDifficulty(const int round) {
-            speed = (round/10.0) + 3;
-            probChangeVel = ((round+1.0)/(round+2.0))/90.0;
+            speed = (round/3.0) + 3;
+            probChangeVel = ((round+1.0)/(round+2.0))/30.0;
+            if (round == 20) initSki();
         }
 
+        //Initializes the ducks for Mr. Ski Mode
+        static void initSki() {
+            is_ski = true;
+        }
+
+        //Acts each frame depending on the current state
+        void act();
+
+        //Gets the box you have to shoot the duck in
+        RectFloat getShotBox() const { return shotbox; }
+
+        //Gets the duck's sprite
+        Sprite& getSprite() { return sprite; }
+
+        //Returns the duck's state
         DuckState getState() const { return state; }
 
+        //Sets this duck's state, and resets the actiontimer
         void setState(const DuckState newstate) {
             state = newstate;
             actiontimer.Reset();
         }
 
+        //Updates animation based on the current state
         void updateAnimation();
 
-        RectFloat getShotBox() const { return shotbox; }
 
-        Sprite& getSprite() { return sprite; }
+
+
 
     protected:
-        //The frames that the ducks can use
-        static std::unordered_map<DuckFrame, RectInt> frames;
+        //Sees if the ducks is at the edge, and ensures he doesn't cross it
+        void detectBoundaries();
 
-        //The sounds that the ducks can play
-        static std::unordered_map<DuckSound, Sound> sounds;
+        //First the duck hovers in the air for a moment, then falls to the ground
+        void die();
 
-        //SPEED, not velocity, of the ducks
-        static float speed;
+        //The duck falling; you've shot him already!
+        void fall();
 
-        //The odds of the duck changing velocity (thus direction) each frame
-        static float probChangeVel;
+        //The duck flying around; fair game!
+        void flyAround();
 
-        //Updates the position of the box we can shoot at
-        void updateShotBox();
-
-        //Sets the direction of the duck to be random
-        void setRandomDirection();
-
-        //The duck flying into the screen; can't be shot yet!
+        //The duck flying into the screen; also can be shot!
         void flyIn();
 
         //The duck flying away; can't be shot anymore!
         void flyOut();
 
-        //The duck flying around; fair game!
-        void flyAround();
+        //Sets the direction of the duck to be random
+        void setRandomDirection();
 
-        //The duck falling; you've shot him already!
-        void fall();
-
-        void die();
-
-        void lieOnGround();
-
-        void detectBoundaries();
-
-        Timer actiontimer;
-
-        //Times the duck's animation
-        Timer animationtimer;
-
-        //The box that the cursor has to be in to register a hit
-        RectFloat shotbox;
+        //Updates the position of the box we can shoot at
+        void updateShotBox();
 
         //The buffer room a duck has before it turns around
-        float buffer[4];
+        static float                                  buffer[4];
 
-        //The actual visible sprite
-        Sprite sprite;
-
-        //Whether this duck has been shot dead
-        bool is_dead;
+        //The frames that the ducks can use
+        static std::unordered_map<DuckFrame, RectInt> frames;
 
         //Whether this is a Mr. Ski duck
-        bool is_ski;
+        static bool                                   is_ski;
 
-        DuckState prevstate;
+        //The odds of the duck changing velocity (thus direction) each frame
+        static float                                  probChangeVel;
 
-        DuckState state;
+        //The sounds that the ducks can play
+        static std::unordered_map<DuckSound, Sound>   sounds;
+
+        //SPEED, not velocity, of the ducks
+        static float                                  speed;
 
 
+        Timer       actiontimer;
+
+        //Times the duck's animation
+        Timer       animationtimer;
+
+        //The duck's previous state
+        DuckState   prevstate;
+
+        //The box that the cursor has to be in to register a hit
+        RectFloat   shotbox;
+
+        //The actual visible sprite
+        Sprite      sprite;
+
+        //The duck's current state
+        DuckState   state;
 
         //How fast this duck is going on both dimensions
         VectorFloat velocity;
-
 };
 
 #endif // DUCK_H

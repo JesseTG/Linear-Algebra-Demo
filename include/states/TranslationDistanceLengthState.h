@@ -25,7 +25,7 @@ class TranslationDistanceLengthState : public State
 {
     public:
         TranslationDistanceLengthState();
-        ~TranslationDistanceLengthState() {};
+        ~TranslationDistanceLengthState();
 
         void input();
         void logic();

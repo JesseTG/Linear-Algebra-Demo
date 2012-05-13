@@ -2,14 +2,16 @@
 
 const int DUCK_SCALE        =  2;  //How much the duck's sprites are scaled
 const float ANGLE_RANGE     = 10;  //The range of angles the ducks can fly up
-const VectorFloat GRAVITY(0, .5);
+const VectorFloat GRAVITY   = VectorFloat(0, .5);
 const float START_HEIGHT    = SCREEN.GetHeight()*.75;  //What row the ducks start
 const float PROB_OF_QUACK   = .02;  //The probability of a duck quacking in any given frame
 
+bool Duck::is_ski = false;
+float Duck::buffer[4];
 float Duck::probChangeVel = .0085;
 float Duck::speed = 3;
 std::unordered_map<DuckFrame, RectInt> Duck::frames;
-std::unordered_map<DuckSound, Sound>   Duck::sounds;
+std::unordered_map<DuckSound,   Sound> Duck::sounds;
 
 Duck::Duck()
 {
@@ -36,9 +38,6 @@ Duck::Duck()
     sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), START_HEIGHT);
     updateShotBox();
 
-
-
-    is_dead  = false;
     velocity = VectorFloat(0, 0);
     state    = DuckState::IDLE;
 }
@@ -60,6 +59,7 @@ void Duck::act()
         default: throw std::invalid_argument("Duck state #" + boost::lexical_cast<std::string, int>(int(state)) + " not recognized!");
     }
 
+    updateShotBox();
     prevstate = state;
 }
 
@@ -68,7 +68,6 @@ void Duck::flyIn()
     if (prevstate != DuckState::FLYING_IN) {
         sprite.SetPosition(Random::Random(buffer[LEFT], buffer[RIGHT]), START_HEIGHT);
         updateShotBox();
-        is_dead = false;
         float angle = Random::Random(-ANGLE_RANGE, ANGLE_RANGE);
         velocity = VectorFloat(speed*cos(angle), -fabs(speed*sin(angle)));
     }
@@ -91,8 +90,6 @@ void Duck::flyAround()
 
     detectBoundaries();
     sprite.Move(velocity);
-
-    updateShotBox();
 }
 
 void Duck::flyOut()

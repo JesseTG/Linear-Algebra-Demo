@@ -1,25 +1,22 @@
 #ifndef ROTATIONSTATE_H
 #define ROTATIONSTATE_H
 
-#include <array>
-#include <sstream>
-
 #include "../Declarations.h"
 #include "../State.h"
 
-
+//This screen shows a controllable helicopter that flies around with a bit of physics
 class RotationState : public State
 {
     public:
         RotationState();
-        ~RotationState();
+        ~RotationState() {}
 
         void input();
         void logic();
         void render();
 
     private:
-        //helicopter's acceleration; added to velocity, calculated by direction
+        //helicopter's acceleration vector, used only for direction
         VectorFloat            acceleration;
 
         //Used to time the helicopter's animation

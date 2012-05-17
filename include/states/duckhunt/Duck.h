@@ -58,9 +58,7 @@ class Duck
         }
 
         //Initializes the ducks for Mr. Ski Mode
-        static void initSki() {
-            is_ski = true;
-        }
+        static void initSki();
 
         //Acts each frame depending on the current state
         void act();
@@ -117,9 +115,6 @@ class Duck
 
         //The frames that the ducks can use
         static std::unordered_map<DuckFrame, RectInt> frames;
-
-        //Whether this is a Mr. Ski duck
-        static bool                                   is_ski;
 
         //The odds of the duck changing velocity (thus direction) each frame
         static float                                  probChangeVel;

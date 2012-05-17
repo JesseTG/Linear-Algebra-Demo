@@ -12,13 +12,13 @@ ScalarVsVectorState::ScalarVsVectorState()
     setSpriteBuffer(harrier, buffer);
 
     centerline = Shape::Line(harrier.GetPosition(), CENTER, 5, Color::White);
-    ////////////////////////////////////////////////////////////////////////////
 }
 
 void ScalarVsVectorState::input()
 {
     checkForNextState(StateName::VECTORS, StateName::RASTER_VS_VECTOR);
 
+    //Gets keyboard input to move the Harrier
     ismoving[UP   ] = INPUT.IsKeyDown(sf::Key::Up   );
     ismoving[DOWN ] = INPUT.IsKeyDown(sf::Key::Down );
     ismoving[LEFT ] = INPUT.IsKeyDown(sf::Key::Left );
@@ -34,9 +34,9 @@ void ScalarVsVectorState::logic()
 
     //Adds the distance we just moved to the running total
     currentpos -= harrier.GetPosition();
-    distance += hypot(currentpos.x, currentpos.y);
+    distance += MAGNITUDE(currentpos);
 
-    //Changes the harrier's sprite based on which third of the screen he's in  /
+    //Changes the harrier's sprite based on which third of the screen he's in
     if (harrier.GetPosition().x < SCREEN.GetWidth()/3) {
         harrier.SetSubRect(RectInt(25, 49, 48, 96));
         harrier.FlipX(true);
@@ -50,7 +50,6 @@ void ScalarVsVectorState::logic()
         harrier.SetSubRect(RectInt(25, 49, 48, 96));
         harrier.FlipX(false);
     }
-    ////////////////////////////////////////////////////////////////////////////
 
 
     //Prepares all statistics for output on-screen  ////////////////////////////
@@ -59,7 +58,7 @@ void ScalarVsVectorState::logic()
     stats_to_string << "Vectors Vs. Scalars\n\n"
                     << "Distance Travelled: " << distance << "\n"
                     << "Displacement From Center: " << std::setprecision(3)
-                    << hypot(distancetocenter.x, distancetocenter.y) << "\n\n"
+                    << MAGNITUDE(distancetocenter) << "\n\n"
                     << "Arrow Keys: Move" << "\n\n"
                     << "GFX: Space Harrier 3D (Sega, 1988)";
     harrierstats.SetText(stats_to_string.str());

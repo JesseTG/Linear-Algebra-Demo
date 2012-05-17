@@ -6,7 +6,6 @@ const VectorFloat GRAVITY   = VectorFloat(0, .5);
 const float START_HEIGHT    = SCREEN.GetHeight()*.75;  //What row the ducks start
 const float PROB_OF_QUACK   = .02;  //The probability of a duck quacking in any given frame
 
-bool Duck::is_ski = false;
 float Duck::buffer[4];
 float Duck::probChangeVel = .0085;
 float Duck::speed = 3;
@@ -24,14 +23,10 @@ Duck::Duck()
     frames[DuckFrame::SHOT   ] = RectInt(212, 202, 243, 231);
     frames[DuckFrame::FALLING] = RectInt(245, 201, 263, 232);
 
-    sounds[DuckSound::FLAP      ].file.LoadFromFile("./sfx/duckhunt/flap.wav");
-    sounds[DuckSound::FLAP      ].sound.SetBuffer(sounds[DuckSound::FLAP].file);
-    sounds[DuckSound::QUACK     ].file.LoadFromFile("./sfx/duckhunt/quack.wav");
-    sounds[DuckSound::QUACK     ].sound.SetBuffer(sounds[DuckSound::QUACK].file);
-    sounds[DuckSound::FALL      ].file.LoadFromFile("./sfx/duckhunt/fall.wav");
-    sounds[DuckSound::FALL      ].sound.SetBuffer(sounds[DuckSound::FALL].file);
-    sounds[DuckSound::HIT_GROUND].file.LoadFromFile("./sfx/duckhunt/hitground.wav");
-    sounds[DuckSound::HIT_GROUND].sound.SetBuffer(sounds[DuckSound::HIT_GROUND].file);
+    sounds[DuckSound::FLAP      ].Load("./sfx/duckhunt/flap.wav"     );
+    sounds[DuckSound::QUACK     ].Load("./sfx/duckhunt/quack.wav"    );
+    sounds[DuckSound::FALL      ].Load("./sfx/duckhunt/fall.wav"     );
+    sounds[DuckSound::HIT_GROUND].Load("./sfx/duckhunt/hitground.wav");
 
     initSprite(sprite, sprites, frames[DuckFrame::NORM_1], DUCK_SCALE);
     setSpriteBuffer(sprite, buffer);
@@ -85,7 +80,7 @@ void Duck::flyAround()
 {
     if (Random::Random(0.0f, 1.0f) <= probChangeVel) setRandomDirection();
 
-    if (Random::Random(0.0f, 1.0f) <= PROB_OF_QUACK && sounds[DuckSound::QUACK].sound.GetStatus() == sf::Sound::Stopped)
+    if (Random::Random(0.0f, 1.0f) <= PROB_OF_QUACK && sounds[DuckSound::QUACK].getStatus() == sf::Sound::Stopped)
         sounds[DuckSound::QUACK].Play();
 
     detectBoundaries();
@@ -127,6 +122,18 @@ void Duck::fall()
     }
 }
 
+void Duck::initSki()
+{
+    frames[DuckFrame::UP_1   ] = RectInt(  0, 386,  27, 422);
+    frames[DuckFrame::UP_2   ] = RectInt( 35, 386,  66, 422);
+    frames[DuckFrame::UP_3   ] = RectInt( 68, 386,  93, 424);
+    frames[DuckFrame::NORM_1 ] = RectInt( 98, 392, 130, 421);
+    frames[DuckFrame::NORM_2 ] = RectInt(136, 395, 168, 422);
+    frames[DuckFrame::NORM_3 ] = RectInt(173, 393, 205, 424);
+    frames[DuckFrame::SHOT   ] = RectInt(212, 394, 243, 425);
+    frames[DuckFrame::FALLING] = RectInt(245, 395, 263, 435);
+}
+
 void Duck::updateShotBox()
 {
     shotbox.Left   = sprite.TransformToGlobal(VectorFloat(0, 0)).x;
@@ -139,6 +146,7 @@ void Duck::updateAnimation()
 {
     sprite.FlipX(velocity.x < 0);  //If the duck is flying left, flip its sprite
 
+    //If the duck is flying...
     if (state == DuckState::FLYING_AROUND || state == DuckState::FLYING_IN || state == DuckState::FLYING_OUT) {
         if (state == DuckState::FLYING_AROUND) {
             //This expression uses a sine wave to animate the duck
@@ -147,13 +155,10 @@ void Duck::updateAnimation()
             sprite.SetSubRect(frames[DuckFrame(lround(sin(25*animationtimer.GetElapsedTime()-.5)+1)+3)]);
         }
 
-        if (sounds[DuckSound::FLAP].sound.GetStatus() == sf::Sound::Stopped && velocity != VectorFloat(0, 0) &&
+        if (sounds[DuckSound::FLAP].getStatus() == sf::Sound::Stopped && velocity != VectorFloat(0, 0) &&
             SCREEN.Contains(sprite.GetPosition().x, sprite.GetPosition().y))
                 sounds[DuckSound::FLAP].Play();
     }
-
-
-
 }
 
 void Duck::detectBoundaries()

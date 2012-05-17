@@ -4,8 +4,7 @@ const int LOGO_SCALE = 3;
 
 DuckHuntTitle::DuckHuntTitle()
 {
-    initSprite(logo, sprites, RectInt(0, 98, 192, 194), LOGO_SCALE,
-               VectorFloat(CENTER.x, SCREEN.GetHeight()/3));
+    initSprite(logo, sprites, RectInt(0, 98, 192, 194), LOGO_SCALE, VectorFloat(CENTER.x, SCREEN.GetHeight()/3));
 
     font.LoadFromFile("./gfx/emulogic.ttf");
     text.SetFont(font);
@@ -18,8 +17,7 @@ DuckHuntTitle::DuckHuntTitle()
                  "Press P to Start");
     text.SetPosition(SCREEN.GetWidth()*.03, SCREEN.GetHeight()*.65);
 
-    titlejingle.file.LoadFromFile("./sfx/duckhunt/title.wav");
-    titlejingle.sound.SetBuffer(titlejingle.file);
+    titlejingle.Load("./sfx/duckhunt/title.wav");
     titlejingle.Play();
 
     Window.Clear();

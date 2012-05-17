@@ -79,6 +79,11 @@ class DuckHuntGameState : public State
         //The game has ended, since you've missed too many times!
         void game_over();
 
+        void initSki() {
+            for (auto& i : ducks) i.initSki();
+            dog.initSki();
+        }
+
         //The introductory animation
         void intro();
 

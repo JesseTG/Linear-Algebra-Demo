@@ -1,28 +1,22 @@
-#include <cmath>
-
 #include "../../include/states/DotProductState.h"
-
-#define _USE_MATH_DEFINES
-#define PI M_PI
 
 const int BLUE_FALCON_SCALE = 2;
 const int BLUE_FALCON_SPEED = 8;
 
 //This function is taken from the libraries for the Arduino microcontroller.
-float map(float x, float in_min, float in_max, float out_min, float out_max)
+//It maps a number from one range to another (e.g. 1 on 0-100 would be 2 on 0-200)
+inline float map(float x, float in_min, float in_max, float out_min, float out_max)
 {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 DotProductState::DotProductState()
 {
-    //The Blue Falcon spritesheet is big enough to justify a new image file  ///
+    //The Blue Falcon spritesheet is big enough to justify a new image file
     bfsprites.LoadFromFile("./gfx/bluefalcon.png");
     bfsprites.SetSmooth(false);
-    ////////////////////////////////////////////////////////////////////////////
 
-    //Puts all the frames into this array  /////////////////////////////////////
-    //Order's weird due to the ordering of the sprites  ////////////////////////
+    //Puts all the frames into this array.  Order's weird due to the ordering of the sprites
     frames[19] = RectInt(  0,   0,  49,  43);
     frames[20] = RectInt( 55,   0, 106,  42);
     frames[21] = RectInt(114,   0, 167,  42);
@@ -55,18 +49,17 @@ DotProductState::DotProductState()
     frames[16] = RectInt(839,  50, 897,  87);
     frames[17] = RectInt(900,  46, 955,  85);
     frames[18] = RectInt(  0,  88,  50, 129);
-    ////////////////////////////////////////////////////////////////////////////
 
-    //Prepares the actual sprite for on-screen display  ////////////////////////
+    //Prepares the actual sprite for on-screen display
     initSprite(bluefalcon, bfsprites, frames[0], BLUE_FALCON_SCALE);
-    setSpriteBuffer(bluefalcon, buffer);
-    ////////////////////////////////////////////////////////////////////////////
+    setSpriteBuffer(bluefalcon, buffer);  //Adjust the collision boundaries based on the BF's frame
 }
 
 void DotProductState::input()
 {
     checkForNextState(StateName::TRANSLATION, StateName::ROTATION);
 
+    //Gets whether the Blue Falcon is moving or not in a given direction
     ismoving[UP   ] = INPUT.IsKeyDown(sf::Key::Up   );
     ismoving[DOWN ] = INPUT.IsKeyDown(sf::Key::Down );
     ismoving[LEFT ] = INPUT.IsKeyDown(sf::Key::Left );
@@ -77,15 +70,11 @@ void DotProductState::logic()
 {
     inputmove(BLUE_FALCON_SPEED, ismoving, bluefalcon, buffer);
 
-    VectorFloat temp = bluefalcon.GetPosition() - VectorFloat(MOUSE);
+    VectorFloat temp = bluefalcon.GetPosition() - MOUSE;  //MOUSE is a VectorFloat!
+    float angletomouse = atan2(temp.x, temp.y) * (180/M_PI) + 180;
 
-    float angletomouse = atan2(temp.x, temp.y) * (180/PI);
-    angletomouse = map(angletomouse, -180, 180, 0, 360);
-
-    bluefalcon.SetSubRect(frames[round(map(angletomouse, 360, 0, 0, frames.size()-1))]);
-    bluefalcon.SetCenter(bluefalcon.GetSubRect().GetWidth()/2,
-                         bluefalcon.GetSubRect().GetHeight()/2);
-
+    bluefalcon.SetSubRect(frames[round(map(angletomouse, 360, 0, 0, frames.size()-1))]);  //Maps [0, 360] to [0, 32)
+    bluefalcon.SetCenter(bluefalcon.GetSubRect().GetWidth()/2, bluefalcon.GetSubRect().GetHeight()/2);
     setSpriteBuffer(bluefalcon, buffer);
 
     stats_to_string.str("");

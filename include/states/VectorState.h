@@ -4,8 +4,7 @@
 #include "../Declarations.h"
 #include "../State.h"
 
-#include <sstream>
-
+//This screen shows a tetrad from Tetris moving back and forth on a line.
 class VectorState : public State
 {
     public:
@@ -35,7 +34,5 @@ class VectorState : public State
         //The title for this screen
         StringGraphic      vectortitle;
 };
-
-
 
 #endif // VECTORSTATE_H

@@ -4,8 +4,6 @@ const int DOG_SCALE = 2;
 const float FACTOR = 2;
 const float DOG_RISE_SPEED = 1.35;  //How fast the dog rises
 
-#include <iostream>
-
 Dog::Dog()
 {
     {  //Set up the dog's frames of animation
@@ -24,12 +22,9 @@ Dog::Dog()
     }
 
     {  //Set up the dog's sounds
-    sounds[DogSound::SUCCESS].file.LoadFromFile("./sfx/duckhunt/success.wav");
-    sounds[DogSound::SUCCESS].sound.SetBuffer(sounds[DogSound::SUCCESS].file);
-    sounds[DogSound::FAIL   ].file.LoadFromFile("./sfx/duckhunt/fail.wav"   );
-    sounds[DogSound::FAIL   ].sound.SetBuffer(sounds[DogSound::FAIL].file   );
-    sounds[DogSound::BARK   ].file.LoadFromFile("./sfx/duckhunt/bark.wav"   );
-    sounds[DogSound::BARK   ].sound.SetBuffer(sounds[DogSound::BARK].file   );
+    sounds[DogSound::SUCCESS].Load("./sfx/duckhunt/success.wav");
+    sounds[DogSound::FAIL   ].Load("./sfx/duckhunt/fail.wav"   );
+    sounds[DogSound::BARK   ].Load("./sfx/duckhunt/bark.wav"   );
     }
 
     {  //Set up the dog's actual sprite
@@ -44,11 +39,6 @@ Dog::Dog()
     barks = 3;
 
     setState(DogState::WALKING);
-}
-
-Dog::~Dog()
-{
-    //dtor
 }
 
 void Dog::act()
@@ -67,10 +57,10 @@ void Dog::act()
     prevstate = state;
 }
 
-void Dog::walk()
+void Dog::initSki()
 {
-    sprite.SetSubRect(frames[DogFrame((int(5*actiontimer.GetElapsedTime())%3)+2)]);
-    sprite.Move(5.0/7.0, 0);
+    frames[DogFrame::ONE_DUCK] = RectInt(167, 326, 210, 374);
+    frames[DogFrame::TWO_DUCK] = RectInt(213, 326, 267, 374);
 }
 
 void Dog::jump()
@@ -79,7 +69,7 @@ void Dog::jump()
         sprite.SetSubRect(frames[DogFrame::EXCITED]);
     }
     else if (actiontimer.GetElapsedTime() <= FACTOR + .2) {
-        if (sounds[DogSound::BARK].sound.GetStatus() == sf::Sound::Stopped && barks > 0) {
+        if (sounds[DogSound::BARK].getStatus() == sf::Sound::Stopped && barks > 0) {
             --barks;
             sounds[DogSound::BARK].Play();
         }
@@ -89,6 +79,23 @@ void Dog::jump()
         sprite.Move(0, temp);
     }
     else {
+        setState(DogState::IDLE);
+    }
+}
+
+void Dog::laugh()
+{
+    sprite.SetSubRect(frames[(floor(sin(30*actiontimer.GetElapsedTime())) + 1) == 0 ? DogFrame::LAUGH_1 : DogFrame::LAUGH_2]);
+
+    if (actiontimer.GetElapsedTime() <= 1) {
+        if (prevstate == DogState::IDLE)
+            sounds[DogSound::FAIL].Play();
+        sprite.Move(0, -DOG_RISE_SPEED);
+    }
+    else if (actiontimer.GetElapsedTime() >= 1.65 && actiontimer.GetElapsedTime() <= 2.65) {
+        sprite.Move(0, DOG_RISE_SPEED);
+    }
+    else if (actiontimer.GetElapsedTime() > 2.65) {
         setState(DogState::IDLE);
     }
 }
@@ -117,23 +124,8 @@ void Dog::rise()
     }
 }
 
-void Dog::laugh()
+void Dog::walk()
 {
-    sprite.SetSubRect(frames[(floor(sin(30*actiontimer.GetElapsedTime())) + 1) == 0 ? DogFrame::LAUGH_1 : DogFrame::LAUGH_2]);
-
-    if (actiontimer.GetElapsedTime() <= 1) {
-        if (prevstate == DogState::IDLE)
-            sounds[DogSound::FAIL].Play();
-        sprite.Move(0, -DOG_RISE_SPEED);
-    }
-    else if (actiontimer.GetElapsedTime() >= 1.65 && actiontimer.GetElapsedTime() <= 2.65) {
-        sprite.Move(0, DOG_RISE_SPEED);
-    }
-    else if (actiontimer.GetElapsedTime() > 2.65) {
-        setState(DogState::IDLE);
-    }
-}
-
-void Dog::updateAnimation()
-{
+    sprite.SetSubRect(frames[DogFrame((int(5*actiontimer.GetElapsedTime())%3)+2)]);
+    sprite.Move(5.0/7.0, 0);
 }

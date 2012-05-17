@@ -19,8 +19,6 @@ const int SCREEN_BPP    = 32;   //Bits per pixel
 //Returns whether the program started up OK or not.
 bool init();
 
-
-
 Image        bgimage;  //The background image.
 Sprite       bg;       //The sprite that represents this background image.
 Event        event;    //The latest external input

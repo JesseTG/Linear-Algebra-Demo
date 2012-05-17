@@ -4,7 +4,7 @@
 //first glance to hold any significance.  Very bad in software development,
 //especially if this magic number is reused.
 const float MARIO_ROTATION = .5;  //The angle the sprite spins each frame.
-const int MARIO_SCALE      = 10;  //The factor we scale the sprite by.
+const int   MARIO_SCALE    = 10;  //The factor we scale the sprite by.
 
 TitleState::TitleState()
 {

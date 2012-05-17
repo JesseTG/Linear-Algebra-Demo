@@ -1,10 +1,12 @@
 #ifndef DECLARATIONS_H
 #define DECLARATIONS_H
 
-#define INPUT Window.GetInput()
+#define INPUT Window.GetInput()  //Replaces all instances of "INPUT" with "Window.GetInput()".  Convenient!
 #define MOUSE VectorFloat(INPUT.GetMouseX(), INPUT.GetMouseY())
 
 #define IN_RANGE(num, min, max) (((min) <= (num)) && ((num) <= (max)))
+#define MAGNITUDE(a) hypot((a).x, (a).y)
+#define NORMALIZE(a) VectorFloat((a.x)/MAGNITUDE(a), (a.y)/MAGNITUDE(a))
 
 #include <array>         //A data structure we use to store frames by number
 #include <iomanip>       //Manipulates how I/O streams represent data
@@ -14,9 +16,8 @@
 #include <unordered_map> //A data structure we use to store frames by name
 
 #include <boost/lexical_cast.hpp>  //So we can report state IDs if an error is thrown
-
-#include <SFML/Graphics.hpp>  //The graphics library; vital to this project!
-#include <SFML/Audio.hpp>     //The sound library that's also used
+#include <SFML/Graphics.hpp>       //The graphics library; vital to this project!
+#include <SFML/Audio.hpp>          //The sound library that's also used
 
 //The class forward declarations.
 class State       ;
@@ -24,24 +25,24 @@ class TitleState  ;
 class StateManager;
 
 //Typedefs for less typing (the scope operator :: looks ugly)  /////////////////
-typedef sf::Clock          Timer;
-typedef sf::Color          Color;
-typedef sf::Event          Event;
-typedef sf::Font           Font;
-typedef sf::Image          Image;
-typedef sf::Input          Input;
-typedef sf::Randomizer     Random;
-typedef sf::Rect<float>    RectFloat;
-typedef sf::Rect<int>      RectInt;
-typedef sf::RenderWindow   RenderWindow;
-typedef sf::Vector2<int>   VectorInt;
-typedef sf::Vector2<float> VectorFloat;
-typedef sf::Shape          Shape;
-typedef sf::Sound          SoundEffect;
-typedef sf::SoundBuffer    SoundFile;
-typedef sf::Sprite         Sprite;
+typedef sf::Clock          Timer        ;
+typedef sf::Color          Color        ;
+typedef sf::Event          Event        ;
+typedef sf::Font           Font         ;
+typedef sf::Image          Image        ;
+typedef sf::Input          Input        ;
+typedef sf::Randomizer     Random       ;
+typedef sf::Rect<float>    RectFloat    ;
+typedef sf::Rect<int>      RectInt      ;
+typedef sf::RenderWindow   RenderWindow ;
+typedef sf::Vector2<int>   VectorInt    ;
+typedef sf::Vector2<float> VectorFloat  ;
+typedef sf::Shape          Shape        ;
+typedef sf::Sound          SoundEffect  ;
+typedef sf::SoundBuffer    SoundFile    ;
+typedef sf::Sprite         Sprite       ;
 typedef sf::String         StringGraphic;
-typedef sf::VideoMode      VideoMode;
+typedef sf::VideoMode      VideoMode    ;
 ////////////////////////////////////////////////////////////////////////////////
 
 //It's easy to interchange regular enumerations with integers.
@@ -63,12 +64,17 @@ enum class StateName : char {
   DUCKHUNT_GAME     ,
 };
 
-//A structure that holds sound, so we can juggle one object rather than two
-struct Sound {
-    SoundFile   file ;
-    SoundEffect sound;
-    void Play() { sound.Play(); }
-    void Stop() { sound.Stop(); }
+//A small class that holds sound, so we can juggle one object rather than two
+class Sound {
+    private:
+        SoundFile   file ;
+        SoundEffect sound;
+
+    public:
+        void Play() { sound.Play(); }
+        void Stop() { sound.Stop(); }
+        void Load(const std::string& name) { file.LoadFromFile(name);  sound.SetBuffer(file); }
+        sf::Sound::Status getStatus() const { return sound.GetStatus(); }
 };
 
 extern Image        bgimage;  //The background image.
@@ -77,7 +83,7 @@ extern Event        event  ;  //The latest external input is stored in
 extern Image        sprites;  //The spritesheet file.  Most gfx come from here.
 extern RenderWindow Window ;  //The window we actually see
 
-extern StateManager StateController;
+extern StateManager StateController;  //The object that manages the screen we're currently on
 
 extern const VectorFloat CENTER;  //The center of the screen
 extern const RectInt     SCREEN;  //The rectangle that comprises the screen
@@ -99,6 +105,7 @@ auto setSpriteBuffer = [&SCREEN](const Sprite& sprite, float buffer[4]) {
     buffer[RIGHT] = SCREEN.GetWidth() - buffer[LEFT];
 };
 
+//Initializes a sprite, and sets its origin to be the center of the sprite
 auto initSprite = [](Sprite& sprite, const Image& image, const RectInt& subrect,
                      const float scale, const VectorFloat& position = CENTER) {
     sprite.SetImage(image);

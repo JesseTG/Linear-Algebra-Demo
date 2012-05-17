@@ -12,15 +12,15 @@ enum class HeroFrame : char {
     WEST_LEFT ,  WEST_RIGHT ,
 };
 
-//Needed so I can define a hash for enum classes.  Kind of like ID numbers.  ///
+//Needed so I can define a hash for enum classes.  Kind of like ID numbers.
 namespace std {
     template<> struct hash<HeroFrame> {
         std::size_t operator()(const HeroFrame hf) const
         { return hash<char>()(static_cast<char>(hf)); }
     };
 }
-////////////////////////////////////////////////////////////////////////////////
 
+//This screen has a hero and a ghost on-screen, key and mouse-controlled respectively.
 class TranslationDistanceLengthState : public State
 {
     public:

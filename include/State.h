@@ -30,6 +30,7 @@ class State
     //Sets the next state.  Only to be used inside subclasses.
     void setNextState(const StateName newnextstate);
 
+  private:
     //The next state we're going for.
     StateName nextstate;
 };

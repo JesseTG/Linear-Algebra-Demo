@@ -4,7 +4,7 @@
 #include "../Declarations.h"
 #include "../State.h"
 
-
+//This screen displays the Blue Falcon from F-Zero GP Legend.  It points to the mouse, and can be moved with the arrows.
 class DotProductState : public State
 {
     public:

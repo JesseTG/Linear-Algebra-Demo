@@ -3,10 +3,11 @@
 const int HERO_SCALE      = 6;
 const int HERO_MOVE_SPEED = 2;
 const int GHOST_SCALE     = 3;
+const int FEAR_DISTANCE   = 100;  //The ghost must be this far away for the hero to move
 
 TranslationDistanceLengthState::TranslationDistanceLengthState()
 {
-    //Preps the unordered map for easy sprite access  //////////////////////////
+    //Preps the unordered map for easy sprite access
     heroframes[HeroFrame::NORTH_LEFT ] = RectInt(102,   0, 118,  16);
     heroframes[HeroFrame::NORTH_RIGHT] = RectInt(120,   0, 136,  16);
     heroframes[HeroFrame::SOUTH_LEFT ] = RectInt( 39,   0,  55,  16);
@@ -15,13 +16,11 @@ TranslationDistanceLengthState::TranslationDistanceLengthState()
     heroframes[HeroFrame::WEST_RIGHT ] = RectInt( 75,   0,  86,  16);
     heroframes[HeroFrame::EAST_RIGHT ] = RectInt(138,   0, 150,  16);
     heroframes[HeroFrame::EAST_LEFT  ] = RectInt(152,   0, 163,  16);
-    ////////////////////////////////////////////////////////////////////////////
 
-    //Preps the Hero sprite itself  ////////////////////////////////////////////
+    //Preps the Hero sprite itself
     initSprite(hero, sprites, heroframes[HeroFrame::SOUTH_LEFT], HERO_SCALE);
     setSpriteBuffer(hero, buffer);
     frame = char(HeroFrame::SOUTH_LEFT);
-    ////////////////////////////////////////////////////////////////////////////
 
     //Preps the Ghost sprite
     initSprite(ghost, sprites, RectInt(34, 18, 58, 48), GHOST_SCALE, MOUSE);
@@ -40,6 +39,7 @@ void TranslationDistanceLengthState::input()
 {
     checkForNextState(StateName::MATRICES, StateName::DOT_PRODUCTS);
 
+    //Ensures that the hero moves ONLY horizontally and vertically
     bool movinghorizontal = !ismoving[LEFT] * !ismoving[RIGHT];
     ismoving[UP   ]       = INPUT.IsKeyDown(sf::Key::Up  ) * movinghorizontal;
     ismoving[DOWN ]       = INPUT.IsKeyDown(sf::Key::Down) * movinghorizontal;
@@ -50,15 +50,13 @@ void TranslationDistanceLengthState::input()
 
 void TranslationDistanceLengthState::logic()
 {
-    //Prevents the Hero from moving diagonally, as in Dragon Quest, but stops him if the Ghost is too close.  ////////
-    VectorFloat distancevector = hero.GetPosition() - ghost.GetPosition();
-    float distance = hypot(distancevector.x, distancevector.y);
-    if (distance > 100) {
-        if (hero.GetColor() != Color::White) hero.SetColor(Color::White);
-        inputmove(HERO_MOVE_SPEED, ismoving, hero, buffer);
+    float distance = MAGNITUDE(hero.GetPosition() - ghost.GetPosition());  //Distance between hero and ghost
+    if (distance > FEAR_DISTANCE) {  //If the ghost is close to the hero...
+        if (hero.GetColor() != Color::White) hero.SetColor(Color::White);  //Remove his color if not already
+        inputmove(HERO_MOVE_SPEED, ismoving, hero, buffer);  //And move him
     }
     else {
-        hero.SetColor(Color::Blue);  //Blue == terrified!
+        hero.SetColor(Color::Blue);  //Blue == terrified and frozen!
     }
 
 
@@ -74,14 +72,15 @@ void TranslationDistanceLengthState::logic()
 
     if (animationtimer.GetElapsedTime() >= 1) {  //Keeps the animation at JUST the right speed
         for (const bool& i : ismoving) if (i) break;  //Don't change the frame if moving
-        frame += (frame % 2 == 0) ? 1 : -1;
-        animationtimer.Reset();
+        frame += (frame % 2 == 0) ? 1 : -1;  //Abuse the properties of boolean logic (true == 1, false == 0)
         hero.SetSubRect(heroframes[HeroFrame(frame)]);
+        animationtimer.Reset();
     }
 
     //The Ghost follows the mouse
     ghost.SetPosition(MOUSE);
 
+    //Prepare text for output
     stats_to_text.str("");
     stats_to_text << "Translation, Distance, and Length\n\n"
                   << "Distance Between Ghost and Hero: " << std::setprecision(3) << distance

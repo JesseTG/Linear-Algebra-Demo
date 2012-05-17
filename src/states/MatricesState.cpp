@@ -2,6 +2,7 @@
 
 MatricesState::MatricesState()
 {
+    //Initializes the matrices
     matrixfont.LoadFromFile("./gfx/emulogic.ttf");
     text.SetFont(matrixfont);
     text.SetSize(24);

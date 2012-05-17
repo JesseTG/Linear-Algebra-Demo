@@ -47,9 +47,12 @@ class Dog
 {
     public:
         Dog();
-        ~Dog();
-        void updateAnimation();
+
+        //Act based on the current state
         void act();
+
+        //Initialize Mr. Ski mode
+        void initSki();
 
         Sprite& getSprite()                    { return sprite;    }
         DogState getState() const              { return state;     }
@@ -84,6 +87,9 @@ class Dog
 
         //The available frames the dog has
         std::unordered_map<DogFrame, RectInt> frames;
+
+        //Whether we've got Mr. Ski ducks or not
+        bool                                  is_ski;
 
         //The dog's previous state
         DogState                              prevstate;

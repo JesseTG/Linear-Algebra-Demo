@@ -1,8 +1,9 @@
 #include "../../../include/states/duckhunt/DuckHuntGameState.h"
 
-const int BG_SCALE         = 2;
-const float FLASH_LENGTH   = .1;  //How long each flash lasts in seconds
-const float TIME_LIMIT     = 5.0;  //In seconds
+const int   BG_SCALE     =   2;
+const float FLASH_LENGTH = 0.1;  //How long each flash lasts in seconds
+const float TIME_LIMIT   = 5.0;  //In seconds
+const int   SKI_ROUND    =   20;  //What round we go into Mr. Ski mode
 
 enum { GROUND, GRASS, SKY };
 
@@ -24,18 +25,18 @@ DuckHuntGameState::DuckHuntGameState()
     bglayers[GRASS ].SetSubRect(RectInt(320,   0, 640, 240));
     bglayers[SKY   ].SetSubRect(RectInt(  0, 240, 320, 480));
 
-    hudstats[HUDStat::AMMO ].SetSize(16  );
-    hudstats[HUDStat::AMMO ].SetPosition( 28, 435);
-    hudstats[HUDStat::ROUND].SetFont(font);
-    hudstats[HUDStat::ROUND].SetSize(16  );
-    hudstats[HUDStat::ROUND].SetPosition(108, 435);
-    hudstats[HUDStat::SCORE].SetSize(8   );
-    hudstats[HUDStat::SCORE].SetPosition(174, 435);
-    hudstats[HUDStat::STATS].SetSize(8   );
-    hudstats[HUDStat::STATS].SetPosition(15, 422);
-    hudstats[HUDStat::STATS].SetText("AMMO      ROUND     SCORE     QUOTA");
-    hudstats[HUDStat::QUOTA].SetSize(8   );
-    hudstats[HUDStat::QUOTA].SetPosition(255, 435);
+    hudstats[HUDStat::AMMO     ].SetSize(16  );
+    hudstats[HUDStat::AMMO     ].SetPosition( 28, 435);
+    hudstats[HUDStat::ROUND    ].SetFont(font);
+    hudstats[HUDStat::ROUND    ].SetSize(16  );
+    hudstats[HUDStat::ROUND    ].SetPosition(108, 435);
+    hudstats[HUDStat::SCORE    ].SetSize(8   );
+    hudstats[HUDStat::SCORE    ].SetPosition(174, 435);
+    hudstats[HUDStat::STATS    ].SetSize(8   );
+    hudstats[HUDStat::STATS    ].SetPosition(15, 422);
+    hudstats[HUDStat::STATS    ].SetText("AMMO      ROUND     SCORE     QUOTA");
+    hudstats[HUDStat::QUOTA    ].SetSize(8   );
+    hudstats[HUDStat::QUOTA    ].SetPosition(255, 435);
     hudstats[HUDStat::GAME_OVER].SetSize(48);
     hudstats[HUDStat::GAME_OVER].SetPosition(0, CENTER.y - 128);
     hudstats[HUDStat::GAME_OVER].SetText("GAME OVER");
@@ -45,10 +46,8 @@ DuckHuntGameState::DuckHuntGameState()
 
 
     {  //Prepare sounds  ///////////////////////////////////////////////////////
-    sounds[DuckHuntSound::SHOT ].file.LoadFromFile("./sfx/duckhunt/shot.wav"        );
-    sounds[DuckHuntSound::SHOT ].sound.SetBuffer(sounds[DuckHuntSound::SHOT].file   );
-    sounds[DuckHuntSound::INTRO].file.LoadFromFile("./sfx/duckhunt/intro.wav"       );
-    sounds[DuckHuntSound::INTRO].sound.SetBuffer(sounds[DuckHuntSound::INTRO].file  );
+    sounds[DuckHuntSound::SHOT ].Load("./sfx/duckhunt/shot.wav"        );
+    sounds[DuckHuntSound::INTRO].Load("./sfx/duckhunt/intro.wav"       );
     }
 
     {  //Prepare render list  //////////////////////////////////////////////////
@@ -105,6 +104,7 @@ void DuckHuntGameState::input()
 
 void DuckHuntGameState::logic()
 {
+    if (round == SKI_ROUND) initSki();
     prevstate = state;
 
 
@@ -157,7 +157,7 @@ void DuckHuntGameState::render()
 void DuckHuntGameState::intro()
 {
     //If the intro theme is not playing anymore...
-    if (sounds[DuckHuntSound::INTRO].sound.GetStatus() == sf::Sound::Stopped) {
+    if (sounds[DuckHuntSound::INTRO].getStatus() == sf::Sound::Stopped) {
         if (dog.getState() == DogState::WALKING) dog.setState(DogState::JUMPING_UP);
     }
 
@@ -196,6 +196,11 @@ void DuckHuntGameState::round_start()
     is_screen_flash = false;
     Duck::increaseDifficulty(++round);
     for (auto& i : ducks) i.setState(DuckState::FLYING_IN);
+
+    if (round == SKI_ROUND) {
+        Duck::initSki();
+        dog.initSki();
+    }
 
     setState(InGameState::GAME);
 }

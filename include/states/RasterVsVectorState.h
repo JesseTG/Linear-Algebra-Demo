@@ -4,6 +4,7 @@
 #include "../Declarations.h"
 #include "../State.h"
 
+//This screen shows two blue pulsating circles, one made of pixels and one that looks like it's made of lines
 class RasterVsVectorState : public State
 {
     public:

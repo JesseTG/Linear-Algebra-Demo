@@ -4,6 +4,7 @@
 #include "../Declarations.h"
 #include "../State.h"
 
+//This screen shows the Harrier from Space Harrier flying around the screen with the arrow keys
 class ScalarVsVectorState : public State
 {
     public:

@@ -100,19 +100,19 @@ void Duck::die()
 {
     sprite.FlipX(false);
     sprite.SetSubRect(frames[DuckFrame::SHOT]);
-    velocity = VectorFloat(0, 0);
+    velocity = VectorFloat(0, 0);  //Stop moving
 
     if (actiontimer.GetElapsedTime() >= 1) setState(DuckState::FALLING);
 }
 
 void Duck::fall()
 {
-    if (sprite.GetSubRect().GetHeight() != frames[DuckFrame::FALLING].GetHeight()) {
+    if (sprite.GetSubRect().GetHeight() != frames[DuckFrame::FALLING].GetHeight()) {  //If we just started falling...
         sprite.SetSubRect(frames[DuckFrame::FALLING]);
         sounds[DuckSound::FALL].Play();
     }
 
-    sprite.Move(velocity += GRAVITY);
+    sprite.Move(velocity += GRAVITY);  //Fall down
 
     if (sprite.GetPosition().y >= SCREEN.GetHeight()*.7) {
         sprite.SetY(SCREEN.GetHeight()*2);  //Move off screen to satisfy a conditional in DuckHuntGameState

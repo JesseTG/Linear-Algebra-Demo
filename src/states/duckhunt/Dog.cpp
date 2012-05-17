@@ -36,6 +36,7 @@ Dog::Dog()
                );
     }
 
+    //The dog barks three times in the intro
     barks = 3;
 
     setState(DogState::WALKING);
@@ -59,6 +60,7 @@ void Dog::act()
 
 void Dog::initSki()
 {
+    //Now for Mr. Ski mode...
     frames[DogFrame::ONE_DUCK] = RectInt(167, 326, 210, 374);
     frames[DogFrame::TWO_DUCK] = RectInt(213, 326, 267, 374);
 }
@@ -127,5 +129,5 @@ void Dog::rise()
 void Dog::walk()
 {
     sprite.SetSubRect(frames[DogFrame((int(5*actiontimer.GetElapsedTime())%3)+2)]);
-    sprite.Move(5.0/7.0, 0);
+    sprite.Move(5.0/7.0, 0);  //Move along closer to the center of the screen
 }

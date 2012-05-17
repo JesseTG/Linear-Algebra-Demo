@@ -3,7 +3,7 @@
 const int   BG_SCALE     =   2;
 const float FLASH_LENGTH = 0.1;  //How long each flash lasts in seconds
 const float TIME_LIMIT   = 5.0;  //In seconds
-const int   SKI_ROUND    =   20;  //What round we go into Mr. Ski mode
+const int   SKI_ROUND    =  15;  //What round we go into Mr. Ski mode
 
 enum { GROUND, GRASS, SKY };
 
@@ -140,9 +140,6 @@ void DuckHuntGameState::render()
 {
     //Animate the dog and ducks
     for (auto& i : ducks) i.updateAnimation();
-    dog.updateAnimation();
-
-
 
     if (!is_screen_flash) {  //If the screen currently isn't flashing white...
         for (const auto& i : renderlist) Window.Draw(*i);  //Draw everything on the render list, from back to front
